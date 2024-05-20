@@ -1,0 +1,128 @@
+---
+title: "Obtener datos desde una fuente remota"
+author: "José Burgos"
+categories: ["quantmod", "getSymbols", "Data", "FRED"]
+format:
+  html:
+   highlight-style: radical
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(quantmod)
+library(tidyverse)
+```
+
+## Introducción
+
+Cuando comenzamos a trabajar con R, es común que analicemos datos en formatos Excel que descargamos en nuestro ordenador. Con el paso del tiempo, esta tarea se convierte en una rutina que puede volverse tediosa, especialmente cuando lidiamos con grandes cantidades de datos que ralentizan el procesamiento y consumen una cantidad considerable de memoria de nuestra computadora.
+
+Imagina la posibilidad de descargar bases de datos de forma remota, seleccionando únicamente los datos necesarios para tu análisis y evitando cargar información que no te interese. Para hacer esto, el paquete `quantmod` proporciona una función llamada **getSymbols**, que permite la descarga de datos desde páginas web.
+
+Al utilizar **`getSymbols`**, puedes simplificar y automatizar el proceso de adquisición de datos, lo que te brinda la flexibilidad de trabajar con conjuntos de datos sin comprometer el rendimiento de tu computadora. Esta función te libera de la carga de descargar manualmente archivos y te permite concentrarte en el análisis y la interpretación de los datos relevantes para tu investigación o proyecto.
+
+**Paquetes:** [`quantmod`, `tidyverse`, `zoo`, `gt`]{.text-code}
+
+## getSymbols
+
+Esta función necesita algunas información esenciales de la data que se necesita descargar, como el símbolo de los datos y el nombre de la pagina donde se encuentra la data.
+
+#### Estrutura de la función getSymbols:
+
+```{r, eval=FALSE}
+getSymbols(Symbols = NULL,          # Obligatorio
+           env = parent.frame(),
+           reload.Symbols = FALSE,
+           verbose = FALSE,
+           warnings = TRUE,
+           src = "yahoo",          # Obligatorio
+           symbol.lookup = TRUE,
+           from = "2010-01-01",
+           to = "2024-01-01"
+           ...)
+```
+
+|                                                                                                                                           |
+|-------------------------------------------------------------------------------------------------------------------------------------------|
+| **Nota**: Dependiendo de la pagina que vayas a descargar pueden variar la estructura de la función, pueden consultar con `?getSymbols()`. |
+
+En esta caso vamos a descargar los datos del Índice de Precios al Consumidor de Estados Unidos desde la pagína principal de la [Federal Reserve Economic Data](https://fred.stlouisfed.org/), con los siguientes parametros:
+
+```{r, warning = FALSE, message = FALSE}
+getSymbols(
+  Symbols =  "USACPALTT01CTGYM",
+  src = "FRED",
+  from = "2012-01-01",
+  to = "2024-02-01",
+  format = "xts",
+  periodicity = "monthly"
+)
+```
+
+Lo primero que tenemos es el `Symbols`, este especifica el identificador del conjunto de datos que se deseamos obtener. En este caso, **USACPALTT01CTGYM** se refiere al *IPC* de *USA*, estos identificadores lo podemos encontrar al lado del nombre cuando visitamos la página principal de la *FRED*. Especificamos la fuente con `src`, en este caso, *"FRED"*. Luego, definimos el rango de fechas con `from` y `to`, que indican el periodo de tiempo que deseamos descargar. Por último, especificamos el formato de los datos con `format` y la periodicidad con `periodicity`.
+
+Por defecto el conjunto de datos que descargamos se guardara con el nombre de símbolo:
+
+```{r}
+dplyr::glimpse(USACPALTT01CTGYM)
+```
+
+#### Manipulación y vizualización de los datos
+
+Primero, hacemos algunos ajuste para hacer nuestro conjunto de datos más amigables para las visualizaciones:
+
+```{r}
+ipc_usa <- zoo::fortify.zoo(USACPALTT01CTGYM) |> # Con esta función convertimos a data.frame
+  setNames(c("periodo", "ipc"))                  # aquí asignamos nombres fácil de identificar
+
+ipc_usa |> 
+  tail(n = 3) |> 
+  gt::gt()
+```
+
+Siempre es bueno agregar un breve análisis de los datos y resaltarlo en nuestro gráfico, aquí agrego algunas ajuste para volver el gráfico más informativo. + Manipulando los datos para hacer un gráfico más informativo:
+
+```{r, echo=FALSE}
+
+ipc_usa |>
+  mutate(
+    max_ipc = ifelse(ipc == max(ipc), ipc, NA),
+    min_ipc_covid = ifelse(periodo == "2020-05-01", ipc, NA),
+    promedio_historico =  ifelse(periodo >= "2012-01-01" & periodo <= "2019-12-01", ipc, NA),
+    promedio_historico = mean(promedio_historico, na.rm = TRUE),
+    across(c(max_ipc, min_ipc_covid), ~round(.x, digits = 2))) |> 
+  ggplot(aes(x = periodo, y = ipc)) +
+   geom_rect(aes(
+     xmin = as.Date("2020-03-01"), 
+     xmax = as.Date("2021-12-31"), 
+     ymin = -Inf, ymax = Inf),
+     fill = "lightgrey", alpha = 0.2) +
+   geom_line(color = "steelblue", size = 1) +
+  # Anotaciones en el gráfico:
+   geom_hline(yintercept = 2.551027, color = "#8d99ae", linetype = "dashed", size = 0.3) +
+   annotate(
+    "text", x = as.Date("2015-05-1"), y = 2.9, label = "Promerdio 2012-2020", color = "#8d99ae",
+    size = 2.9) +
+   geom_text(aes(
+     periodo, min_ipc_covid, label = paste0(min_ipc_covid, " (May-2020)")),
+     vjust = 1, hjust = .1, color = "darkblue", size = 2) +
+   geom_text(aes(
+     periodo, max_ipc, label = paste0(max_ipc, " (Jun-2022)")),
+     vjust = -0.3, hjust = .1, color = "red", size = 2) +
+  #Formato y estilo de los ejes:
+    scale_x_date(date_labels = "%b %Y", date_breaks = "2 year") +
+    scale_y_continuous(labels = scales::number_format(accuracy = 0.1)) +
+  # Titulos:
+    labs(
+      title = "Índice de Precios al Consumidor (IPC) de USA",
+      subtitle = "Datos de enero 2012 a febrero 2024",
+      x = "Periodo",
+      y = "IPC", 
+      caption = "Fuente: FRED") +
+  # Temas y ajuste de letras:
+    theme_classic()
+```
+
+## Observaciones
+
+## \## Referencias:
