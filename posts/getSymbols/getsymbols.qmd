@@ -1,10 +1,12 @@
 ---
 title: "Obtener datos desde una fuente remota"
 author: "José Burgos"
+date: "2024-03-02"
+date-format: medium
 categories: ["quantmod", "getSymbols", "Data", "FRED"]
 format:
   html:
-   highlight-style: radical
+    highlight-style: github
 ---
 
 ```{r setup, include=FALSE}
@@ -21,7 +23,7 @@ Imagina la posibilidad de descargar bases de datos de forma remota, seleccionand
 
 Al utilizar **`getSymbols`**, puedes simplificar y automatizar el proceso de adquisición de datos, lo que te brinda la flexibilidad de trabajar con conjuntos de datos sin comprometer el rendimiento de tu computadora. Esta función te libera de la carga de descargar manualmente archivos y te permite concentrarte en el análisis y la interpretación de los datos relevantes para tu investigación o proyecto.
 
-**Paquetes:** [`quantmod`, `tidyverse`, `zoo`, `gt`]{.text-code}
+**Paquetes:** [quantmod]{.text-code} [tidyverse]{.text-code} [zoo]{.text-code} [gt]{.text-code}
 
 ## getSymbols
 
@@ -42,9 +44,9 @@ getSymbols(Symbols = NULL,          # Obligatorio
            ...)
 ```
 
-|                                                                                                                                           |
-|-------------------------------------------------------------------------------------------------------------------------------------------|
-| **Nota**: Dependiendo de la pagina que vayas a descargar pueden variar la estructura de la función, pueden consultar con `?getSymbols()`. |
+::: {.callout-tip title="Nota"}
+Dependiendo de la pagina que vayas a descargar pueden variar la estructura de la función, pueden consultar con `?getSymbols()`.
+:::
 
 En esta caso vamos a descargar los datos del Índice de Precios al Consumidor de Estados Unidos desde la pagína principal de la [Federal Reserve Economic Data](https://fred.stlouisfed.org/), con los siguientes parametros:
 
@@ -59,7 +61,7 @@ getSymbols(
 )
 ```
 
-Lo primero que tenemos es el `Symbols`, este especifica el identificador del conjunto de datos que se deseamos obtener. En este caso, **USACPALTT01CTGYM** se refiere al *IPC* de *USA*, estos identificadores lo podemos encontrar al lado del nombre cuando visitamos la página principal de la *FRED*. Especificamos la fuente con `src`, en este caso, *"FRED"*. Luego, definimos el rango de fechas con `from` y `to`, que indican el periodo de tiempo que deseamos descargar. Por último, especificamos el formato de los datos con `format` y la periodicidad con `periodicity`.
+Lo primero que tenemos es el `Symbols`, este especifica el identificador del conjunto de datos que se deseamos obtener. En este caso, {{< kbd USACPALTT01CTGYM >}}se refiere al *IPC* de *USA*, estos identificadores lo podemos encontrar al lado del nombre cuando visitamos la página principal de la *FRED*. Especificamos la fuente con `src`, en este caso, *"FRED"*. Luego, definimos el rango de fechas con `from` y `to`, que indican el periodo de tiempo que deseamos descargar. Por último, especificamos el formato de los datos con `format` y la periodicidad con `periodicity`.
 
 Por defecto el conjunto de datos que descargamos se guardara con el nombre de símbolo:
 

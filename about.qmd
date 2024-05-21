@@ -1,5 +1,5 @@
 ---
-title: "About"
+title: "José"
 image: profile.jpg
 about:
   template: jolla
@@ -13,7 +13,6 @@ about:
     - icon: github
       text: Github
       href: https://github.com
-
 ---
 
-About this blog
+Hola soy José Burgos, un economista, entusiasta por la ciencia de datos y la programación en el lenguaje en **Rstudio.** Te invito a visitar mi blog personal, donde podrás ver algunas técnica de manipulación, visualización de datos, hasta modelos econometrícos.

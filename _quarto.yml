@@ -2,14 +2,20 @@ project:
   type: website
 
 website:
-  title: "jburgos-quarto"
+  title: "José Burgos"
+  description: "Personal website of José Burgos"
   navbar:
-    right:
+    background: '#03045e'
+    left:
       - about.qmd
       - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+        href: https://github.com/josebug
+      - icon: linkedin
+        href: https://www.linkedin.com/in/jos%C3%A9-antonio-burgos-francisco-979672163/
+      - icon: envelope-at
+        href: joseaburgos01@outlook.com
+  
+
 format:
   html:
     theme: cosmo
