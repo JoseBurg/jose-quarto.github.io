@@ -1,5 +1,6 @@
 ---
 title: "Obtener datos desde una fuente remota"
+lang: es
 author: "José Burgos"
 date: "2024-03-02"
 date-format: medium
@@ -13,6 +14,7 @@ format:
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 library(quantmod)
 library(tidyverse)
+library(gt)
 ```
 
 ## Introducción
@@ -29,7 +31,7 @@ Al utilizar **`getSymbols`**, puedes simplificar y automatizar el proceso de adq
 
 Esta función necesita algunas información esenciales de la data que se necesita descargar, como el símbolo de los datos y el nombre de la pagina donde se encuentra la data.
 
-#### Estrutura de la función getSymbols:
+#### Estructura de la función getSymbols:
 
 ```{r, eval=FALSE}
 getSymbols(Symbols = NULL,          # Obligatorio
@@ -44,11 +46,11 @@ getSymbols(Symbols = NULL,          # Obligatorio
            ...)
 ```
 
-::: {.callout-tip title="Nota"}
+::: {.callout-important title="Nota" appearance="simple"}
 Dependiendo de la pagina que vayas a descargar pueden variar la estructura de la función, pueden consultar con `?getSymbols()`.
 :::
 
-En esta caso vamos a descargar los datos del Índice de Precios al Consumidor de Estados Unidos desde la pagína principal de la [Federal Reserve Economic Data](https://fred.stlouisfed.org/), con los siguientes parametros:
+En esta caso vamos a descargar los datos del Índice de Precios al Consumidor de Estados Unidos desde la página principal de la [Federal Reserve Economic Data](https://fred.stlouisfed.org/), con los siguientes parámetros:
 
 ```{r, warning = FALSE, message = FALSE}
 getSymbols(
@@ -61,70 +63,106 @@ getSymbols(
 )
 ```
 
-Lo primero que tenemos es el `Symbols`, este especifica el identificador del conjunto de datos que se deseamos obtener. En este caso, {{< kbd USACPALTT01CTGYM >}}se refiere al *IPC* de *USA*, estos identificadores lo podemos encontrar al lado del nombre cuando visitamos la página principal de la *FRED*. Especificamos la fuente con `src`, en este caso, *"FRED"*. Luego, definimos el rango de fechas con `from` y `to`, que indican el periodo de tiempo que deseamos descargar. Por último, especificamos el formato de los datos con `format` y la periodicidad con `periodicity`.
+Lo primero que tenemos es el **Symbols**, este especifica el identificador del conjunto de datos que se deseamos obtener. En este caso, {{< kbd USACPALTT01CTGYM >}} se refiere al [Índices de precios al consumidor (IPC, IPCA), COICOP 1999: Índice de precios al consumidor: Total para Estados Unidos]{.underline} en unidades de contribución a la tasa de crecimiento, en 1 año, sin desestacionalizar. Estos identificadores lo podemos encontrar al lado del nombre cuando visitamos la página principal de la FRED. Especificamos la fuente con `src`, en este caso, "FRED". Luego, definimos el rango de fechas con `from` y `to`, que indican el periodo de tiempo que deseamos descargar. Por último, especificamos el formato de los datos con `format` y la periodicidad con `periodicity`.
 
-Por defecto el conjunto de datos que descargamos se guardara con el nombre de símbolo:
+Por defecto el conjunto de datos que descargamos se guardara con el nombre del símbolo que utilizamos, algunas informaciones de la data descargada se pueden ver con el siguiente código:
 
 ```{r}
 dplyr::glimpse(USACPALTT01CTGYM)
 ```
 
-#### Manipulación y vizualización de los datos
+#### Manipulación y visualización de los datos
 
-Primero, hacemos algunos ajuste para hacer nuestro conjunto de datos más amigables para las visualizaciones:
+Primero, hacemos algunos ajuste para hacer nuestro conjunto de datos más amigables[^1] para las visualizaciones:
+
+[^1]: Se recomienda utilizar nombres de variables que sean fáciles de recordar y que tengan sentido para nosotros. Evitar el uso de letras mayúsculas, caracteres especiales y símbolos matemáticos, nos ayuda a disminuir los errores, facilita la lectura y comprensión de los códigos en el futuro.
 
 ```{r}
-ipc_usa <- zoo::fortify.zoo(USACPALTT01CTGYM) |> # Con esta función convertimos a data.frame
-  setNames(c("periodo", "ipc"))                  # aquí asignamos nombres fácil de identificar
-
+ipc_usa <- zoo::fortify.zoo(# Convertimos a data.frame
+                 USACPALTT01CTGYM) |> 
+               setNames(# asignamos nombres fácil de identificar
+                 c("periodo", "ipc")) |> 
+                mutate(across(ipc, ~round(.x, digits = 2)))
 ipc_usa |> 
   tail(n = 3) |> 
   gt::gt()
 ```
 
-Siempre es bueno agregar un breve análisis de los datos y resaltarlo en nuestro gráfico, aquí agrego algunas ajuste para volver el gráfico más informativo. + Manipulando los datos para hacer un gráfico más informativo:
+Siempre es bueno explorar algunas estadísticas descriptivas de nuestros datos, para tener una idea general de la información que estamos trabajando:
 
-```{r, echo=FALSE}
-
-ipc_usa |>
+```{r}
+ipc_usa |> 
   mutate(
-    max_ipc = ifelse(ipc == max(ipc), ipc, NA),
-    min_ipc_covid = ifelse(periodo == "2020-05-01", ipc, NA),
-    promedio_historico =  ifelse(periodo >= "2012-01-01" & periodo <= "2019-12-01", ipc, NA),
-    promedio_historico = mean(promedio_historico, na.rm = TRUE),
-    across(c(max_ipc, min_ipc_covid), ~round(.x, digits = 2))) |> 
-  ggplot(aes(x = periodo, y = ipc)) +
-   geom_rect(aes(
-     xmin = as.Date("2020-03-01"), 
-     xmax = as.Date("2021-12-31"), 
-     ymin = -Inf, ymax = Inf),
-     fill = "lightgrey", alpha = 0.2) +
-   geom_line(color = "steelblue", size = 1) +
-  # Anotaciones en el gráfico:
-   geom_hline(yintercept = 2.551027, color = "#8d99ae", linetype = "dashed", size = 0.3) +
-   annotate(
-    "text", x = as.Date("2015-05-1"), y = 2.9, label = "Promerdio 2012-2020", color = "#8d99ae",
-    size = 2.9) +
-   geom_text(aes(
-     periodo, min_ipc_covid, label = paste0(min_ipc_covid, " (May-2020)")),
-     vjust = 1, hjust = .1, color = "darkblue", size = 2) +
-   geom_text(aes(
-     periodo, max_ipc, label = paste0(max_ipc, " (Jun-2022)")),
-     vjust = -0.3, hjust = .1, color = "red", size = 2) +
-  #Formato y estilo de los ejes:
-    scale_x_date(date_labels = "%b %Y", date_breaks = "2 year") +
-    scale_y_continuous(labels = scales::number_format(accuracy = 0.1)) +
-  # Titulos:
-    labs(
-      title = "Índice de Precios al Consumidor (IPC) de USA",
-      subtitle = "Datos de enero 2012 a febrero 2024",
-      x = "Periodo",
-      y = "IPC", 
-      caption = "Fuente: FRED") +
-  # Temas y ajuste de letras:
-    theme_classic()
+    Covid = ifelse(periodo >= "2020-01-01", "Covid", "Pre-Covid")) |> 
+  summarise(across(ipc, list(
+    Promedio = mean, Minimo = min, 
+    Maximo = max),
+    .names = "{.fn}"),
+    .by = Covid) |> 
+  gt() |> tab_header(
+    title = "IPC de USA",
+    subtitle = "Datos de enero 2012 a febrero 2024")
 ```
+
+-   Tomando en consideración las estadisticas de la tabla anterior, crearemos las variables que vamos a usar para resaltar algunos puntos en el gráfico:
+
+    ```{r}
+    ipc_usa_est <- ipc_usa |>
+      mutate(
+        max_ipc = ifelse(ipc == max(ipc), ipc, NA),               # Máximo covid
+        min_ipc_covid = ifelse(periodo == "2020-05-01", ipc, NA)) # Mínimo covid
+    ```
+
+-   Graficamos con `ggplot2` :
+
+    1.  Se resalta las fechas donde el covid afecto las economías:
+
+        ```{r}
+        (graph_ipc_usa <- ipc_usa_est |>
+          ggplot(aes(x = periodo, y = ipc)) +
+           geom_rect(aes(
+             xmin = as.Date("2020-01-01"), 
+             xmax = as.Date("2021-12-31"), 
+             ymin = -Inf, ymax = Inf),
+             fill = "#8d99ae") +
+           geom_line(color = "black", size = 1))
+        ```
+
+    2.  Vamos agregar más información al gráfico, con algunas anotaciones:
+
+        ```{r}
+        (graph_ipc_usa <- graph_ipc_usa + 
+          geom_hline(yintercept = 1.58, color = "#5f1a37", linetype = "dashed", size = 0.6) +
+          annotate("text", x = as.Date("2022-12-1"), y = 1.9, label = "Promerdio 2012-2020",            color = "#5f1a37",size = 2.9) +
+           geom_text(aes(
+             periodo, min_ipc_covid, label = paste0(min_ipc_covid, " (May-2020)")),
+             vjust = 1, hjust = .1, color = "#0d00a4", size = 2.5) +
+           geom_text(aes(
+             periodo, max_ipc, label = paste0(max_ipc, " (Jun-2022)")),
+             vjust = -0.3, hjust = .1, color = "red", size = 2.5))
+        ```
+
+    3.  Por último, se mejora el diseño del gráfico predeterminado:
+
+        ```{r}
+        (graph_ipc_usa <- graph_ipc_usa +
+          scale_x_date(date_labels = "%b %Y", date_breaks = "2 year") +        # Eje x
+          # scale_y_continuous(labels = scales::number_format(accuracy = 0.1)) + # Eje y
+            labs( # Titulos:
+              title = "Índice de Precios al Consumidor (IPC) de USA",
+              subtitle = "Datos de enero 2012 a febrero 2024",
+              x = "Periodo",
+              y = "IPC", 
+              caption = "Fuente: FRED") +
+            theme_bw()) # Tema de gráfico
+        ```
 
 ## Observaciones
 
-## \## Referencias:
+Como se puede observar en el gráfico, los paros de movilidad y la disminución de la demanda a nivel global producto de la pandemia de COVID-19, provoco en el Índice de Precios al Consumidor (IPC) de Estados Unidos experimentara comportamiento inusuales en el IPC, donde logra alcanzar un valor de 0.05 en mayo de 2020, y después inicia un periodo de aumento que se extiende hasta junio del 2022, en el que alcanza su valor máximo[^2] de 9.0%. Aunque la FED ha trabajado arduamente para lograr la disminución que ha experimentando en los últimos meses, el IPC aún no ha llegado a los niveles previos a la pandemia.
+
+[^2]: Máximo de la serie observada.
+
+## Consideraciones de getSymbols
+
+## 

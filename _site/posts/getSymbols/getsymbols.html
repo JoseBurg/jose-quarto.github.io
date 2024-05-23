@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.450">
@@ -84,16 +84,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "type": "overlay",
   "limit": 20,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
   }
 }</script>
 
@@ -112,12 +112,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <span class="navbar-title">José Burgos</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../about.html" rel="" target="">
  <span class="menu-text">José</span></a>
@@ -138,7 +138,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
+            <div class="quarto-navbar-tools">
 </div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -162,16 +162,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-meta">
 
       <div>
-      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-heading">Autor/a</div>
       <div class="quarto-title-meta-contents">
                <p>José Burgos </p>
             </div>
     </div>
       
       <div>
-      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-heading">Fecha de publicación</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">Mar 2, 2024</p>
+        <p class="date">2 mar 2024</p>
       </div>
     </div>
     
@@ -199,8 +199,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="getsymbols" class="level2">
 <h2 class="anchored" data-anchor-id="getsymbols">getSymbols</h2>
 <p>Esta función necesita algunas información esenciales de la data que se necesita descargar, como el símbolo de los datos y el nombre de la pagina donde se encuentra la data.</p>
-<section id="estrutura-de-la-función-getsymbols" class="level4">
-<h4 class="anchored" data-anchor-id="estrutura-de-la-función-getsymbols">Estrutura de la función getSymbols:</h4>
+<section id="estructura-de-la-función-getsymbols" class="level4">
+<h4 class="anchored" data-anchor-id="estructura-de-la-función-getsymbols">Estructura de la función getSymbols:</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getSymbols</span>(<span class="at">Symbols =</span> <span class="cn">NULL</span>,          <span class="co"># Obligatorio</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">env =</span> <span class="fu">parent.frame</span>(),</span>
@@ -211,9 +211,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">symbol.lookup =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">from =</span> <span class="st">"2010-01-01"</span>,</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">to =</span> <span class="st">"2024-01-01"</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>           ...)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>           ...)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Nota">
+<div class="callout callout-style-simple callout-important callout-titled" title="Nota">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -226,7 +226,7 @@ Nota
 <p>Dependiendo de la pagina que vayas a descargar pueden variar la estructura de la función, pueden consultar con <code>?getSymbols()</code>.</p>
 </div>
 </div>
-<p>En esta caso vamos a descargar los datos del Índice de Precios al Consumidor de Estados Unidos desde la pagína principal de la <a href="https://fred.stlouisfed.org/">Federal Reserve Economic Data</a>, con los siguientes parametros:</p>
+<p>En esta caso vamos a descargar los datos del Índice de Precios al Consumidor de Estados Unidos desde la página principal de la <a href="https://fred.stlouisfed.org/">Federal Reserve Economic Data</a>, con los siguientes parámetros:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getSymbols</span>(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Symbols =</span>  <span class="st">"USACPALTT01CTGYM"</span>,</span>
@@ -235,15 +235,15 @@ Nota
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="st">"2024-02-01"</span>,</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">format =</span> <span class="st">"xts"</span>,</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">periodicity =</span> <span class="st">"monthly"</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "USACPALTT01CTGYM"</code></pre>
 </div>
 </div>
-<p>Lo primero que tenemos es el <code>Symbols</code>, este especifica el identificador del conjunto de datos que se deseamos obtener. En este caso, <kbd>USACPALTT01CTGYM</kbd>se refiere al <em>IPC</em> de <em>USA</em>, estos identificadores lo podemos encontrar al lado del nombre cuando visitamos la página principal de la <em>FRED</em>. Especificamos la fuente con <code>src</code>, en este caso, <em>“FRED”</em>. Luego, definimos el rango de fechas con <code>from</code> y <code>to</code>, que indican el periodo de tiempo que deseamos descargar. Por último, especificamos el formato de los datos con <code>format</code> y la periodicidad con <code>periodicity</code>.</p>
-<p>Por defecto el conjunto de datos que descargamos se guardara con el nombre de símbolo:</p>
+<p>Lo primero que tenemos es el <strong>Symbols</strong>, este especifica el identificador del conjunto de datos que se deseamos obtener. En este caso, <kbd>USACPALTT01CTGYM</kbd> se refiere al <u>Índices de precios al consumidor (IPC, IPCA), COICOP 1999: Índice de precios al consumidor: Total para Estados Unidos</u> en unidades de contribución a la tasa de crecimiento, en 1 año, sin desestacionalizar. Estos identificadores lo podemos encontrar al lado del nombre cuando visitamos la página principal de la FRED. Especificamos la fuente con <code>src</code>, en este caso, “FRED”. Luego, definimos el rango de fechas con <code>from</code> y <code>to</code>, que indican el periodo de tiempo que deseamos descargar. Por último, especificamos el formato de los datos con <code>format</code> y la periodicidad con <code>periodicity</code>.</p>
+<p>Por defecto el conjunto de datos que descargamos se guardara con el nombre del símbolo que utilizamos, algunas informaciones de la data descargada se pueden ver con el siguiente código:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(USACPALTT01CTGYM)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(USACPALTT01CTGYM)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>An xts object on 2012-01-01 / 2024-02-01 containing: 
   Data:    double [146, 1]
@@ -251,39 +251,41 @@ Nota
   Index:   Date [146] (TZ: "UTC")
   xts Attributes:
     $ src    : chr "FRED"
-    $ updated: POSIXct[1:1], format: "2024-05-20 20:59:13"</code></pre>
+    $ updated: POSIXct[1:1], format: "2024-05-22 23:19:15"</code></pre>
 </div>
 </div>
 </section>
-<section id="manipulación-y-vizualización-de-los-datos" class="level4">
-<h4 class="anchored" data-anchor-id="manipulación-y-vizualización-de-los-datos">Manipulación y vizualización de los datos</h4>
-<p>Primero, hacemos algunos ajuste para hacer nuestro conjunto de datos más amigables para las visualizaciones:</p>
+<section id="manipulación-y-visualización-de-los-datos" class="level4">
+<h4 class="anchored" data-anchor-id="manipulación-y-visualización-de-los-datos">Manipulación y visualización de los datos</h4>
+<p>Primero, hacemos algunos ajuste para hacer nuestro conjunto de datos más amigables<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> para las visualizaciones:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ipc_usa <span class="ot">&lt;-</span> zoo<span class="sc">::</span><span class="fu">fortify.zoo</span>(USACPALTT01CTGYM) <span class="sc">|&gt;</span> <span class="co"># Con esta función convertimos a data.frame</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setNames</span>(<span class="fu">c</span>(<span class="st">"periodo"</span>, <span class="st">"ipc"</span>))                  <span class="co"># aquí asignamos nombres fácil de identificar</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>ipc_usa <span class="sc">|&gt;</span> </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span>(<span class="at">n =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ipc_usa <span class="ot">&lt;-</span> zoo<span class="sc">::</span><span class="fu">fortify.zoo</span>(<span class="co"># Convertimos a data.frame</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                 USACPALTT01CTGYM) <span class="sc">|&gt;</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>               <span class="fu">setNames</span>(<span class="co"># asignamos nombres fácil de identificar</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">c</span>(<span class="st">"periodo"</span>, <span class="st">"ipc"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                <span class="fu">mutate</span>(<span class="fu">across</span>(ipc, <span class="sc">~</span><span class="fu">round</span>(.x, <span class="at">digits =</span> <span class="dv">2</span>)))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ipc_usa <span class="sc">|&gt;</span> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span>(<span class="at">n =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="intvyqztwv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#intvyqztwv table {
+<div id="hzncnyamja" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hzncnyamja table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#intvyqztwv thead, #intvyqztwv tbody, #intvyqztwv tfoot, #intvyqztwv tr, #intvyqztwv td, #intvyqztwv th {
+#hzncnyamja thead, #hzncnyamja tbody, #hzncnyamja tfoot, #hzncnyamja tr, #hzncnyamja td, #hzncnyamja th {
   border-style: none;
 }
 
-#intvyqztwv p {
+#hzncnyamja p {
   margin: 0;
   padding: 0;
 }
 
-#intvyqztwv .gt_table {
+#hzncnyamja .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -309,12 +311,12 @@ Nota
   border-left-color: #D3D3D3;
 }
 
-#intvyqztwv .gt_caption {
+#hzncnyamja .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#intvyqztwv .gt_title {
+#hzncnyamja .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -326,7 +328,7 @@ Nota
   border-bottom-width: 0;
 }
 
-#intvyqztwv .gt_subtitle {
+#hzncnyamja .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -338,7 +340,7 @@ Nota
   border-top-width: 0;
 }
 
-#intvyqztwv .gt_heading {
+#hzncnyamja .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -350,13 +352,13 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#intvyqztwv .gt_bottom_border {
+#hzncnyamja .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#intvyqztwv .gt_col_headings {
+#hzncnyamja .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -371,7 +373,7 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#intvyqztwv .gt_col_heading {
+#hzncnyamja .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -391,7 +393,7 @@ Nota
   overflow-x: hidden;
 }
 
-#intvyqztwv .gt_column_spanner_outer {
+#hzncnyamja .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -403,15 +405,15 @@ Nota
   padding-right: 4px;
 }
 
-#intvyqztwv .gt_column_spanner_outer:first-child {
+#hzncnyamja .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#intvyqztwv .gt_column_spanner_outer:last-child {
+#hzncnyamja .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#intvyqztwv .gt_column_spanner {
+#hzncnyamja .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -423,11 +425,11 @@ Nota
   width: 100%;
 }
 
-#intvyqztwv .gt_spanner_row {
+#hzncnyamja .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#intvyqztwv .gt_group_heading {
+#hzncnyamja .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -453,7 +455,7 @@ Nota
   text-align: left;
 }
 
-#intvyqztwv .gt_empty_group_heading {
+#hzncnyamja .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -468,15 +470,15 @@ Nota
   vertical-align: middle;
 }
 
-#intvyqztwv .gt_from_md > :first-child {
+#hzncnyamja .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#intvyqztwv .gt_from_md > :last-child {
+#hzncnyamja .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#intvyqztwv .gt_row {
+#hzncnyamja .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -495,7 +497,7 @@ Nota
   overflow-x: hidden;
 }
 
-#intvyqztwv .gt_stub {
+#hzncnyamja .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -508,7 +510,7 @@ Nota
   padding-right: 5px;
 }
 
-#intvyqztwv .gt_stub_row_group {
+#hzncnyamja .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -522,15 +524,15 @@ Nota
   vertical-align: top;
 }
 
-#intvyqztwv .gt_row_group_first td {
+#hzncnyamja .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#intvyqztwv .gt_row_group_first th {
+#hzncnyamja .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#intvyqztwv .gt_summary_row {
+#hzncnyamja .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -540,16 +542,16 @@ Nota
   padding-right: 5px;
 }
 
-#intvyqztwv .gt_first_summary_row {
+#hzncnyamja .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#intvyqztwv .gt_first_summary_row.thick {
+#hzncnyamja .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#intvyqztwv .gt_last_summary_row {
+#hzncnyamja .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -559,7 +561,7 @@ Nota
   border-bottom-color: #D3D3D3;
 }
 
-#intvyqztwv .gt_grand_summary_row {
+#hzncnyamja .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -569,7 +571,7 @@ Nota
   padding-right: 5px;
 }
 
-#intvyqztwv .gt_first_grand_summary_row {
+#hzncnyamja .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -579,7 +581,7 @@ Nota
   border-top-color: #D3D3D3;
 }
 
-#intvyqztwv .gt_last_grand_summary_row_top {
+#hzncnyamja .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -589,11 +591,11 @@ Nota
   border-bottom-color: #D3D3D3;
 }
 
-#intvyqztwv .gt_striped {
+#hzncnyamja .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#intvyqztwv .gt_table_body {
+#hzncnyamja .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -602,7 +604,7 @@ Nota
   border-bottom-color: #D3D3D3;
 }
 
-#intvyqztwv .gt_footnotes {
+#hzncnyamja .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -616,7 +618,7 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#intvyqztwv .gt_footnote {
+#hzncnyamja .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -625,7 +627,7 @@ Nota
   padding-right: 5px;
 }
 
-#intvyqztwv .gt_sourcenotes {
+#hzncnyamja .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -639,7 +641,7 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#intvyqztwv .gt_sourcenote {
+#hzncnyamja .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -647,69 +649,68 @@ Nota
   padding-right: 5px;
 }
 
-#intvyqztwv .gt_left {
+#hzncnyamja .gt_left {
   text-align: left;
 }
 
-#intvyqztwv .gt_center {
+#hzncnyamja .gt_center {
   text-align: center;
 }
 
-#intvyqztwv .gt_right {
+#hzncnyamja .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#intvyqztwv .gt_font_normal {
+#hzncnyamja .gt_font_normal {
   font-weight: normal;
 }
 
-#intvyqztwv .gt_font_bold {
+#hzncnyamja .gt_font_bold {
   font-weight: bold;
 }
 
-#intvyqztwv .gt_font_italic {
+#hzncnyamja .gt_font_italic {
   font-style: italic;
 }
 
-#intvyqztwv .gt_super {
+#hzncnyamja .gt_super {
   font-size: 65%;
 }
 
-#intvyqztwv .gt_footnote_marks {
+#hzncnyamja .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#intvyqztwv .gt_asterisk {
+#hzncnyamja .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#intvyqztwv .gt_indent_1 {
+#hzncnyamja .gt_indent_1 {
   text-indent: 5px;
 }
 
-#intvyqztwv .gt_indent_2 {
+#hzncnyamja .gt_indent_2 {
   text-indent: 10px;
 }
 
-#intvyqztwv .gt_indent_3 {
+#hzncnyamja .gt_indent_3 {
   text-indent: 15px;
 }
 
-#intvyqztwv .gt_indent_4 {
+#hzncnyamja .gt_indent_4 {
   text-indent: 20px;
 }
 
-#intvyqztwv .gt_indent_5 {
+#hzncnyamja .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
   <thead>
-    
     <tr class="gt_col_headings">
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="periodo">periodo</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ipc">ipc</th>
@@ -717,11 +718,11 @@ Nota
   </thead>
   <tbody class="gt_table_body">
     <tr><td headers="periodo" class="gt_row gt_right">2023-12-01</td>
-<td headers="ipc" class="gt_row gt_right">3.262947</td></tr>
+<td headers="ipc" class="gt_row gt_right">3.26</td></tr>
     <tr><td headers="periodo" class="gt_row gt_right">2024-01-01</td>
-<td headers="ipc" class="gt_row gt_right">3.081752</td></tr>
+<td headers="ipc" class="gt_row gt_right">3.08</td></tr>
     <tr><td headers="periodo" class="gt_row gt_right">2024-02-01</td>
-<td headers="ipc" class="gt_row gt_right">3.032076</td></tr>
+<td headers="ipc" class="gt_row gt_right">3.03</td></tr>
   </tbody>
   
   
@@ -729,24 +730,572 @@ Nota
 </div>
 </div>
 </div>
-<p>Siempre es bueno agregar un breve análisis de los datos y resaltarlo en nuestro gráfico, aquí agrego algunas ajuste para volver el gráfico más informativo. + Manipulando los datos para hacer un gráfico más informativo:</p>
+<p>Siempre es bueno explorar algunas estadísticas descriptivas de nuestros datos, para tener una idea general de la información que estamos trabajando:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ipc_usa <span class="sc">|&gt;</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Covid =</span> <span class="fu">ifelse</span>(periodo <span class="sc">&gt;=</span> <span class="st">"2020-01-01"</span>, <span class="st">"Covid"</span>, <span class="st">"Pre-Covid"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(ipc, <span class="fu">list</span>(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Promedio =</span> mean, <span class="at">Minimo =</span> min, </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maximo =</span> max),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.names =</span> <span class="st">"{.fn}"</span>),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> Covid) <span class="sc">|&gt;</span> </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> <span class="fu">tab_header</span>(</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"IPC de USA"</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Datos de enero 2012 a febrero 2024"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="getsymbols_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+
+<div id="vypuofpcsc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vypuofpcsc table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#vypuofpcsc thead, #vypuofpcsc tbody, #vypuofpcsc tfoot, #vypuofpcsc tr, #vypuofpcsc td, #vypuofpcsc th {
+  border-style: none;
+}
+
+#vypuofpcsc p {
+  margin: 0;
+  padding: 0;
+}
+
+#vypuofpcsc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vypuofpcsc .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#vypuofpcsc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vypuofpcsc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vypuofpcsc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vypuofpcsc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vypuofpcsc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vypuofpcsc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vypuofpcsc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vypuofpcsc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vypuofpcsc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vypuofpcsc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vypuofpcsc .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#vypuofpcsc .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#vypuofpcsc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vypuofpcsc .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vypuofpcsc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vypuofpcsc .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vypuofpcsc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vypuofpcsc .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#vypuofpcsc .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#vypuofpcsc .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#vypuofpcsc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vypuofpcsc .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#vypuofpcsc .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#vypuofpcsc .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vypuofpcsc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vypuofpcsc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vypuofpcsc .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vypuofpcsc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vypuofpcsc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vypuofpcsc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vypuofpcsc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vypuofpcsc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vypuofpcsc .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vypuofpcsc .gt_left {
+  text-align: left;
+}
+
+#vypuofpcsc .gt_center {
+  text-align: center;
+}
+
+#vypuofpcsc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vypuofpcsc .gt_font_normal {
+  font-weight: normal;
+}
+
+#vypuofpcsc .gt_font_bold {
+  font-weight: bold;
+}
+
+#vypuofpcsc .gt_font_italic {
+  font-style: italic;
+}
+
+#vypuofpcsc .gt_super {
+  font-size: 65%;
+}
+
+#vypuofpcsc .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#vypuofpcsc .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#vypuofpcsc .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#vypuofpcsc .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#vypuofpcsc .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vypuofpcsc .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vypuofpcsc .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="4" class="gt_heading gt_title gt_font_normal" style="">IPC de USA</td>
+    </tr>
+    <tr class="gt_heading">
+      <td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Datos de enero 2012 a febrero 2024</td>
+    </tr>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Covid">Covid</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Promedio">Promedio</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Minimo">Minimo</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Maximo">Maximo</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Covid" class="gt_row gt_left">Pre-Covid</td>
+<td headers="Promedio" class="gt_row gt_right">1.580417</td>
+<td headers="Minimo" class="gt_row gt_right">-0.23</td>
+<td headers="Maximo" class="gt_row gt_right">2.90</td></tr>
+    <tr><td headers="Covid" class="gt_row gt_left">Covid</td>
+<td headers="Promedio" class="gt_row gt_right">4.414400</td>
+<td headers="Minimo" class="gt_row gt_right">0.05</td>
+<td headers="Maximo" class="gt_row gt_right">8.97</td></tr>
+  </tbody>
+  
+  
+</table>
 </div>
 </div>
+</div>
+<ul>
+<li><p>Tomando en consideración las estadisticas de la tabla anterior, crearemos las variables que vamos a usar para resaltar algunos puntos en el gráfico:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ipc_usa_est <span class="ot">&lt;-</span> ipc_usa <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_ipc =</span> <span class="fu">ifelse</span>(ipc <span class="sc">==</span> <span class="fu">max</span>(ipc), ipc, <span class="cn">NA</span>),               <span class="co"># Máximo covid</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_ipc_covid =</span> <span class="fu">ifelse</span>(periodo <span class="sc">==</span> <span class="st">"2020-05-01"</span>, ipc, <span class="cn">NA</span>)) <span class="co"># Mínimo covid</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li><p>Graficamos con <code>ggplot2</code> :</p>
+<ol type="1">
+<li><p>Se resalta las fechas donde el covid afecto las economías:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(graph_ipc_usa <span class="ot">&lt;-</span> ipc_usa_est <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> periodo, <span class="at">y =</span> ipc)) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_rect</span>(<span class="fu">aes</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xmin =</span> <span class="fu">as.Date</span>(<span class="st">"2020-01-01"</span>), </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xmax =</span> <span class="fu">as.Date</span>(<span class="st">"2021-12-31"</span>), </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ymin =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">ymax =</span> <span class="cn">Inf</span>),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">fill =</span> <span class="st">"#8d99ae"</span>) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">1</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="getsymbols_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div></li>
+<li><p>Vamos agregar más información al gráfico, con algunas anotaciones:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(graph_ipc_usa <span class="ot">&lt;-</span> graph_ipc_usa <span class="sc">+</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">1.58</span>, <span class="at">color =</span> <span class="st">"#5f1a37"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">size =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2022-12-1"</span>), <span class="at">y =</span> <span class="fl">1.9</span>, <span class="at">label =</span> <span class="st">"Promerdio 2012-2020"</span>,            <span class="at">color =</span> <span class="st">"#5f1a37"</span>,<span class="at">size =</span> <span class="fl">2.9</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_text</span>(<span class="fu">aes</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>     periodo, min_ipc_covid, <span class="at">label =</span> <span class="fu">paste0</span>(min_ipc_covid, <span class="st">" (May-2020)"</span>)),</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> .<span class="dv">1</span>, <span class="at">color =</span> <span class="st">"#0d00a4"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_text</span>(<span class="fu">aes</span>(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>     periodo, max_ipc, <span class="at">label =</span> <span class="fu">paste0</span>(max_ipc, <span class="st">" (Jun-2022)"</span>)),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">hjust =</span> .<span class="dv">1</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">2.5</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="getsymbols_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div></li>
+<li><p>Por último, se mejora el diseño del gráfico predeterminado:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>(graph_ipc_usa <span class="ot">&lt;-</span> graph_ipc_usa <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">"%b %Y"</span>, <span class="at">date_breaks =</span> <span class="st">"2 year"</span>) <span class="sc">+</span>        <span class="co"># Eje x</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># scale_y_continuous(labels = scales::number_format(accuracy = 0.1)) + # Eje y</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>( <span class="co"># Titulos:</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Índice de Precios al Consumidor (IPC) de USA"</span>,</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Datos de enero 2012 a febrero 2024"</span>,</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Periodo"</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"IPC"</span>, </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Fuente: FRED"</span>) <span class="sc">+</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()) <span class="co"># Tema de gráfico</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="getsymbols_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div></li>
+</ol></li>
+</ul>
 </section>
 </section>
 <section id="observaciones" class="level2">
 <h2 class="anchored" data-anchor-id="observaciones">Observaciones</h2>
+<p>Como se puede observar en el gráfico, los paros de movilidad y la disminución de la demanda a nivel global producto de la pandemia de COVID-19, provoco en el Índice de Precios al Consumidor (IPC) de Estados Unidos experimentara comportamiento inusuales en el IPC, donde logra alcanzar un valor de 0.05 en mayo de 2020, y después inicia un periodo de aumento que se extiende hasta junio del 2022, en el que alcanza su valor máximo<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> de 9.0%. Aunque la FED ha trabajado arduamente para lograr la disminución que ha experimentando en los últimos meses, el IPC aún no ha llegado a los niveles previos a la pandemia.</p>
 </section>
-<section id="referencias" class="level2">
-<h2 class="anchored" data-anchor-id="referencias">## Referencias:</h2>
+<section id="consideraciones-de-getsymbols" class="level2">
+<h2 class="anchored" data-anchor-id="consideraciones-de-getsymbols">Consideraciones de getSymbols</h2>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
 
 
 </section>
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notas</h2>
+
+<ol>
+<li id="fn1"><p>Se recomienda utilizar nombres de variables que sean fáciles de recordar y que tengan sentido para nosotros. Evitar el uso de letras mayúsculas, caracteres especiales y símbolos matemáticos, nos ayuda a disminuir los errores, facilita la lectura y comprensión de los códigos en el futuro.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Máximo de la serie observada.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -801,12 +1350,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Copiado");
     let tooltip;
     if (window.bootstrap) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
+      button.setAttribute("data-bs-title", "Copiado");
       tooltip = new bootstrap.Tooltip(button, 
         { trigger: "manual", 
           customClass: "code-copy-button-tooltip",
