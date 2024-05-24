@@ -96,12 +96,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Buscar"
   }
 }</script>
+<style>html{ scroll-behavior: smooth; }</style>
 
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -182,7 +183,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contenido</h2>
+   
+  <ul>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#getsymbols" id="toc-getsymbols" class="nav-link" data-scroll-target="#getsymbols">getSymbols</a>
+  <ul class="collapse">
+  <li><a href="#manipulación-y-visualización-de-los-datos" id="toc-manipulación-y-visualización-de-los-datos" class="nav-link" data-scroll-target="#manipulación-y-visualización-de-los-datos">Manipulación y visualización de los datos</a></li>
+  </ul></li>
+  <li><a href="#observaciones" id="toc-observaciones" class="nav-link" data-scroll-target="#observaciones">Observaciones</a></li>
+  <li><a href="#consideraciones-finales-de-getsymbols" id="toc-consideraciones-finales-de-getsymbols" class="nav-link" data-scroll-target="#consideraciones-finales-de-getsymbols">Consideraciones finales de getSymbols</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -191,7 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introducción" class="level2">
 <h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
-<p>Cuando comenzamos a trabajar con R, es común que analicemos datos en formatos Excel que descargamos en nuestro ordenador. Con el paso del tiempo, esta tarea se convierte en una rutina que puede volverse tediosa, especialmente cuando lidiamos con grandes cantidades de datos que ralentizan el procesamiento y consumen una cantidad considerable de memoria de nuestra computadora.</p>
+<p>Cuando iniciamos a trabajar con R, es común que analicemos datos en formatos Excel que descargamos en nuestro ordenador. Con el paso del tiempo, esta tarea se convierte en una rutina que puede volverse tediosa, especialmente cuando lidiamos con grandes cantidades de datos que ralentizan el procesamiento y consumen una cantidad considerable de memoria de nuestra computadora.</p>
 <p>Imagina la posibilidad de descargar bases de datos de forma remota, seleccionando únicamente los datos necesarios para tu análisis y evitando cargar información que no te interese. Para hacer esto, el paquete <code>quantmod</code> proporciona una función llamada <strong>getSymbols</strong>, que permite la descarga de datos desde páginas web.</p>
 <p>Al utilizar <strong><code>getSymbols</code></strong>, puedes simplificar y automatizar el proceso de adquisición de datos, lo que te brinda la flexibilidad de trabajar con conjuntos de datos sin comprometer el rendimiento de tu computadora. Esta función te libera de la carga de descargar manualmente archivos y te permite concentrarte en el análisis y la interpretación de los datos relevantes para tu investigación o proyecto.</p>
 <p><strong>Paquetes:</strong> <span class="text-code">quantmod</span> <span class="text-code">tidyverse</span> <span class="text-code">zoo</span> <span class="text-code">gt</span></p>
@@ -201,17 +216,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Esta función necesita algunas información esenciales de la data que se necesita descargar, como el símbolo de los datos y el nombre de la pagina donde se encuentra la data.</p>
 <section id="estructura-de-la-función-getsymbols" class="level4">
 <h4 class="anchored" data-anchor-id="estructura-de-la-función-getsymbols">Estructura de la función getSymbols:</h4>
+<p>En esta caso vamos a descargar los datos del Índice de Precios al Consumidor de Estados Unidos desde la página principal de la <a href="https://fred.stlouisfed.org/">Federal Reserve Economic Data</a>, con los siguientes parámetros:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getSymbols</span>(<span class="at">Symbols =</span> <span class="cn">NULL</span>,          <span class="co"># Obligatorio</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>           <span class="at">env =</span> <span class="fu">parent.frame</span>(),</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">reload.Symbols =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">verbose =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">warnings =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>           <span class="at">src =</span> <span class="st">"yahoo"</span>,          <span class="co"># Obligatorio</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>           <span class="at">symbol.lookup =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>           <span class="at">from =</span> <span class="st">"2010-01-01"</span>,</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>           <span class="at">to =</span> <span class="st">"2024-01-01"</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>           ...)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getSymbols</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Symbols =</span>  <span class="st">"USACPALTT01CTGYM"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">src =</span> <span class="st">"FRED"</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="st">"2012-01-01"</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="st">"2024-02-01"</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">format =</span> <span class="st">"xts"</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">periodicity =</span> <span class="st">"monthly"</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "USACPALTT01CTGYM"</code></pre>
+</div>
 </div>
 <div class="callout callout-style-simple callout-important callout-titled" title="Nota">
 <div class="callout-header d-flex align-content-center">
@@ -226,24 +243,10 @@ Nota
 <p>Dependiendo de la pagina que vayas a descargar pueden variar la estructura de la función, pueden consultar con <code>?getSymbols()</code>.</p>
 </div>
 </div>
-<p>En esta caso vamos a descargar los datos del Índice de Precios al Consumidor de Estados Unidos desde la página principal de la <a href="https://fred.stlouisfed.org/">Federal Reserve Economic Data</a>, con los siguientes parámetros:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">getSymbols</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Symbols =</span>  <span class="st">"USACPALTT01CTGYM"</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">src =</span> <span class="st">"FRED"</span>,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="st">"2012-01-01"</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="st">"2024-02-01"</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">format =</span> <span class="st">"xts"</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">periodicity =</span> <span class="st">"monthly"</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "USACPALTT01CTGYM"</code></pre>
-</div>
-</div>
-<p>Lo primero que tenemos es el <strong>Symbols</strong>, este especifica el identificador del conjunto de datos que se deseamos obtener. En este caso, <kbd>USACPALTT01CTGYM</kbd> se refiere al <u>Índices de precios al consumidor (IPC, IPCA), COICOP 1999: Índice de precios al consumidor: Total para Estados Unidos</u> en unidades de contribución a la tasa de crecimiento, en 1 año, sin desestacionalizar. Estos identificadores lo podemos encontrar al lado del nombre cuando visitamos la página principal de la FRED. Especificamos la fuente con <code>src</code>, en este caso, “FRED”. Luego, definimos el rango de fechas con <code>from</code> y <code>to</code>, que indican el periodo de tiempo que deseamos descargar. Por último, especificamos el formato de los datos con <code>format</code> y la periodicidad con <code>periodicity</code>.</p>
+<p>Lo primero que tenemos es el <strong>Symbols</strong>, este especifica el identificador del conjunto de datos que deseamos obtener. En este caso, <kbd>USACPALTT01CTGYM</kbd> se refiere a los Índices de precios al consumidor (IPC, IPCA), COICOP 1999: Índice de precios al consumidor: Total para Estados Unidos en unidades de contribución a la tasa de crecimiento, en 1 año, sin desestacionalizar. Estos identificadores lo podemos encontrar al lado del nombre cuando visitamos la página principal de la FRED. Especificamos la fuente con <code>src</code>, en este caso, “FRED”. Luego, definimos el rango de fechas con <code>from</code> y <code>to</code>, que indican el periodo de tiempo que deseamos descargar. Por último, especificamos el formato de los datos con <code>format</code> y la periodicidad con <code>periodicity</code>.</p>
 <p>Por defecto el conjunto de datos que descargamos se guardara con el nombre del símbolo que utilizamos, algunas informaciones de la data descargada se pueden ver con el siguiente código:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(USACPALTT01CTGYM)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(USACPALTT01CTGYM)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>An xts object on 2012-01-01 / 2024-02-01 containing: 
   Data:    double [146, 1]
@@ -251,41 +254,45 @@ Nota
   Index:   Date [146] (TZ: "UTC")
   xts Attributes:
     $ src    : chr "FRED"
-    $ updated: POSIXct[1:1], format: "2024-05-22 23:19:15"</code></pre>
+    $ updated: POSIXct[1:1], format: "2024-05-23 22:54:10"</code></pre>
 </div>
 </div>
 </section>
-<section id="manipulación-y-visualización-de-los-datos" class="level4">
-<h4 class="anchored" data-anchor-id="manipulación-y-visualización-de-los-datos">Manipulación y visualización de los datos</h4>
-<p>Primero, hacemos algunos ajuste para hacer nuestro conjunto de datos más amigables<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> para las visualizaciones:</p>
+<section id="manipulación-y-visualización-de-los-datos" class="level3">
+<h3 class="anchored" data-anchor-id="manipulación-y-visualización-de-los-datos">Manipulación y visualización de los datos</h3>
+<p>Vamos hacer algunos ajuste para que nuestro conjunto de datos sea más amigables<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> para las visualizaciones y luego pasamos a calcular algunas estadísticas descriptivas de los datos descargados.</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Paso 1</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Paso 2</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ipc_usa <span class="ot">&lt;-</span> zoo<span class="sc">::</span><span class="fu">fortify.zoo</span>(<span class="co"># Convertimos a data.frame</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                 USACPALTT01CTGYM) <span class="sc">|&gt;</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>               <span class="fu">setNames</span>(<span class="co"># asignamos nombres fácil de identificar</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">c</span>(<span class="st">"periodo"</span>, <span class="st">"ipc"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                <span class="fu">mutate</span>(<span class="fu">across</span>(ipc, <span class="sc">~</span><span class="fu">round</span>(.x, <span class="at">digits =</span> <span class="dv">2</span>)))</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>ipc_usa <span class="sc">|&gt;</span> </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span>(<span class="at">n =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>ipc_usa <span class="ot">&lt;-</span> zoo<span class="sc">::</span><span class="fu">fortify.zoo</span>(<span class="co"># Convertimos a data.frame</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                 USACPALTT01CTGYM) <span class="sc">|&gt;</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>               <span class="fu">setNames</span>(<span class="co"># asignamos nombres fácil de identificar</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                 <span class="fu">c</span>(<span class="st">"periodo"</span>, <span class="st">"ipc"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                <span class="fu">mutate</span>(<span class="fu">across</span>(ipc, <span class="sc">~</span><span class="fu">round</span>(.x, <span class="at">digits =</span> <span class="dv">2</span>)))</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>ipc_usa <span class="sc">|&gt;</span> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span>(<span class="at">n =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="hzncnyamja" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hzncnyamja table {
+<div id="fpytbpjasa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#fpytbpjasa table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hzncnyamja thead, #hzncnyamja tbody, #hzncnyamja tfoot, #hzncnyamja tr, #hzncnyamja td, #hzncnyamja th {
+#fpytbpjasa thead, #fpytbpjasa tbody, #fpytbpjasa tfoot, #fpytbpjasa tr, #fpytbpjasa td, #fpytbpjasa th {
   border-style: none;
 }
 
-#hzncnyamja p {
+#fpytbpjasa p {
   margin: 0;
   padding: 0;
 }
 
-#hzncnyamja .gt_table {
+#fpytbpjasa .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -311,12 +318,12 @@ Nota
   border-left-color: #D3D3D3;
 }
 
-#hzncnyamja .gt_caption {
+#fpytbpjasa .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hzncnyamja .gt_title {
+#fpytbpjasa .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -328,7 +335,7 @@ Nota
   border-bottom-width: 0;
 }
 
-#hzncnyamja .gt_subtitle {
+#fpytbpjasa .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -340,7 +347,7 @@ Nota
   border-top-width: 0;
 }
 
-#hzncnyamja .gt_heading {
+#fpytbpjasa .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -352,13 +359,13 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#hzncnyamja .gt_bottom_border {
+#fpytbpjasa .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hzncnyamja .gt_col_headings {
+#fpytbpjasa .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -373,7 +380,7 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#hzncnyamja .gt_col_heading {
+#fpytbpjasa .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -393,7 +400,7 @@ Nota
   overflow-x: hidden;
 }
 
-#hzncnyamja .gt_column_spanner_outer {
+#fpytbpjasa .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -405,15 +412,15 @@ Nota
   padding-right: 4px;
 }
 
-#hzncnyamja .gt_column_spanner_outer:first-child {
+#fpytbpjasa .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hzncnyamja .gt_column_spanner_outer:last-child {
+#fpytbpjasa .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hzncnyamja .gt_column_spanner {
+#fpytbpjasa .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -425,11 +432,11 @@ Nota
   width: 100%;
 }
 
-#hzncnyamja .gt_spanner_row {
+#fpytbpjasa .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hzncnyamja .gt_group_heading {
+#fpytbpjasa .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -455,7 +462,7 @@ Nota
   text-align: left;
 }
 
-#hzncnyamja .gt_empty_group_heading {
+#fpytbpjasa .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -470,15 +477,15 @@ Nota
   vertical-align: middle;
 }
 
-#hzncnyamja .gt_from_md > :first-child {
+#fpytbpjasa .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hzncnyamja .gt_from_md > :last-child {
+#fpytbpjasa .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hzncnyamja .gt_row {
+#fpytbpjasa .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -497,7 +504,7 @@ Nota
   overflow-x: hidden;
 }
 
-#hzncnyamja .gt_stub {
+#fpytbpjasa .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -510,7 +517,7 @@ Nota
   padding-right: 5px;
 }
 
-#hzncnyamja .gt_stub_row_group {
+#fpytbpjasa .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -524,15 +531,15 @@ Nota
   vertical-align: top;
 }
 
-#hzncnyamja .gt_row_group_first td {
+#fpytbpjasa .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hzncnyamja .gt_row_group_first th {
+#fpytbpjasa .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hzncnyamja .gt_summary_row {
+#fpytbpjasa .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -542,16 +549,16 @@ Nota
   padding-right: 5px;
 }
 
-#hzncnyamja .gt_first_summary_row {
+#fpytbpjasa .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hzncnyamja .gt_first_summary_row.thick {
+#fpytbpjasa .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hzncnyamja .gt_last_summary_row {
+#fpytbpjasa .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -561,7 +568,7 @@ Nota
   border-bottom-color: #D3D3D3;
 }
 
-#hzncnyamja .gt_grand_summary_row {
+#fpytbpjasa .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -571,7 +578,7 @@ Nota
   padding-right: 5px;
 }
 
-#hzncnyamja .gt_first_grand_summary_row {
+#fpytbpjasa .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -581,7 +588,7 @@ Nota
   border-top-color: #D3D3D3;
 }
 
-#hzncnyamja .gt_last_grand_summary_row_top {
+#fpytbpjasa .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -591,11 +598,11 @@ Nota
   border-bottom-color: #D3D3D3;
 }
 
-#hzncnyamja .gt_striped {
+#fpytbpjasa .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hzncnyamja .gt_table_body {
+#fpytbpjasa .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -604,7 +611,7 @@ Nota
   border-bottom-color: #D3D3D3;
 }
 
-#hzncnyamja .gt_footnotes {
+#fpytbpjasa .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -618,7 +625,7 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#hzncnyamja .gt_footnote {
+#fpytbpjasa .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -627,7 +634,7 @@ Nota
   padding-right: 5px;
 }
 
-#hzncnyamja .gt_sourcenotes {
+#fpytbpjasa .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -641,7 +648,7 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#hzncnyamja .gt_sourcenote {
+#fpytbpjasa .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -649,63 +656,63 @@ Nota
   padding-right: 5px;
 }
 
-#hzncnyamja .gt_left {
+#fpytbpjasa .gt_left {
   text-align: left;
 }
 
-#hzncnyamja .gt_center {
+#fpytbpjasa .gt_center {
   text-align: center;
 }
 
-#hzncnyamja .gt_right {
+#fpytbpjasa .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hzncnyamja .gt_font_normal {
+#fpytbpjasa .gt_font_normal {
   font-weight: normal;
 }
 
-#hzncnyamja .gt_font_bold {
+#fpytbpjasa .gt_font_bold {
   font-weight: bold;
 }
 
-#hzncnyamja .gt_font_italic {
+#fpytbpjasa .gt_font_italic {
   font-style: italic;
 }
 
-#hzncnyamja .gt_super {
+#fpytbpjasa .gt_super {
   font-size: 65%;
 }
 
-#hzncnyamja .gt_footnote_marks {
+#fpytbpjasa .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hzncnyamja .gt_asterisk {
+#fpytbpjasa .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hzncnyamja .gt_indent_1 {
+#fpytbpjasa .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hzncnyamja .gt_indent_2 {
+#fpytbpjasa .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hzncnyamja .gt_indent_3 {
+#fpytbpjasa .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hzncnyamja .gt_indent_4 {
+#fpytbpjasa .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hzncnyamja .gt_indent_5 {
+#fpytbpjasa .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -730,38 +737,40 @@ Nota
 </div>
 </div>
 </div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>Siempre es bueno explorar algunas estadísticas descriptivas de nuestros datos, para tener una idea general de la información que estamos trabajando:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ipc_usa <span class="sc">|&gt;</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Covid =</span> <span class="fu">ifelse</span>(periodo <span class="sc">&gt;=</span> <span class="st">"2020-01-01"</span>, <span class="st">"Covid"</span>, <span class="st">"Pre-Covid"</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(ipc, <span class="fu">list</span>(</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Promedio =</span> mean, <span class="at">Minimo =</span> min, </span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maximo =</span> max),</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.names =</span> <span class="st">"{.fn}"</span>),</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> Covid) <span class="sc">|&gt;</span> </span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> <span class="fu">tab_header</span>(</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"IPC de USA"</span>,</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Datos de enero 2012 a febrero 2024"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>ipc_usa <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">Covid =</span> <span class="fu">ifelse</span>(periodo <span class="sc">&gt;=</span> <span class="st">"2020-01-01"</span>, <span class="st">"Covid"</span>, <span class="st">"Pre-Covid"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(ipc, <span class="fu">list</span>(</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Promedio =</span> mean, <span class="at">Minimo =</span> min, </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maximo =</span> max),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.names =</span> <span class="st">"{.fn}"</span>),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.by =</span> Covid) <span class="sc">|&gt;</span> </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span> <span class="fu">tab_header</span>(</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"IPC de USA"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Datos de enero 2012 a febrero 2024"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="vypuofpcsc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vypuofpcsc table {
+<div id="ohrdkdvcrc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ohrdkdvcrc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vypuofpcsc thead, #vypuofpcsc tbody, #vypuofpcsc tfoot, #vypuofpcsc tr, #vypuofpcsc td, #vypuofpcsc th {
+#ohrdkdvcrc thead, #ohrdkdvcrc tbody, #ohrdkdvcrc tfoot, #ohrdkdvcrc tr, #ohrdkdvcrc td, #ohrdkdvcrc th {
   border-style: none;
 }
 
-#vypuofpcsc p {
+#ohrdkdvcrc p {
   margin: 0;
   padding: 0;
 }
 
-#vypuofpcsc .gt_table {
+#ohrdkdvcrc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -787,12 +796,12 @@ Nota
   border-left-color: #D3D3D3;
 }
 
-#vypuofpcsc .gt_caption {
+#ohrdkdvcrc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vypuofpcsc .gt_title {
+#ohrdkdvcrc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -804,7 +813,7 @@ Nota
   border-bottom-width: 0;
 }
 
-#vypuofpcsc .gt_subtitle {
+#ohrdkdvcrc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -816,7 +825,7 @@ Nota
   border-top-width: 0;
 }
 
-#vypuofpcsc .gt_heading {
+#ohrdkdvcrc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -828,13 +837,13 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#vypuofpcsc .gt_bottom_border {
+#ohrdkdvcrc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vypuofpcsc .gt_col_headings {
+#ohrdkdvcrc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -849,7 +858,7 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#vypuofpcsc .gt_col_heading {
+#ohrdkdvcrc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -869,7 +878,7 @@ Nota
   overflow-x: hidden;
 }
 
-#vypuofpcsc .gt_column_spanner_outer {
+#ohrdkdvcrc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -881,15 +890,15 @@ Nota
   padding-right: 4px;
 }
 
-#vypuofpcsc .gt_column_spanner_outer:first-child {
+#ohrdkdvcrc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vypuofpcsc .gt_column_spanner_outer:last-child {
+#ohrdkdvcrc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vypuofpcsc .gt_column_spanner {
+#ohrdkdvcrc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -901,11 +910,11 @@ Nota
   width: 100%;
 }
 
-#vypuofpcsc .gt_spanner_row {
+#ohrdkdvcrc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vypuofpcsc .gt_group_heading {
+#ohrdkdvcrc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -931,7 +940,7 @@ Nota
   text-align: left;
 }
 
-#vypuofpcsc .gt_empty_group_heading {
+#ohrdkdvcrc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -946,15 +955,15 @@ Nota
   vertical-align: middle;
 }
 
-#vypuofpcsc .gt_from_md > :first-child {
+#ohrdkdvcrc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vypuofpcsc .gt_from_md > :last-child {
+#ohrdkdvcrc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vypuofpcsc .gt_row {
+#ohrdkdvcrc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -973,7 +982,7 @@ Nota
   overflow-x: hidden;
 }
 
-#vypuofpcsc .gt_stub {
+#ohrdkdvcrc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -986,7 +995,7 @@ Nota
   padding-right: 5px;
 }
 
-#vypuofpcsc .gt_stub_row_group {
+#ohrdkdvcrc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1000,15 +1009,15 @@ Nota
   vertical-align: top;
 }
 
-#vypuofpcsc .gt_row_group_first td {
+#ohrdkdvcrc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vypuofpcsc .gt_row_group_first th {
+#ohrdkdvcrc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vypuofpcsc .gt_summary_row {
+#ohrdkdvcrc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1018,16 +1027,16 @@ Nota
   padding-right: 5px;
 }
 
-#vypuofpcsc .gt_first_summary_row {
+#ohrdkdvcrc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vypuofpcsc .gt_first_summary_row.thick {
+#ohrdkdvcrc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vypuofpcsc .gt_last_summary_row {
+#ohrdkdvcrc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1037,7 +1046,7 @@ Nota
   border-bottom-color: #D3D3D3;
 }
 
-#vypuofpcsc .gt_grand_summary_row {
+#ohrdkdvcrc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1047,7 +1056,7 @@ Nota
   padding-right: 5px;
 }
 
-#vypuofpcsc .gt_first_grand_summary_row {
+#ohrdkdvcrc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1057,7 +1066,7 @@ Nota
   border-top-color: #D3D3D3;
 }
 
-#vypuofpcsc .gt_last_grand_summary_row_top {
+#ohrdkdvcrc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1067,11 +1076,11 @@ Nota
   border-bottom-color: #D3D3D3;
 }
 
-#vypuofpcsc .gt_striped {
+#ohrdkdvcrc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vypuofpcsc .gt_table_body {
+#ohrdkdvcrc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1080,7 +1089,7 @@ Nota
   border-bottom-color: #D3D3D3;
 }
 
-#vypuofpcsc .gt_footnotes {
+#ohrdkdvcrc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1094,7 +1103,7 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#vypuofpcsc .gt_footnote {
+#ohrdkdvcrc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1103,7 +1112,7 @@ Nota
   padding-right: 5px;
 }
 
-#vypuofpcsc .gt_sourcenotes {
+#ohrdkdvcrc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1117,7 +1126,7 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#vypuofpcsc .gt_sourcenote {
+#ohrdkdvcrc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1125,63 +1134,63 @@ Nota
   padding-right: 5px;
 }
 
-#vypuofpcsc .gt_left {
+#ohrdkdvcrc .gt_left {
   text-align: left;
 }
 
-#vypuofpcsc .gt_center {
+#ohrdkdvcrc .gt_center {
   text-align: center;
 }
 
-#vypuofpcsc .gt_right {
+#ohrdkdvcrc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vypuofpcsc .gt_font_normal {
+#ohrdkdvcrc .gt_font_normal {
   font-weight: normal;
 }
 
-#vypuofpcsc .gt_font_bold {
+#ohrdkdvcrc .gt_font_bold {
   font-weight: bold;
 }
 
-#vypuofpcsc .gt_font_italic {
+#ohrdkdvcrc .gt_font_italic {
   font-style: italic;
 }
 
-#vypuofpcsc .gt_super {
+#ohrdkdvcrc .gt_super {
   font-size: 65%;
 }
 
-#vypuofpcsc .gt_footnote_marks {
+#ohrdkdvcrc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vypuofpcsc .gt_asterisk {
+#ohrdkdvcrc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vypuofpcsc .gt_indent_1 {
+#ohrdkdvcrc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vypuofpcsc .gt_indent_2 {
+#ohrdkdvcrc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vypuofpcsc .gt_indent_3 {
+#ohrdkdvcrc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vypuofpcsc .gt_indent_4 {
+#ohrdkdvcrc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vypuofpcsc .gt_indent_5 {
+#ohrdkdvcrc .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1216,74 +1225,83 @@ Nota
 </div>
 </div>
 </div>
-<ul>
-<li><p>Tomando en consideración las estadisticas de la tabla anterior, crearemos las variables que vamos a usar para resaltar algunos puntos en el gráfico:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ipc_usa_est <span class="ot">&lt;-</span> ipc_usa <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_ipc =</span> <span class="fu">ifelse</span>(ipc <span class="sc">==</span> <span class="fu">max</span>(ipc), ipc, <span class="cn">NA</span>),               <span class="co"># Máximo covid</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_ipc_covid =</span> <span class="fu">ifelse</span>(periodo <span class="sc">==</span> <span class="st">"2020-05-01"</span>, ipc, <span class="cn">NA</span>)) <span class="co"># Mínimo covid</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div></li>
-<li><p>Graficamos con <code>ggplot2</code> :</p>
-<ol type="1">
-<li><p>Se resalta las fechas donde el covid afecto las economías:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>(graph_ipc_usa <span class="ot">&lt;-</span> ipc_usa_est <span class="sc">|&gt;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> periodo, <span class="at">y =</span> ipc)) <span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_rect</span>(<span class="fu">aes</span>(</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xmin =</span> <span class="fu">as.Date</span>(<span class="st">"2020-01-01"</span>), </span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xmax =</span> <span class="fu">as.Date</span>(<span class="st">"2021-12-31"</span>), </span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ymin =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">ymax =</span> <span class="cn">Inf</span>),</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">fill =</span> <span class="st">"#8d99ae"</span>) <span class="sc">+</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">1</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="getsymbols_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
-</div></li>
-<li><p>Vamos agregar más información al gráfico, con algunas anotaciones:</p>
+</div>
+</div>
+<p>Tomando en consideración las estadísticas de la tabla anterior, crearemos las variables que vamos a usar para resaltar algunos puntos en el gráfico:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(graph_ipc_usa <span class="ot">&lt;-</span> graph_ipc_usa <span class="sc">+</span> </span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">1.58</span>, <span class="at">color =</span> <span class="st">"#5f1a37"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">size =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2022-12-1"</span>), <span class="at">y =</span> <span class="fl">1.9</span>, <span class="at">label =</span> <span class="st">"Promerdio 2012-2020"</span>,            <span class="at">color =</span> <span class="st">"#5f1a37"</span>,<span class="at">size =</span> <span class="fl">2.9</span>) <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_text</span>(<span class="fu">aes</span>(</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>     periodo, min_ipc_covid, <span class="at">label =</span> <span class="fu">paste0</span>(min_ipc_covid, <span class="st">" (May-2020)"</span>)),</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> .<span class="dv">1</span>, <span class="at">color =</span> <span class="st">"#0d00a4"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_text</span>(<span class="fu">aes</span>(</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>     periodo, max_ipc, <span class="at">label =</span> <span class="fu">paste0</span>(max_ipc, <span class="st">" (Jun-2022)"</span>)),</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">hjust =</span> .<span class="dv">1</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">2.5</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>ipc_usa_est <span class="ot">&lt;-</span> ipc_usa <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_ipc =</span> <span class="fu">ifelse</span>(ipc <span class="sc">==</span> <span class="fu">max</span>(ipc), ipc, <span class="cn">NA</span>),               <span class="co"># Máximo covid</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_ipc_covid =</span> <span class="fu">ifelse</span>(periodo <span class="sc">==</span> <span class="st">"2020-05-01"</span>, ipc, <span class="cn">NA</span>)) <span class="co"># Mínimo covid</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Para gráficar los datos, vamos a utilizar la librería <code>ggplot2</code> y agregar informaciones para resaltar algunos puntos importantes en el gráfico:</p>
+<p>Inicio de la pandemia:</p>
+<div class="cell">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>graph_ipc_usa <span class="ot">&lt;-</span> ipc_usa_est <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> periodo, <span class="at">y =</span> ipc)) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_rect</span>(<span class="fu">aes</span>(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">xmin =</span> <span class="fu">as.Date</span>(<span class="st">"2020-01-01"</span>),  <span class="co"># Inicio de pandemia</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">xmax =</span> <span class="fu">as.Date</span>(<span class="st">"2021-12-31"</span>), </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>     <span class="at">ymin =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">ymax =</span> <span class="cn">Inf</span>),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>     <span class="at">fill =</span> <span class="st">"#8d99ae"</span>) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">1</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Vamos agregar más información al gráfico, con algunas anotaciones:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>graph_ipc_usa <span class="ot">&lt;-</span> graph_ipc_usa <span class="sc">+</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Promedio pre-covid</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">1.58</span>, <span class="at">color =</span> <span class="st">"#5f1a37"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">size =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fu">as.Date</span>(<span class="st">"2022-12-1"</span>), <span class="at">y =</span> <span class="fl">1.9</span>, <span class="at">label =</span> <span class="st">"Promerdio 2012-2020"</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"#5f1a37"</span>,<span class="at">size =</span> <span class="fl">2.9</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Mínimo covid</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>     periodo, min_ipc_covid, <span class="at">label =</span> <span class="fu">paste0</span>(min_ipc_covid, <span class="st">" (May-2020)"</span>)),</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">vjust =</span> <span class="dv">1</span>, <span class="at">hjust =</span> .<span class="dv">1</span>, <span class="at">color =</span> <span class="st">"#0d00a4"</span>, <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Máximo covid</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_text</span>(<span class="fu">aes</span>(</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>     periodo, max_ipc, <span class="at">label =</span> <span class="fu">paste0</span>(max_ipc, <span class="st">" (Jun-2022)"</span>)),</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">hjust =</span> .<span class="dv">1</span>, <span class="at">color =</span> <span class="st">"red"</span>, <span class="at">size =</span> <span class="fl">2.5</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Por último, se mejora el diseño del gráfico predeterminado:</p>
+<div class="cell">
+<details>
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(graph_ipc_usa <span class="ot">&lt;-</span> graph_ipc_usa <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Escala de fecha</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">"%b %Y"</span>, <span class="at">date_breaks =</span> <span class="st">"2 year"</span>) <span class="sc">+</span>        </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Titulos:</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">labs</span>(</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Índice de Precios al Consumidor (IPC) de USA"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Datos de enero 2012 a febrero 2024"</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Periodo"</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"IPC"</span>, </span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Fuente: FRED"</span>) <span class="sc">+</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()) <span class="co"># Tema de gráfico</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output-display">
 <p><img src="getsymbols_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
-</div></li>
-<li><p>Por último, se mejora el diseño del gráfico predeterminado:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>(graph_ipc_usa <span class="ot">&lt;-</span> graph_ipc_usa <span class="sc">+</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">"%b %Y"</span>, <span class="at">date_breaks =</span> <span class="st">"2 year"</span>) <span class="sc">+</span>        <span class="co"># Eje x</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># scale_y_continuous(labels = scales::number_format(accuracy = 0.1)) + # Eje y</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>( <span class="co"># Titulos:</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">title =</span> <span class="st">"Índice de Precios al Consumidor (IPC) de USA"</span>,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">subtitle =</span> <span class="st">"Datos de enero 2012 a febrero 2024"</span>,</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> <span class="st">"Periodo"</span>,</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">y =</span> <span class="st">"IPC"</span>, </span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Fuente: FRED"</span>) <span class="sc">+</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_bw</span>()) <span class="co"># Tema de gráfico</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="getsymbols_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
 </div>
-</div></li>
-</ol></li>
-</ul>
 </section>
 </section>
 <section id="observaciones" class="level2">
 <h2 class="anchored" data-anchor-id="observaciones">Observaciones</h2>
-<p>Como se puede observar en el gráfico, los paros de movilidad y la disminución de la demanda a nivel global producto de la pandemia de COVID-19, provoco en el Índice de Precios al Consumidor (IPC) de Estados Unidos experimentara comportamiento inusuales en el IPC, donde logra alcanzar un valor de 0.05 en mayo de 2020, y después inicia un periodo de aumento que se extiende hasta junio del 2022, en el que alcanza su valor máximo<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> de 9.0%. Aunque la FED ha trabajado arduamente para lograr la disminución que ha experimentando en los últimos meses, el IPC aún no ha llegado a los niveles previos a la pandemia.</p>
+<p>Como se puede observar en el gráfico, los paros de movilidad y la disminución de la demanda a nivel global producto de la pandemia de COVID-19, provoco que el IPC de Estados Unidos experimentara comportamiento inusuales, donde este logra alcanzar un valor de 0.05 en mayo de 2020, y después inicia un periodo de aumento que se extiende hasta junio del 2022, en el que alcanza su valor máximo<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> de 9.0%. Aunque la Reserva Federal ha trabajado arduamente para lograr la disminución que se ha evidenciado en los últimos meses, el IPC aún no ha llegado a los niveles previos a la pandemia.</p>
 </section>
-<section id="consideraciones-de-getsymbols" class="level2">
-<h2 class="anchored" data-anchor-id="consideraciones-de-getsymbols">Consideraciones de getSymbols</h2>
-</section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
+<section id="consideraciones-finales-de-getsymbols" class="level2">
+<h2 class="anchored" data-anchor-id="consideraciones-finales-de-getsymbols">Consideraciones finales de getSymbols</h2>
+<p>Las diferentes formas de usar la función <code>getSymbols</code> del paquete <code>quantmod</code> permiten a los analista de datos personalizar la descarga masiva de datos según lo requiera. Pero se debe tener en cuenta que en algunos casos las fechas solicitadas no estarán disponibles, el formato de los datos descargados puede no ser el adecuado para el análisis que se va a realizar, o en el caso de algunas variables, la periodicidad deseada de los datos puede que no este disponible.</p>
+<p>Hasta el momento los sitios web que se suelen descargar datos son:</p>
+<p><img src="../..\img/getSymbol/yahooo_finance.png" class="img-fluid" width="25"> <strong>Yahoo Finance</strong></p>
+<p><img src="../..\img/getSymbol/finance_google.svg" class="img-fluid" width="20"> <strong>Google Finance</strong></p>
+<p><img src="../..\img/getSymbol/fred-logo.png" width="20" height="20"> <strong>FRED</strong></p>
+<p><img src="../..\img/getSymbol/oanda.png" width="20" height="20"> <strong>Oanda</strong></p>
+<p>Los formatos de datos más comunes que se pueden descargar son de series de tiempo, como <code>xts</code> y <code>zoo</code>.</p>
+<p>Las periodicidades que se pueden descargar va a depender mucho del tipo de variable que se quiera descargar, estas van desde diarias hasta anuales.</p>
 
 
 </section>
@@ -1292,7 +1310,7 @@ Nota
 <div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notas</h2>
 
 <ol>
-<li id="fn1"><p>Se recomienda utilizar nombres de variables que sean fáciles de recordar y que tengan sentido para nosotros. Evitar el uso de letras mayúsculas, caracteres especiales y símbolos matemáticos, nos ayuda a disminuir los errores, facilita la lectura y comprensión de los códigos en el futuro.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>Se recomienda utilizar nombres de variables que sean fáciles de recordar y que tengan sentido para nosotros. Es más fácil recordar el nombre de un objeto donde su nombre lo describa, de seguro recodara más rápido el IPC de USA con <code>ipc_usa</code> en vez de <code>USACPALTT01CTGYM</code>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Máximo de la serie observada.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
@@ -1533,4 +1551,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>

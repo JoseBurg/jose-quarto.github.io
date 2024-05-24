@@ -7,6 +7,13 @@ date-format: medium
 categories: ["quantmod", "getSymbols", "Data", "FRED"]
 format:
   html:
+    toc: true
+    toc-location: right
+    toc-title: Contenido
+    code-fold: true
+    code-summary: "Show the code"
+    smooth-scroll: true
+    code-copy: hover
     highlight-style: github
 ---
 
@@ -19,7 +26,7 @@ library(gt)
 
 ## Introducción
 
-Cuando comenzamos a trabajar con R, es común que analicemos datos en formatos Excel que descargamos en nuestro ordenador. Con el paso del tiempo, esta tarea se convierte en una rutina que puede volverse tediosa, especialmente cuando lidiamos con grandes cantidades de datos que ralentizan el procesamiento y consumen una cantidad considerable de memoria de nuestra computadora.
+Cuando iniciamos a trabajar con R, es común que analicemos datos en formatos Excel que descargamos en nuestro ordenador. Con el paso del tiempo, esta tarea se convierte en una rutina que puede volverse tediosa, especialmente cuando lidiamos con grandes cantidades de datos que ralentizan el procesamiento y consumen una cantidad considerable de memoria de nuestra computadora.
 
 Imagina la posibilidad de descargar bases de datos de forma remota, seleccionando únicamente los datos necesarios para tu análisis y evitando cargar información que no te interese. Para hacer esto, el paquete `quantmod` proporciona una función llamada **getSymbols**, que permite la descarga de datos desde páginas web.
 
@@ -33,26 +40,10 @@ Esta función necesita algunas información esenciales de la data que se necesit
 
 #### Estructura de la función getSymbols:
 
-```{r, eval=FALSE}
-getSymbols(Symbols = NULL,          # Obligatorio
-           env = parent.frame(),
-           reload.Symbols = FALSE,
-           verbose = FALSE,
-           warnings = TRUE,
-           src = "yahoo",          # Obligatorio
-           symbol.lookup = TRUE,
-           from = "2010-01-01",
-           to = "2024-01-01"
-           ...)
-```
-
-::: {.callout-important title="Nota" appearance="simple"}
-Dependiendo de la pagina que vayas a descargar pueden variar la estructura de la función, pueden consultar con `?getSymbols()`.
-:::
-
 En esta caso vamos a descargar los datos del Índice de Precios al Consumidor de Estados Unidos desde la página principal de la [Federal Reserve Economic Data](https://fred.stlouisfed.org/), con los siguientes parámetros:
 
 ```{r, warning = FALSE, message = FALSE}
+#| code-fold: false
 getSymbols(
   Symbols =  "USACPALTT01CTGYM",
   src = "FRED",
@@ -63,21 +54,30 @@ getSymbols(
 )
 ```
 
-Lo primero que tenemos es el **Symbols**, este especifica el identificador del conjunto de datos que se deseamos obtener. En este caso, {{< kbd USACPALTT01CTGYM >}} se refiere al [Índices de precios al consumidor (IPC, IPCA), COICOP 1999: Índice de precios al consumidor: Total para Estados Unidos]{.underline} en unidades de contribución a la tasa de crecimiento, en 1 año, sin desestacionalizar. Estos identificadores lo podemos encontrar al lado del nombre cuando visitamos la página principal de la FRED. Especificamos la fuente con `src`, en este caso, "FRED". Luego, definimos el rango de fechas con `from` y `to`, que indican el periodo de tiempo que deseamos descargar. Por último, especificamos el formato de los datos con `format` y la periodicidad con `periodicity`.
+::: {.callout-important title="Nota" appearance="simple"}
+Dependiendo de la pagina que vayas a descargar pueden variar la estructura de la función, pueden consultar con `?getSymbols()`.
+:::
+
+Lo primero que tenemos es el **Symbols**, este especifica el identificador del conjunto de datos que deseamos obtener. En este caso, {{< kbd USACPALTT01CTGYM >}} se refiere a los Índices de precios al consumidor (IPC, IPCA), COICOP 1999: Índice de precios al consumidor: Total para Estados Unidos en unidades de contribución a la tasa de crecimiento, en 1 año, sin desestacionalizar. Estos identificadores lo podemos encontrar al lado del nombre cuando visitamos la página principal de la FRED. Especificamos la fuente con `src`, en este caso, "FRED". Luego, definimos el rango de fechas con `from` y `to`, que indican el periodo de tiempo que deseamos descargar. Por último, especificamos el formato de los datos con `format` y la periodicidad con `periodicity`.
 
 Por defecto el conjunto de datos que descargamos se guardara con el nombre del símbolo que utilizamos, algunas informaciones de la data descargada se pueden ver con el siguiente código:
 
 ```{r}
+#| code-fold: false
 dplyr::glimpse(USACPALTT01CTGYM)
 ```
 
-#### Manipulación y visualización de los datos
+### Manipulación y visualización de los datos
 
-Primero, hacemos algunos ajuste para hacer nuestro conjunto de datos más amigables[^1] para las visualizaciones:
+Vamos hacer algunos ajuste para que nuestro conjunto de datos sea más amigables[^1] para las visualizaciones y luego pasamos a calcular algunas estadísticas descriptivas de los datos descargados.
 
-[^1]: Se recomienda utilizar nombres de variables que sean fáciles de recordar y que tengan sentido para nosotros. Evitar el uso de letras mayúsculas, caracteres especiales y símbolos matemáticos, nos ayuda a disminuir los errores, facilita la lectura y comprensión de los códigos en el futuro.
+[^1]: Se recomienda utilizar nombres de variables que sean fáciles de recordar y que tengan sentido para nosotros. Es más fácil recordar el nombre de un objeto donde su nombre lo describa, de seguro recodara más rápido el IPC de USA con `ipc_usa` en vez de `USACPALTT01CTGYM`.
+
+::: panel-tabset
+### Paso 1
 
 ```{r}
+#| code-fold: false
 ipc_usa <- zoo::fortify.zoo(# Convertimos a data.frame
                  USACPALTT01CTGYM) |> 
                setNames(# asignamos nombres fácil de identificar
@@ -88,9 +88,12 @@ ipc_usa |>
   gt::gt()
 ```
 
+### Paso 2
+
 Siempre es bueno explorar algunas estadísticas descriptivas de nuestros datos, para tener una idea general de la información que estamos trabajando:
 
 ```{r}
+#| code-fold: false
 ipc_usa |> 
   mutate(
     Covid = ifelse(periodo >= "2020-01-01", "Covid", "Pre-Covid")) |> 
@@ -103,66 +106,88 @@ ipc_usa |>
     title = "IPC de USA",
     subtitle = "Datos de enero 2012 a febrero 2024")
 ```
+:::
 
--   Tomando en consideración las estadisticas de la tabla anterior, crearemos las variables que vamos a usar para resaltar algunos puntos en el gráfico:
+Tomando en consideración las estadísticas de la tabla anterior, crearemos las variables que vamos a usar para resaltar algunos puntos en el gráfico:
 
-    ```{r}
-    ipc_usa_est <- ipc_usa |>
-      mutate(
-        max_ipc = ifelse(ipc == max(ipc), ipc, NA),               # Máximo covid
-        min_ipc_covid = ifelse(periodo == "2020-05-01", ipc, NA)) # Mínimo covid
-    ```
+```{r}
+#| code-fold: false
+ipc_usa_est <- ipc_usa |>
+  mutate(
+    max_ipc = ifelse(ipc == max(ipc), ipc, NA),               # Máximo covid
+    min_ipc_covid = ifelse(periodo == "2020-05-01", ipc, NA)) # Mínimo covid
+```
 
--   Graficamos con `ggplot2` :
+Para gráficar los datos, vamos a utilizar la librería `ggplot2` y agregar informaciones para resaltar algunos puntos importantes en el gráfico:
 
-    1.  Se resalta las fechas donde el covid afecto las economías:
+Inicio de la pandemia:
 
-        ```{r}
-        (graph_ipc_usa <- ipc_usa_est |>
-          ggplot(aes(x = periodo, y = ipc)) +
-           geom_rect(aes(
-             xmin = as.Date("2020-01-01"), 
-             xmax = as.Date("2021-12-31"), 
-             ymin = -Inf, ymax = Inf),
-             fill = "#8d99ae") +
-           geom_line(color = "black", size = 1))
-        ```
+```{r}
+graph_ipc_usa <- ipc_usa_est |>
+  ggplot(aes(x = periodo, y = ipc)) +
+   geom_rect(aes(
+     xmin = as.Date("2020-01-01"),  # Inicio de pandemia
+     xmax = as.Date("2021-12-31"), 
+     ymin = -Inf, ymax = Inf),
+     fill = "#8d99ae") +
+   geom_line(color = "black", size = 1)
+```
 
-    2.  Vamos agregar más información al gráfico, con algunas anotaciones:
+Vamos agregar más información al gráfico, con algunas anotaciones:
 
-        ```{r}
-        (graph_ipc_usa <- graph_ipc_usa + 
-          geom_hline(yintercept = 1.58, color = "#5f1a37", linetype = "dashed", size = 0.6) +
-          annotate("text", x = as.Date("2022-12-1"), y = 1.9, label = "Promerdio 2012-2020",            color = "#5f1a37",size = 2.9) +
-           geom_text(aes(
-             periodo, min_ipc_covid, label = paste0(min_ipc_covid, " (May-2020)")),
-             vjust = 1, hjust = .1, color = "#0d00a4", size = 2.5) +
-           geom_text(aes(
-             periodo, max_ipc, label = paste0(max_ipc, " (Jun-2022)")),
-             vjust = -0.3, hjust = .1, color = "red", size = 2.5))
-        ```
+```{r}
+#| code-fold: false
+graph_ipc_usa <- graph_ipc_usa + 
+  # Promedio pre-covid
+  geom_hline(yintercept = 1.58, color = "#5f1a37", linetype = "dashed", size = 0.6) +
+  annotate("text", x = as.Date("2022-12-1"), y = 1.9, label = "Promerdio 2012-2020",
+           color = "#5f1a37",size = 2.9) +
+  # Mínimo covid
+  geom_text(aes(
+     periodo, min_ipc_covid, label = paste0(min_ipc_covid, " (May-2020)")),
+     vjust = 1, hjust = .1, color = "#0d00a4", size = 2.5) +
+  # Máximo covid
+   geom_text(aes(
+     periodo, max_ipc, label = paste0(max_ipc, " (Jun-2022)")),
+     vjust = -0.3, hjust = .1, color = "red", size = 2.5)
+```
 
-    3.  Por último, se mejora el diseño del gráfico predeterminado:
+Por último, se mejora el diseño del gráfico predeterminado:
 
-        ```{r}
-        (graph_ipc_usa <- graph_ipc_usa +
-          scale_x_date(date_labels = "%b %Y", date_breaks = "2 year") +        # Eje x
-          # scale_y_continuous(labels = scales::number_format(accuracy = 0.1)) + # Eje y
-            labs( # Titulos:
-              title = "Índice de Precios al Consumidor (IPC) de USA",
-              subtitle = "Datos de enero 2012 a febrero 2024",
-              x = "Periodo",
-              y = "IPC", 
-              caption = "Fuente: FRED") +
-            theme_bw()) # Tema de gráfico
-        ```
+```{r}
+(graph_ipc_usa <- graph_ipc_usa +
+  # Escala de fecha
+   scale_x_date(date_labels = "%b %Y", date_breaks = "2 year") +        
+  # Titulos:
+   labs(
+      title = "Índice de Precios al Consumidor (IPC) de USA",
+      subtitle = "Datos de enero 2012 a febrero 2024",
+      x = "Periodo",
+      y = "IPC", 
+      caption = "Fuente: FRED") +
+  theme_bw()) # Tema de gráfico
+```
 
 ## Observaciones
 
-Como se puede observar en el gráfico, los paros de movilidad y la disminución de la demanda a nivel global producto de la pandemia de COVID-19, provoco en el Índice de Precios al Consumidor (IPC) de Estados Unidos experimentara comportamiento inusuales en el IPC, donde logra alcanzar un valor de 0.05 en mayo de 2020, y después inicia un periodo de aumento que se extiende hasta junio del 2022, en el que alcanza su valor máximo[^2] de 9.0%. Aunque la FED ha trabajado arduamente para lograr la disminución que ha experimentando en los últimos meses, el IPC aún no ha llegado a los niveles previos a la pandemia.
+Como se puede observar en el gráfico, los paros de movilidad y la disminución de la demanda a nivel global producto de la pandemia de COVID-19, provoco que el IPC de Estados Unidos experimentara comportamiento inusuales, donde este logra alcanzar un valor de 0.05 en mayo de 2020, y después inicia un periodo de aumento que se extiende hasta junio del 2022, en el que alcanza su valor máximo[^2] de 9.0%. Aunque la Reserva Federal ha trabajado arduamente para lograr la disminución que se ha evidenciado en los últimos meses, el IPC aún no ha llegado a los niveles previos a la pandemia.
 
 [^2]: Máximo de la serie observada.
 
-## Consideraciones de getSymbols
+## Consideraciones finales de getSymbols
 
-## 
+Las diferentes formas de usar la función `getSymbols` del paquete `quantmod` permiten a los analista de datos personalizar la descarga masiva de datos según lo requiera. Pero se debe tener en cuenta que en algunos casos las fechas solicitadas no estarán disponibles, el formato de los datos descargados puede no ser el adecuado para el análisis que se va a realizar, o en el caso de algunas variables, la periodicidad deseada de los datos puede que no este disponible.
+
+Hasta el momento los sitios web que se suelen descargar datos son:
+
+![](/img/getSymbol/yahooo_finance.png){width="25"} **Yahoo Finance**
+
+![](/img/getSymbol/finance_google.svg){width="20"} **Google Finance**
+
+![](/img/getSymbol/fred-logo.png){width="20" height="20"} **FRED**
+
+![](/img/getSymbol/oanda.png){width="20" height="20"} **Oanda**
+
+Los formatos de datos más comunes que se pueden descargar son de series de tiempo, como `xts` y `zoo`.
+
+Las periodicidades que se pueden descargar va a depender mucho del tipo de variable que se quiera descargar, estas van desde diarias hasta anuales.
