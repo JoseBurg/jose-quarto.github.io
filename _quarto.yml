@@ -9,7 +9,7 @@ website:
     right:
       - about.qmd
       - icon: github
-        href: https://github.com/josebug
+        href: https://github.com/joseburg
       - icon: linkedin
         href: https://www.linkedin.com/in/jos%C3%A9-antonio-burgos-francisco-979672163/
       - icon: envelope-at
