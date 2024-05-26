@@ -7,9 +7,9 @@ about:
     - icon: linkedin
       text: LinkedIn
       href: https://www.linkedin.com/in/jos%C3%A9-antonio-burgos-francisco-979672163/
-    - icon: github
-      text: Github
-      href: https://github.com/joseburg
+    - icon: envelope-at
+      text: Outlook
+      href: mailto:joseaburgos01@outlook.com
 ---
 
-Hola, mi nombre es José Burgos. Soy un joven economista apasionado por la ciencia de datos y la programación en **RStudio**. Te invito a visitar mi blog personal, donde comparto técnicas de ciencias de datos, y análisis económicos, mayormente con modelos econométricos.
+Hola, mi nombre es José Burgos. Soy un joven economista apasionado por la ciencia de datos y la programación en RStudio. Te invito a visitar mi blog personal, donde comparto técnicas de ciencia de datos y análisis económicos, principalmente utilizando modelos econométricos.

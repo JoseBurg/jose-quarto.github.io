@@ -9,12 +9,12 @@ website:
     background: '#03045e'
     right:
       - about.qmd
-      - icon: github
-        href: https://github.com/joseburg
+      # - icon: github
+      #   href: https://github.com/joseburg
       - icon: linkedin
         href: https://www.linkedin.com/in/jos%C3%A9-antonio-burgos-francisco-979672163/
       - icon: envelope-at
-        href: joseaburgos01@outlook.com
+        href: mailto:joseaburgos01@outlook.com
   
 
 format:
