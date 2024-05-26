@@ -5,6 +5,8 @@ project:
 website:
   title: "José Burgos"
   description: "Personal website of José Burgos"
+  execute:
+    freezer: auto
   navbar:
     background: '#03045e'
     right:
@@ -22,6 +24,5 @@ format:
     clipr: true
     theme: cosmo
     css: styles.css
-
 editor: visual
 
