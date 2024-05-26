@@ -5,8 +5,6 @@ project:
 website:
   title: "José Burgos"
   description: "Personal website of José Burgos"
-  execute:
-    freezer: auto
   navbar:
     background: '#03045e'
     right:
