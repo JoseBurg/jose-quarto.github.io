@@ -1,0 +1,60 @@
+---
+title: "APis"
+---
+
+# Introducción
+
+Una API, o Interfaz de Programación de Aplicaciones (por sus siglas en inglés, Application Programming Interface), es un conjunto de reglas y protocolos que permiten que diferentes aplicaciones informáticas se comuniquen entre sí. Estas reglas determinan cómo los componentes de software deben interactuar, qué datos pueden solicitar y cómo deben interpretar las respuestas.
+
+Las APIs son esenciales para los analistas de datos porque les proporcionan acceso a datos de diversas fuentes, les permiten automatizar tareas, integrar información, realizar análisis avanzados y visualizar resultados. Esto les ayuda a tomar decisiones informadas y a extraer **insights** valiosos de los datos, lo que puede tener un impacto significativo en la toma de decisiones empresariales y estratégicas.
+
+En este artículo, exploraremos la conexión a la base de datos de la Superintendencia de Bancos de la República Dominicana a través de su API. Nuestro objetivo principal será extraer datos relacionados con las captaciones por regiones. Posteriormente, llevaremos a cabo diversas manipulaciones y visualizaciones con el propósito de realizar un análisis detallado de estos bancos.
+
+### Elementos necesarios para conectar a una API:
+
+1.  **Acceso a la Documentación**
+2.  **Claves de Autenticación**
+3.  **Herramientas de Desarrollo**
+4.  **Conexión a Internet**
+5.  **Manejo de Respuestas**
+
+```{r}
+library(httr)
+library(dplyr)
+library(ggplot2)
+library(tidytext)
+
+link <- "https://apis.sb.gob.do/estadisticas/v2/carteras/creditos/genero?periodoInicial=2021-01"
+subscription_key <- "bRhDMj4xQCQw9cG"
+response <- GET(link, add_headers(`Subscription-Key` = subscription_key))
+
+json_content <- content(response, "text", encoding = "UTF-8")
+captaciones <- jsonlite::fromJSON(json_content)
+
+
+# captaciones |> 
+#   # group_by(region) |> 
+#   mutate(
+#     total = sum(balance),
+#     entidad = as.factor(entidad),
+#     orden = reorder_within(entidad, total, region)) |> 
+#   ggplot() + 
+#   geom_col(
+#     aes(x = total/1000000, y = orden), 
+#     show.legend = FALSE) +
+#   labs(x = "", y = "") +
+#   facet_wrap(~region, scales = "free_y") +
+#   scale_y_reordered()
+```
+
+[Pasos para registrarse en la APis de la Super de Bancos](https://medium.com/@SB-ESTUDIOS/c%C3%B3mo-registrarte-en-el-portal-de-apis-de-la-superintendencia-de-bancos-b8a59acf3f9a)
+
+A la hora de acceder a las estadísticas del sistema financiero, se recomienda ir la versión 2, ya que la uno será descontinuada. ![](img/mens_v1.png){width="316"}
+
+Luego de elegir la variable deseada que se descargara, es importante verificar los parámetros y sus características, ademas de consultar cuales de esos parámetros serán obligatorios o no. Como se ve en la siguiente imagen, la super nos proporciona un resumen detallados de los para metros a utilizar:
+
+![](img/list_param.png)
+
+Según los detalles de la imagen anterior, solo se requiere colocar el periodo inicial para poder descargar los datos, aunque podemos filtrar con los demás.
+
+Luego de elegir los filtros o parametros que tendra nuestra data la pagina nos generará un link con la siguiente estructura:
