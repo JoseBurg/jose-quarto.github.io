@@ -1,0 +1,10 @@
+url <- "https://api.digital.gob.do/v1/fuels"
+
+query <- list(
+  date = "2010-01-01",
+  since = "2021-01-01",
+  until = "2024-06-19",
+  code = "PGACU00"
+)
+
+response <- httr::GET(url, query = query, httr::accept("application/json"))
