@@ -1,0 +1,43 @@
+---
+title: "Gráficos elegantes"
+author: "José Burgos"
+date: "2024-12-21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introducción
+
+Pocas personas no prefieren dedicarle tiempo a la elegancia de un gráfico a la hora de hacer análisis en \`Rstudio\`, y lo entiendo, mejorar la estética en un gráfico de rstudio, especialmente con ggplot2, conlleva un tiempo que las personas no quieren perder. En este blog empezare a publicar algunas cambios que podemos hacer en un gráfico, para que puedan utilizar en sus reportes.
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+pib_gasto <- bcdata::get_pib_gasto() 
+
+exportaciones_importaciones <-  pib_gasto |> 
+  filter(
+    partida %in% c("Exportaciones", "Importaciones")
+  )
+```
+
+```{r}
+
+plot_bas_exp_impor <- exportaciones_importaciones |> 
+  ggplot() +
+  geom_line(aes(fecha, monto, color = partida)) +
+  labs(
+    title = "Exportaciones e importaciones en República Dominicana",
+    subtitle = "En millones de pesos (RD$)",
+    caption = "Fuente: BCRD", 
+    color = NULL
+  ) +
+  theme_minimal() +
+  theme(axis.title = element_blank())
+```
+
+```{r}
+plot_bas_exp_impor
+```

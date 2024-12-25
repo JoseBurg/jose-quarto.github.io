@@ -1,0 +1,16 @@
+{
+  "hash": "39873d5f09b571b0e851078b6a7969cc",
+  "result": {
+    "markdown": "---\ntitle: \"Gráficos elegantes\"\nauthor: \"José Burgos\"\ndate: \"2024-12-21\"\noutput: html_document\n---\n\n\n\n\n## Introducción\n\nPocas personas no prefieren dedicarle tiempo a la elegancia de un gráfico a la hora de hacer análisis en \\`Rstudio\\`, y lo entiendo, mejorar la estética en un gráfico de rstudio, especialmente con ggplot2, conlleva un tiempo que las personas no quieren perder. En este blog empezare a publicar algunas cambios que podemos hacer en un gráfico, para que puedan utilizar en sus reportes.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\npib_gasto <- bcdata::get_pib_gasto() \n\nexportaciones_importaciones <-  pib_gasto |> \n  filter(\n    partida %in% c(\"Exportaciones\", \"Importaciones\")\n  )\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nplot_bas_exp_impor <- exportaciones_importaciones |> \n  ggplot() +\n  geom_line(aes(fecha, monto, color = partida)) +\n  labs(\n    title = \"Exportaciones e importaciones en República Dominicana\",\n    subtitle = \"En millones de pesos (RD$)\",\n    caption = \"Fuente: BCRD\", \n    color = NULL\n  ) +\n  theme_minimal() +\n  theme(axis.title = element_blank())\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\nplot_bas_exp_impor\n```\n\n::: {.cell-output-display}\n![](exportaciones_importaciones_RD_files/figure-html/unnamed-chunk-3-1.png){width=672}\n:::\n:::\n",
+    "supporting": [
+      "exportaciones_importaciones_RD_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
