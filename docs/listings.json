@@ -2,7 +2,6 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/apis/APIs.html",
       "/posts/graficos/RD_exportaciones_importaciones.html",
       "/posts/getSymbols/getsymbols.html"
     ]

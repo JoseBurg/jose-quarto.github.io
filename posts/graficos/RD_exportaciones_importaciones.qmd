@@ -124,9 +124,9 @@ Hasta ahora, hemos realizado varias mejoras en nuestro gráfico, pero aún podem
 ### Gráfico final
 
 ```{r}
-# En este caso, como debemos probar varias veces, 
+# En este caso, como debemos probar varias veces 
 # con algunos ajuste hasta que las anotaciones queden organizada,
-# es de gran ayuda crear una función
+# es de gran ayuda crear una función:
 anotaciones <- function(x = "2016-03-01", y, label, color){
   ggplot2::annotate("text", 
     x = as.Date(x), y = y, 
