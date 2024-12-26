@@ -2,7 +2,7 @@
 title: "Domina la estética con ggplot2"
 author: "José Burgos"
 date-format: medium
-categories: ["ggplot2", "annotate", "databcrd", "Exportaciones", "Importaciones"]
+categories: ["ggplot2", "annotate", "databcrd"]
 format:
   html:
     toc: true
