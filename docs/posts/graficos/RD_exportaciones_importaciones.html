@@ -8,7 +8,7 @@
 
 <meta name="author" content="José Burgos">
 
-<title>José Burgos - Gráficos elegantes</title>
+<title>José Burgos - Domina la estética con ggplot2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -142,7 +142,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Gráficos elegantes</h1>
+      <h1 class="title">Domina la estética con ggplot2</h1>
                                 <div class="quarto-categories">
                 <div class="quarto-category">ggplot2</div>
                 <div class="quarto-category">annotate</div>
@@ -177,6 +177,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#empecemos" id="toc-empecemos" class="nav-link" data-scroll-target="#empecemos">Empecemos</a>
+  <ul class="collapse">
+  <li><a href="#instalar-paquete-desde-github" id="toc-instalar-paquete-desde-github" class="nav-link" data-scroll-target="#instalar-paquete-desde-github">Instalar paquete desde github</a></li>
+  <li><a href="#graficando" id="toc-graficando" class="nav-link" data-scroll-target="#graficando">Graficando</a></li>
+  <li><a href="#sombreando-entre-dos-lineas" id="toc-sombreando-entre-dos-lineas" class="nav-link" data-scroll-target="#sombreando-entre-dos-lineas">Sombreando entre dos lineas</a></li>
+  <li><a href="#gráfico-final" id="toc-gráfico-final" class="nav-link" data-scroll-target="#gráfico-final">Gráfico final</a></li>
+  </ul></li>
   <li><a href="#consideraciones" id="toc-consideraciones" class="nav-link" data-scroll-target="#consideraciones">Consideraciones</a></li>
   <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias">Referencias</a></li>
   </ul>
@@ -190,8 +197,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introducción" class="level2">
 <h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
-<p>Muchas personas no suelen dedicar tiempo a la estética de los gráficos al realizar análisis en RStudio, y es comprensible. Mejorar la apariencia de un gráfico, especialmente cuando se utiliza ggplot2, puede ser una tarea que requiere tiempo, y a menudo, no se percibe como una prioridad. Sin embargo, la presentación visual es clave para comunicar resultados de manera efectiva. Por eso, en este <code>blog</code> comenzaré a compartir algunas ideas y ajustes que puedes implementar en tus gráficos con ggplot2 para elevar la calidad de tus reportes.</p>
+<p>Muchas personas no suelen dedicar tiempo a la estética de los gráficos al realizar análisis en RStudio, y es comprensible. Mejorar la apariencia de un gráfico, especialmente cuando se utiliza <code>ggplot2</code>, puede ser una tarea que requiere tiempo, y a menudo, no se percibe como una prioridad. Sin embargo, la presentación visual es clave para comunicar resultados de manera efectiva. Por eso, en este <code>blog</code> comenzaré a compartir algunas ideas y ajustes que puedes implementar en tus gráficos con <code>ggplot2</code> para elevar la calidad de tus reportes.</p>
 <p>En esta publicación, utilizaremos el paquete <code>databcrd</code>, desarrollado por <em>Johan Rosa</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, una figura destacada en la programación con R en <strong>RD</strong>. Este paquete, disponible en su perfil de GitHub (“<strong><em>Johan-rosa/databcrd</em></strong>”), es sencillo de instalar y usar. Su principal propósito es permitir la descarga remota y en tiempo real de datos del Banco Central de la República Dominica. Además, estos datos están adaptados para facilitar su uso en análisis realizados en RStudio.</p>
+</section>
+<section id="empecemos" class="level2">
+<h2 class="anchored" data-anchor-id="empecemos">Empecemos</h2>
+<section id="instalar-paquete-desde-github" class="level3">
+<h3 class="anchored" data-anchor-id="instalar-paquete-desde-github">Instalar paquete desde github</h3>
 <p>Con estos pasos puede utilizar el paquete <strong>databcrd</strong>:</p>
 <ol type="1">
 <li><p>Instalar el paquete <code>devtools</code>.</p></li>
@@ -215,6 +227,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</section>
+<section id="graficando" class="level3">
+<h3 class="anchored" data-anchor-id="graficando">Graficando</h3>
 <p>Nos centraremos en las exportaciones e importaciones para nuestro ejercicio de visualización. Crearemos un gráfico sencillo que muestre su evolución, asegurándonos de incluir los elementos básicos que todo gráfico debe tener: un título claro, la fuente de los datos y las etiquetas correspondientes en los ejes.</p>
 <div class="cell">
 <details>
@@ -255,6 +270,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="RD_exportaciones_importaciones_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
+<section id="sombreando-entre-dos-lineas" class="level3">
+<h3 class="anchored" data-anchor-id="sombreando-entre-dos-lineas">Sombreando entre dos lineas</h3>
 <p>Podemos sombrear en el gráfico después del <strong>covid</strong>, para enfocar la atención a nuestro publico, como ha evolucionado nuestras variables después del periodo de la pandemia.</p>
 <p>Para esto vamos a filtrar nuestra base de datos en la fecha que nos interesa y cambiar la estructura para que sea más fácil hacer el sombreado.</p>
 <div class="cell">
@@ -275,22 +293,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plot_avance1 <span class="ot">&lt;-</span> plot_avance <span class="sc">+</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data_sobrear_2020,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">x =</span> fecha, </span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">ymin =</span> Exportaciones, </span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">ymax =</span> Importaciones</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    ), </span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"#748cab"</span>,</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.3</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>plot_avance1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> fecha, <span class="at">ymin =</span> Exportaciones, <span class="at">ymax =</span> Importaciones), </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"#748cab"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plot_avance1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="RD_exportaciones_importaciones_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Hasta ahora, hemos realizado varias mejoras en nuestro gráfico, pero aún podemos optimizar su apariencia. Una forma de hacerlo es colocando las etiquetas de las series directamente dentro del gráfico. Para lograr esto, utilizaremos la función <code>annotate</code>, que nos permite agregar texto personalizado en posiciones específicas del gráfico. Además, podremos ajustar el tamaño, color y posición del texto para que se integre de manera armoniosa con el diseño general.</p>
+</section>
+<section id="gráfico-final" class="level3">
+<h3 class="anchored" data-anchor-id="gráfico-final">Gráfico final</h3>
 <div class="cell">
 <details>
 <summary>Code</summary>
@@ -313,6 +328,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="RD_exportaciones_importaciones_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+</section>
 </section>
 <section id="consideraciones" class="level2">
 <h2 class="anchored" data-anchor-id="consideraciones">Consideraciones</h2>

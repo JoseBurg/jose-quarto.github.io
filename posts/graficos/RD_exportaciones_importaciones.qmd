@@ -1,5 +1,5 @@
 ---
-title: "Gráficos elegantes"
+title: "Domina la estética con ggplot2"
 author: "José Burgos"
 date-format: medium
 categories: ["ggplot2", "annotate", "databcrd", "Exportaciones", "Importaciones"]
@@ -22,11 +22,15 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 ## Introducción
 
-Muchas personas no suelen dedicar tiempo a la estética de los gráficos al realizar análisis en RStudio, y es comprensible. Mejorar la apariencia de un gráfico, especialmente cuando se utiliza ggplot2, puede ser una tarea que requiere tiempo, y a menudo, no se percibe como una prioridad. Sin embargo, la presentación visual es clave para comunicar resultados de manera efectiva. Por eso, en este `blog` comenzaré a compartir algunas ideas y ajustes que puedes implementar en tus gráficos con ggplot2 para elevar la calidad de tus reportes.
+Muchas personas no suelen dedicar tiempo a la estética de los gráficos al realizar análisis en RStudio, y es comprensible. Mejorar la apariencia de un gráfico, especialmente cuando se utiliza `ggplot2`, puede ser una tarea que requiere tiempo, y a menudo, no se percibe como una prioridad. Sin embargo, la presentación visual es clave para comunicar resultados de manera efectiva. Por eso, en este `blog` comenzaré a compartir algunas ideas y ajustes que puedes implementar en tus gráficos con `ggplot2` para elevar la calidad de tus reportes.
 
 En esta publicación, utilizaremos el paquete `databcrd`, desarrollado por *Johan Rosa*[^1], una figura destacada en la programación con R en **RD**. Este paquete, disponible en su perfil de GitHub ("***Johan-rosa/databcrd***"), es sencillo de instalar y usar. Su principal propósito es permitir la descarga remota y en tiempo real de datos del Banco Central de la República Dominica. Además, estos datos están adaptados para facilitar su uso en análisis realizados en RStudio.
 
 [^1]: Puede echarle un vistazo a su blog personal: <https://www.johan-rosa.com/>
+
+## Empecemos
+
+### Instalar paquete desde github
 
 Con estos pasos puede utilizar el paquete **databcrd**:
 
@@ -51,6 +55,8 @@ exportaciones_importaciones <-  pib_gasto |>
     partida %in% c("Exportaciones", "Importaciones")
   )
 ```
+
+### Graficando
 
 Nos centraremos en las exportaciones e importaciones para nuestro ejercicio de visualización. Crearemos un gráfico sencillo que muestre su evolución, asegurándonos de incluir los elementos básicos que todo gráfico debe tener: un título claro, la fuente de los datos y las etiquetas correspondientes en los ejes.
 
@@ -86,6 +92,8 @@ plot_avance <- plot_bas_exp_impor +
 plot_avance
 ```
 
+### Sombreando entre dos lineas
+
 Podemos sombrear en el gráfico después del **covid**, para enfocar la atención a nuestro publico, como ha evolucionado nuestras variables después del periodo de la pandemia.
 
 Para esto vamos a filtrar nuestra base de datos en la fecha que nos interesa y cambiar la estructura para que sea más fácil hacer el sombreado.
@@ -99,26 +107,21 @@ data_sobrear_2020 <- exportaciones_importaciones |>
     names_from = partida,
     values_from = pib_nominal
   )
-  
 ```
 
 ```{r}
 plot_avance1 <- plot_avance + 
   geom_ribbon(
     data = data_sobrear_2020,
-    aes(
-      x = fecha, 
-      ymin = Exportaciones, 
-      ymax = Importaciones
-    ), 
-    fill = "#748cab",
-    alpha = 0.3
-    
-  )
+    aes(x = fecha, ymin = Exportaciones, ymax = Importaciones), 
+    fill = "#748cab", alpha = 0.3)
+
 plot_avance1
 ```
 
 Hasta ahora, hemos realizado varias mejoras en nuestro gráfico, pero aún podemos optimizar su apariencia. Una forma de hacerlo es colocando las etiquetas de las series directamente dentro del gráfico. Para lograr esto, utilizaremos la función `annotate`, que nos permite agregar texto personalizado en posiciones específicas del gráfico. Además, podremos ajustar el tamaño, color y posición del texto para que se integre de manera armoniosa con el diseño general.
+
+### Gráfico final
 
 ```{r}
 # En este caso, como debemos probar varias veces, 
