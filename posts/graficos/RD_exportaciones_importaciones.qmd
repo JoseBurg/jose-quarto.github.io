@@ -42,9 +42,10 @@ Con estos pasos puede utilizar el paquete **databcrd**:
 
 Luego de instalar el paquete solo es cargarlo o llamarlo de manera explicita, esta última es la que usaremos en este post para que el lector conozca mejor las funciones.
 
-Vamos a descargar el PIB de República Dominicana, con la función `get_pib_gasto` , los parámetros determinados son los siguientes:
+Vamos a descargar el PIB nominal de la República Dominicana, con la función `get_pib_gasto` , los parámetros determinados son los siguientes:
 
 ```{r message=FALSE, warning=FALSE}
+#| code-fold: true
 library(tidyverse)
 pib_gasto <- databcrd::get_pib_gasto(
   modalidad = "nominal", 
