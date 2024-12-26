@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.3.450">
@@ -82,16 +82,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "type": "overlay",
   "limit": 20,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
@@ -111,8 +111,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <span class="navbar-title">José Burgos</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -155,12 +155,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="quarto-title-meta">
 
       <div>
-      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-heading">Autor/a</div>
       <div class="quarto-title-meta-contents">
                <p>José Burgos </p>
             </div>
     </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Fecha de publicación</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">25 dic 2024</p>
+      </div>
+    </div>
     
       
     </div>
@@ -211,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Vamos a descargar el PIB de República Dominicana, con la función <code>get_pib_gasto</code> , los parámetros determinados son los siguientes:</p>
 <div class="cell">
 <details>
-<summary>Code</summary>
+<summary>Código</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pib_gasto <span class="ot">&lt;-</span> databcrd<span class="sc">::</span><span class="fu">get_pib_gasto</span>(</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">modalidad =</span> <span class="st">"nominal"</span>, </span>
@@ -222,7 +228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>exportaciones_importaciones <span class="ot">&lt;-</span>  pib_gasto <span class="sc">|&gt;</span> </span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    partida <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Exportaciones"</span>, <span class="st">"Importaciones"</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -231,7 +237,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Nos centraremos en las exportaciones e importaciones para nuestro ejercicio de visualización. Crearemos un gráfico sencillo que muestre su evolución, asegurándonos de incluir los elementos básicos que todo gráfico debe tener: un título claro, la fuente de los datos y las etiquetas correspondientes en los ejes.</p>
 <div class="cell">
 <details>
-<summary>Code</summary>
+<summary>Código</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>plot_bas_exp_impor <span class="ot">&lt;-</span> exportaciones_importaciones <span class="sc">|&gt;</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(fecha, pib_nominal, <span class="at">color =</span> partida), <span class="at">size =</span> .<span class="dv">7</span>) <span class="sc">+</span></span>
@@ -241,7 +247,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Millones de pesos"</span>, <span class="at">x =</span> <span class="st">"Periodo"</span>) <span class="sc">+</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plot_bas_exp_impor</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>plot_bas_exp_impor</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="RD_exportaciones_importaciones_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
@@ -252,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Por otro lado, las etiquetas de las series, “Exportaciones” e “Importaciones”, ocupan un espacio considerable en el gráfico. Existen diversas formas de optimizar esto: podemos colocarlas horizontalmente debajo del eje temporal o, como haremos aquí, incluirlas directamente dentro del gráfico para ahorrar espacio y mejorar la organización visual. Finalmente, los colores predeterminados de <code>ggplot2</code> no siempre son los más elegantes. Cambiar la paleta de colores ayudará a que el gráfico tenga un aspecto más profesional y atractivo.</p>
 <div class="cell">
 <details>
-<summary>Code</summary>
+<summary>Código</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>plot_avance <span class="ot">&lt;-</span> plot_bas_exp_impor <span class="sc">+</span> </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>comma) <span class="sc">+</span> <span class="co"># Manipulando el eje y</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_x_date</span>( <span class="co"># Eje x</span></span>
@@ -262,7 +268,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"gray65"</span>)) <span class="sc">+</span> <span class="co"># Cambiando los colores</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>, <span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">family =</span> <span class="st">"Georgia"</span>))</span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plot_avance</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>plot_avance</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="RD_exportaciones_importaciones_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
@@ -275,26 +281,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Para esto vamos a filtrar nuestra base de datos en la fecha que nos interesa y cambiar la estructura para que sea más fácil hacer el sombreado.</p>
 <div class="cell">
 <details>
-<summary>Code</summary>
+<summary>Código</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data_sobrear_2020 <span class="ot">&lt;-</span> exportaciones_importaciones <span class="sc">|&gt;</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(fecha <span class="sc">&gt;</span> <span class="st">"2020-01-01"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(fecha, partida, pib_nominal) <span class="sc">|&gt;</span> </span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_wider</span>(</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> partida,</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> pib_nominal</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details>
-<summary>Code</summary>
+<summary>Código</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>plot_avance1 <span class="ot">&lt;-</span> plot_avance <span class="sc">+</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> data_sobrear_2020,</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x =</span> fecha, <span class="at">ymin =</span> Exportaciones, <span class="at">ymax =</span> Importaciones), </span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"#748cab"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>)</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plot_avance1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>plot_avance1</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="RD_exportaciones_importaciones_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
@@ -306,7 +312,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="gráfico-final">Gráfico final</h3>
 <div class="cell">
 <details>
-<summary>Code</summary>
+<summary>Código</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># En este caso, como debemos probar varias veces </span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># con algunos ajuste hasta que las anotaciones queden organizada,</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># es de gran ayuda crear una función:</span></span>
@@ -320,7 +326,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plot_avance1 <span class="sc">+</span></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anotaciones</span>(<span class="at">y =</span> <span class="fl">18e4</span>, <span class="at">label =</span> <span class="st">"Exportaciones"</span>, <span class="at">color  =</span> <span class="st">"darkblue"</span>) <span class="sc">+</span></span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anotaciones</span>(<span class="at">y =</span> <span class="fl">28e4</span>, <span class="at">label =</span> <span class="st">"Importaciones"</span>, <span class="at">color  =</span> <span class="st">"gray65"</span>) <span class="sc">+</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <p><img src="RD_exportaciones_importaciones_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
@@ -346,7 +352,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Notas</h2>
 
 <ol>
 <li id="fn1"><p>Puede echarle un vistazo a su blog personal: <a href="https://www.johan-rosa.com/" class="uri">https://www.johan-rosa.com/</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -406,12 +412,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Copiado");
     let tooltip;
     if (window.bootstrap) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
+      button.setAttribute("data-bs-title", "Copiado");
       tooltip = new bootstrap.Tooltip(button, 
         { trigger: "manual", 
           customClass: "code-copy-button-tooltip",

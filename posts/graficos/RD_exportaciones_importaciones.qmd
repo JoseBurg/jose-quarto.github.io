@@ -1,6 +1,8 @@
 ---
 title: "Domina la estética con ggplot2"
+lang: es
 author: "José Burgos"
+date: "2024-12-25"
 date-format: medium
 categories: ["ggplot2", "annotate", "databcrd"]
 format:
