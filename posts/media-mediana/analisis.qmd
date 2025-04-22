@@ -1,8 +1,22 @@
 ---
 title: "La Media y la Mediana: Guía Completa para su Elección e Interpretación en Análisis Estadísticos"
+lang: es
 author: "José Burgos"
-format: html
-editor: visual
+date: "2024-12-25"
+date-format: medium
+categories: ["media", "mediana", "simetría"]
+format:
+  html:
+    toc: true
+    toc-location: right
+    toc-title: Contenido
+    code-fold: true
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
+    code-summary: "Show the code"
+    smooth-scroll: true
+    code-copy: hover
+    highlight-style: github
 ---
 
 La elección entre la media y la mediana como medidas de tendencia central es un aspecto fundamental del análisis estadístico que impacta significativamente en la interpretación de los datos. Un análisis cuidadoso revela que la media funciona idealmente en distribuciones simétricas, mientras que la mediana ofrece mayor robustez frente a valores atípicos, siendo preferible en distribuciones asimétricas. Seleccionar incorrectamente entre estas medidas puede distorsionar gravemente la interpretación de los datos, por lo que resulta esencial comprender la naturaleza de la distribución y complementar el análisis con otras medidas estadísticas para obtener conclusiones válidas y representativas.
