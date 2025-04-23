@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="José Burgos">
 
-<title>José Burgos - Obtener datos desde una fuente remota</title>
+<title>Obtener datos desde una fuente remota – José Burgos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -34,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -82,7 +82,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "Sin resultados",
     "search-matching-documents-text": "documentos encontrados",
@@ -91,6 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "resultado adicional en este documento",
     "search-more-matches-text": "resultados adicionales en este documento",
     "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancelar",
     "search-submit-button-title": "Enviar",
     "search-label": "Buscar"
@@ -105,38 +112,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">José Burgos</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Buscar"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html" rel="" target="">
- <span class="menu-text">José</span></a>
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">José</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://www.linkedin.com/in/jos%C3%A9-antonio-burgos-francisco-979672163/" rel="" target=""><i class="bi bi-linkedin" role="img">
+    <a class="nav-link" href="https://www.linkedin.com/in/jos%C3%A9-antonio-burgos-francisco-979672163/"> <i class="bi bi-linkedin" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="mailto:joseaburgos01@outlook.com" rel="" target=""><i class="bi bi-envelope-at" role="img">
+    <a class="nav-link" href="mailto:joseaburgos01@outlook.com"> <i class="bi bi-envelope-at" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -199,6 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
+
 <section id="introducción" class="level2">
 <h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
 <p>Cuando iniciamos a trabajar con R, es común que analicemos datos en formatos Excel que descargamos en nuestro ordenador. Con el paso del tiempo, esta tarea se convierte en una rutina que puede volverse tediosa, especialmente cuando lidiamos con grandes cantidades de datos que ralentizan el procesamiento y consumen una cantidad considerable de memoria de nuestra computadora.</p>
@@ -238,7 +246,7 @@ Nota
 <p>Dependiendo de la pagina que vayas a descargar pueden variar la estructura de la función, pueden consultar con <code>?getSymbols()</code>.</p>
 </div>
 </div>
-<p>Lo primero que tenemos es el <strong>Symbols</strong>, este especifica el identificador del conjunto de datos que deseamos obtener. En este caso, <kbd>USACPALTT01CTGYM</kbd> se refiere a los Índices de precios al consumidor (IPC, IPCA), COICOP 1999: Índice de precios al consumidor: Total para Estados Unidos en unidades de contribución a la tasa de crecimiento, en 1 año, sin desestacionalizar. Estos identificadores lo podemos encontrar al lado del nombre cuando visitamos la página principal de la FRED. Especificamos la fuente con <code>src</code>, en este caso, “FRED”. Luego, definimos el rango de fechas con <code>from</code> y <code>to</code>, que indican el periodo de tiempo que deseamos descargar. Por último, especificamos el formato de los datos con <code>format</code> y la periodicidad con <code>periodicity</code>.</p>
+<p>Lo primero que tenemos es el <strong>Symbols</strong>, este especifica el identificador del conjunto de datos que deseamos obtener. En este caso, <kbd aria-hidden="true">USACPALTT01CTGYM</kbd><span class="visually-hidden">USACPALTT01CTGYM</span> se refiere a los Índices de precios al consumidor (IPC, IPCA), COICOP 1999: Índice de precios al consumidor: Total para Estados Unidos en unidades de contribución a la tasa de crecimiento, en 1 año, sin desestacionalizar. Estos identificadores lo podemos encontrar al lado del nombre cuando visitamos la página principal de la FRED. Especificamos la fuente con <code>src</code>, en este caso, “FRED”. Luego, definimos el rango de fechas con <code>from</code> y <code>to</code>, que indican el periodo de tiempo que deseamos descargar. Por último, especificamos el formato de los datos con <code>format</code> y la periodicidad con <code>periodicity</code>.</p>
 <p>Por defecto el conjunto de datos que descargamos se guardara con el nombre del símbolo que utilizamos, algunas informaciones de la data descargada se pueden ver con el siguiente código:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(USACPALTT01CTGYM)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -249,7 +257,7 @@ Nota
   Index:   Date [146] (TZ: "UTC")
   xts Attributes:
     $ src    : chr "FRED"
-    $ updated: POSIXct[1:1], format: "2024-05-26 14:40:54"</code></pre>
+    $ updated: POSIXct[1:1], format: "2025-04-22 22:40:46"</code></pre>
 </div>
 </div>
 </section>
@@ -270,24 +278,23 @@ Nota
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tail</span>(<span class="at">n =</span> <span class="dv">3</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  gt<span class="sc">::</span><span class="fu">gt</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<div id="unehlbffxq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#unehlbffxq table {
+<div id="dztjwlrxug" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#dztjwlrxug table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#unehlbffxq thead, #unehlbffxq tbody, #unehlbffxq tfoot, #unehlbffxq tr, #unehlbffxq td, #unehlbffxq th {
+#dztjwlrxug thead, #dztjwlrxug tbody, #dztjwlrxug tfoot, #dztjwlrxug tr, #dztjwlrxug td, #dztjwlrxug th {
   border-style: none;
 }
 
-#unehlbffxq p {
+#dztjwlrxug p {
   margin: 0;
   padding: 0;
 }
 
-#unehlbffxq .gt_table {
+#dztjwlrxug .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -313,12 +320,12 @@ Nota
   border-left-color: #D3D3D3;
 }
 
-#unehlbffxq .gt_caption {
+#dztjwlrxug .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#unehlbffxq .gt_title {
+#dztjwlrxug .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -330,7 +337,7 @@ Nota
   border-bottom-width: 0;
 }
 
-#unehlbffxq .gt_subtitle {
+#dztjwlrxug .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -342,7 +349,7 @@ Nota
   border-top-width: 0;
 }
 
-#unehlbffxq .gt_heading {
+#dztjwlrxug .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -354,13 +361,13 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#unehlbffxq .gt_bottom_border {
+#dztjwlrxug .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#unehlbffxq .gt_col_headings {
+#dztjwlrxug .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -375,7 +382,7 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#unehlbffxq .gt_col_heading {
+#dztjwlrxug .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -395,7 +402,7 @@ Nota
   overflow-x: hidden;
 }
 
-#unehlbffxq .gt_column_spanner_outer {
+#dztjwlrxug .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -407,15 +414,15 @@ Nota
   padding-right: 4px;
 }
 
-#unehlbffxq .gt_column_spanner_outer:first-child {
+#dztjwlrxug .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#unehlbffxq .gt_column_spanner_outer:last-child {
+#dztjwlrxug .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#unehlbffxq .gt_column_spanner {
+#dztjwlrxug .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -427,11 +434,11 @@ Nota
   width: 100%;
 }
 
-#unehlbffxq .gt_spanner_row {
+#dztjwlrxug .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#unehlbffxq .gt_group_heading {
+#dztjwlrxug .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -457,7 +464,7 @@ Nota
   text-align: left;
 }
 
-#unehlbffxq .gt_empty_group_heading {
+#dztjwlrxug .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -472,15 +479,15 @@ Nota
   vertical-align: middle;
 }
 
-#unehlbffxq .gt_from_md > :first-child {
+#dztjwlrxug .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#unehlbffxq .gt_from_md > :last-child {
+#dztjwlrxug .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#unehlbffxq .gt_row {
+#dztjwlrxug .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -499,7 +506,7 @@ Nota
   overflow-x: hidden;
 }
 
-#unehlbffxq .gt_stub {
+#dztjwlrxug .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -512,7 +519,7 @@ Nota
   padding-right: 5px;
 }
 
-#unehlbffxq .gt_stub_row_group {
+#dztjwlrxug .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -526,15 +533,15 @@ Nota
   vertical-align: top;
 }
 
-#unehlbffxq .gt_row_group_first td {
+#dztjwlrxug .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#unehlbffxq .gt_row_group_first th {
+#dztjwlrxug .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#unehlbffxq .gt_summary_row {
+#dztjwlrxug .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -544,16 +551,16 @@ Nota
   padding-right: 5px;
 }
 
-#unehlbffxq .gt_first_summary_row {
+#dztjwlrxug .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#unehlbffxq .gt_first_summary_row.thick {
+#dztjwlrxug .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#unehlbffxq .gt_last_summary_row {
+#dztjwlrxug .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -563,7 +570,7 @@ Nota
   border-bottom-color: #D3D3D3;
 }
 
-#unehlbffxq .gt_grand_summary_row {
+#dztjwlrxug .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -573,7 +580,7 @@ Nota
   padding-right: 5px;
 }
 
-#unehlbffxq .gt_first_grand_summary_row {
+#dztjwlrxug .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -583,7 +590,7 @@ Nota
   border-top-color: #D3D3D3;
 }
 
-#unehlbffxq .gt_last_grand_summary_row_top {
+#dztjwlrxug .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -593,11 +600,11 @@ Nota
   border-bottom-color: #D3D3D3;
 }
 
-#unehlbffxq .gt_striped {
+#dztjwlrxug .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#unehlbffxq .gt_table_body {
+#dztjwlrxug .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -606,7 +613,7 @@ Nota
   border-bottom-color: #D3D3D3;
 }
 
-#unehlbffxq .gt_footnotes {
+#dztjwlrxug .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -620,7 +627,7 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#unehlbffxq .gt_footnote {
+#dztjwlrxug .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -629,7 +636,7 @@ Nota
   padding-right: 5px;
 }
 
-#unehlbffxq .gt_sourcenotes {
+#dztjwlrxug .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -643,7 +650,7 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#unehlbffxq .gt_sourcenote {
+#dztjwlrxug .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -651,84 +658,99 @@ Nota
   padding-right: 5px;
 }
 
-#unehlbffxq .gt_left {
+#dztjwlrxug .gt_left {
   text-align: left;
 }
 
-#unehlbffxq .gt_center {
+#dztjwlrxug .gt_center {
   text-align: center;
 }
 
-#unehlbffxq .gt_right {
+#dztjwlrxug .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#unehlbffxq .gt_font_normal {
+#dztjwlrxug .gt_font_normal {
   font-weight: normal;
 }
 
-#unehlbffxq .gt_font_bold {
+#dztjwlrxug .gt_font_bold {
   font-weight: bold;
 }
 
-#unehlbffxq .gt_font_italic {
+#dztjwlrxug .gt_font_italic {
   font-style: italic;
 }
 
-#unehlbffxq .gt_super {
+#dztjwlrxug .gt_super {
   font-size: 65%;
 }
 
-#unehlbffxq .gt_footnote_marks {
+#dztjwlrxug .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#unehlbffxq .gt_asterisk {
+#dztjwlrxug .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#unehlbffxq .gt_indent_1 {
+#dztjwlrxug .gt_indent_1 {
   text-indent: 5px;
 }
 
-#unehlbffxq .gt_indent_2 {
+#dztjwlrxug .gt_indent_2 {
   text-indent: 10px;
 }
 
-#unehlbffxq .gt_indent_3 {
+#dztjwlrxug .gt_indent_3 {
   text-indent: 15px;
 }
 
-#unehlbffxq .gt_indent_4 {
+#dztjwlrxug .gt_indent_4 {
   text-indent: 20px;
 }
 
-#unehlbffxq .gt_indent_5 {
+#dztjwlrxug .gt_indent_5 {
   text-indent: 25px;
 }
+
+#dztjwlrxug .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#dztjwlrxug div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="periodo">periodo</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ipc">ipc</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="periodo" class="gt_row gt_right">2023-12-01</td>
-<td headers="ipc" class="gt_row gt_right">3.26</td></tr>
-    <tr><td headers="periodo" class="gt_row gt_right">2024-01-01</td>
-<td headers="ipc" class="gt_row gt_right">3.08</td></tr>
-    <tr><td headers="periodo" class="gt_row gt_right">2024-02-01</td>
-<td headers="ipc" class="gt_row gt_right">3.03</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_col_headings">
+<th id="periodo" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">periodo</th>
+<th id="ipc" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">ipc</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_right" headers="periodo">2023-12-01</td>
+<td class="gt_row gt_right" headers="ipc">3.26</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_right" headers="periodo">2024-01-01</td>
+<td class="gt_row gt_right" headers="ipc">3.08</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_right" headers="periodo">2024-02-01</td>
+<td class="gt_row gt_right" headers="ipc">3.03</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -748,24 +770,23 @@ Nota
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"IPC de USA"</span>,</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Datos de enero 2012 a febrero 2024"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-
-<div id="cyfdevymzn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cyfdevymzn table {
+<div id="jzgkaunslh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jzgkaunslh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cyfdevymzn thead, #cyfdevymzn tbody, #cyfdevymzn tfoot, #cyfdevymzn tr, #cyfdevymzn td, #cyfdevymzn th {
+#jzgkaunslh thead, #jzgkaunslh tbody, #jzgkaunslh tfoot, #jzgkaunslh tr, #jzgkaunslh td, #jzgkaunslh th {
   border-style: none;
 }
 
-#cyfdevymzn p {
+#jzgkaunslh p {
   margin: 0;
   padding: 0;
 }
 
-#cyfdevymzn .gt_table {
+#jzgkaunslh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -791,12 +812,12 @@ Nota
   border-left-color: #D3D3D3;
 }
 
-#cyfdevymzn .gt_caption {
+#jzgkaunslh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cyfdevymzn .gt_title {
+#jzgkaunslh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -808,7 +829,7 @@ Nota
   border-bottom-width: 0;
 }
 
-#cyfdevymzn .gt_subtitle {
+#jzgkaunslh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -820,7 +841,7 @@ Nota
   border-top-width: 0;
 }
 
-#cyfdevymzn .gt_heading {
+#jzgkaunslh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -832,13 +853,13 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#cyfdevymzn .gt_bottom_border {
+#jzgkaunslh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cyfdevymzn .gt_col_headings {
+#jzgkaunslh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -853,7 +874,7 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#cyfdevymzn .gt_col_heading {
+#jzgkaunslh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -873,7 +894,7 @@ Nota
   overflow-x: hidden;
 }
 
-#cyfdevymzn .gt_column_spanner_outer {
+#jzgkaunslh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -885,15 +906,15 @@ Nota
   padding-right: 4px;
 }
 
-#cyfdevymzn .gt_column_spanner_outer:first-child {
+#jzgkaunslh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cyfdevymzn .gt_column_spanner_outer:last-child {
+#jzgkaunslh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cyfdevymzn .gt_column_spanner {
+#jzgkaunslh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -905,11 +926,11 @@ Nota
   width: 100%;
 }
 
-#cyfdevymzn .gt_spanner_row {
+#jzgkaunslh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cyfdevymzn .gt_group_heading {
+#jzgkaunslh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -935,7 +956,7 @@ Nota
   text-align: left;
 }
 
-#cyfdevymzn .gt_empty_group_heading {
+#jzgkaunslh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -950,15 +971,15 @@ Nota
   vertical-align: middle;
 }
 
-#cyfdevymzn .gt_from_md > :first-child {
+#jzgkaunslh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cyfdevymzn .gt_from_md > :last-child {
+#jzgkaunslh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cyfdevymzn .gt_row {
+#jzgkaunslh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -977,7 +998,7 @@ Nota
   overflow-x: hidden;
 }
 
-#cyfdevymzn .gt_stub {
+#jzgkaunslh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -990,7 +1011,7 @@ Nota
   padding-right: 5px;
 }
 
-#cyfdevymzn .gt_stub_row_group {
+#jzgkaunslh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1004,15 +1025,15 @@ Nota
   vertical-align: top;
 }
 
-#cyfdevymzn .gt_row_group_first td {
+#jzgkaunslh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cyfdevymzn .gt_row_group_first th {
+#jzgkaunslh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cyfdevymzn .gt_summary_row {
+#jzgkaunslh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1022,16 +1043,16 @@ Nota
   padding-right: 5px;
 }
 
-#cyfdevymzn .gt_first_summary_row {
+#jzgkaunslh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cyfdevymzn .gt_first_summary_row.thick {
+#jzgkaunslh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cyfdevymzn .gt_last_summary_row {
+#jzgkaunslh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1041,7 +1062,7 @@ Nota
   border-bottom-color: #D3D3D3;
 }
 
-#cyfdevymzn .gt_grand_summary_row {
+#jzgkaunslh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1051,7 +1072,7 @@ Nota
   padding-right: 5px;
 }
 
-#cyfdevymzn .gt_first_grand_summary_row {
+#jzgkaunslh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1061,7 +1082,7 @@ Nota
   border-top-color: #D3D3D3;
 }
 
-#cyfdevymzn .gt_last_grand_summary_row_top {
+#jzgkaunslh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1071,11 +1092,11 @@ Nota
   border-bottom-color: #D3D3D3;
 }
 
-#cyfdevymzn .gt_striped {
+#jzgkaunslh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cyfdevymzn .gt_table_body {
+#jzgkaunslh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1084,7 +1105,7 @@ Nota
   border-bottom-color: #D3D3D3;
 }
 
-#cyfdevymzn .gt_footnotes {
+#jzgkaunslh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1098,7 +1119,7 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#cyfdevymzn .gt_footnote {
+#jzgkaunslh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1107,7 +1128,7 @@ Nota
   padding-right: 5px;
 }
 
-#cyfdevymzn .gt_sourcenotes {
+#jzgkaunslh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1121,7 +1142,7 @@ Nota
   border-right-color: #D3D3D3;
 }
 
-#cyfdevymzn .gt_sourcenote {
+#jzgkaunslh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1129,94 +1150,107 @@ Nota
   padding-right: 5px;
 }
 
-#cyfdevymzn .gt_left {
+#jzgkaunslh .gt_left {
   text-align: left;
 }
 
-#cyfdevymzn .gt_center {
+#jzgkaunslh .gt_center {
   text-align: center;
 }
 
-#cyfdevymzn .gt_right {
+#jzgkaunslh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cyfdevymzn .gt_font_normal {
+#jzgkaunslh .gt_font_normal {
   font-weight: normal;
 }
 
-#cyfdevymzn .gt_font_bold {
+#jzgkaunslh .gt_font_bold {
   font-weight: bold;
 }
 
-#cyfdevymzn .gt_font_italic {
+#jzgkaunslh .gt_font_italic {
   font-style: italic;
 }
 
-#cyfdevymzn .gt_super {
+#jzgkaunslh .gt_super {
   font-size: 65%;
 }
 
-#cyfdevymzn .gt_footnote_marks {
+#jzgkaunslh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cyfdevymzn .gt_asterisk {
+#jzgkaunslh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cyfdevymzn .gt_indent_1 {
+#jzgkaunslh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cyfdevymzn .gt_indent_2 {
+#jzgkaunslh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cyfdevymzn .gt_indent_3 {
+#jzgkaunslh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cyfdevymzn .gt_indent_4 {
+#jzgkaunslh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cyfdevymzn .gt_indent_5 {
+#jzgkaunslh .gt_indent_5 {
   text-indent: 25px;
 }
+
+#jzgkaunslh .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#jzgkaunslh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
 </style>
-<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-  <thead>
-    <tr class="gt_heading">
-      <td colspan="4" class="gt_heading gt_title gt_font_normal" style="">IPC de USA</td>
-    </tr>
-    <tr class="gt_heading">
-      <td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style="">Datos de enero 2012 a febrero 2024</td>
-    </tr>
-    <tr class="gt_col_headings">
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Covid">Covid</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Promedio">Promedio</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Minimo">Minimo</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Maximo">Maximo</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td headers="Covid" class="gt_row gt_left">Pre-Covid</td>
-<td headers="Promedio" class="gt_row gt_right">1.580417</td>
-<td headers="Minimo" class="gt_row gt_right">-0.23</td>
-<td headers="Maximo" class="gt_row gt_right">2.90</td></tr>
-    <tr><td headers="Covid" class="gt_row gt_left">Covid</td>
-<td headers="Promedio" class="gt_row gt_right">4.414400</td>
-<td headers="Minimo" class="gt_row gt_right">0.05</td>
-<td headers="Maximo" class="gt_row gt_right">8.97</td></tr>
-  </tbody>
-  
-  
+
+<table class="gt_table caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="header gt_heading">
+<th colspan="4" class="gt_heading gt_title gt_font_normal">IPC de USA</th>
+</tr>
+<tr class="odd gt_heading">
+<th colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border">Datos de enero 2012 a febrero 2024</th>
+</tr>
+<tr class="header gt_col_headings">
+<th id="Covid" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Covid</th>
+<th id="Promedio" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Promedio</th>
+<th id="Minimo" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Minimo</th>
+<th id="Maximo" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Maximo</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Covid">Pre-Covid</td>
+<td class="gt_row gt_right" headers="Promedio">1.580417</td>
+<td class="gt_row gt_right" headers="Minimo">-0.23</td>
+<td class="gt_row gt_right" headers="Maximo">2.90</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="Covid">Covid</td>
+<td class="gt_row gt_right" headers="Promedio">4.414400</td>
+<td class="gt_row gt_right" headers="Minimo">0.05</td>
+<td class="gt_row gt_right" headers="Maximo">8.97</td>
+</tr>
+</tbody>
 </table>
+
 </div>
 </div>
 </div>
@@ -1233,8 +1267,8 @@ Nota
 <p>Para gráficar los datos, vamos a utilizar la librería <code>ggplot2</code> y agregar informaciones para resaltar algunos puntos importantes en el gráfico:</p>
 <p>Inicio de la pandemia:</p>
 <div class="cell">
-<details>
-<summary>Código</summary>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>graph_ipc_usa <span class="ot">&lt;-</span> ipc_usa_est <span class="sc">|&gt;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> periodo, <span class="at">y =</span> ipc)) <span class="sc">+</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_rect</span>(<span class="fu">aes</span>(</span>
@@ -1263,8 +1297,8 @@ Nota
 </div>
 <p>Por último, se mejora el diseño del gráfico predeterminado:</p>
 <div class="cell">
-<details>
-<summary>Código</summary>
+<details class="code-fold">
+<summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>(graph_ipc_usa <span class="ot">&lt;-</span> graph_ipc_usa <span class="sc">+</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Escala de fecha</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">"%b %Y"</span>, <span class="at">date_breaks =</span> <span class="st">"2 year"</span>) <span class="sc">+</span>        </span>
@@ -1278,7 +1312,11 @@ Nota
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()) <span class="co"># Tema de gráfico</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><img src="getsymbols_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+<div>
+<figure class="figure">
+<p><img src="getsymbols_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -1344,18 +1382,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1387,11 +1414,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1401,8 +1467,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1414,7 +1489,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1458,6 +1656,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1483,6 +1682,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1543,6 +1768,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+
 
 
 

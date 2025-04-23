@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
 
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.5.57">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="José Burgos">
 
-<title>José Burgos</title>
+<title>Descomposición de series de tiempo – José Burgos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +24,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -55,48 +54,20 @@ ul.task-list li input[type="checkbox"] {
   ],
   "show-item-context": false,
   "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
     "search-text-placeholder": "",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
+<style>html{ scroll-behavior: smooth; }</style>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -128,28 +99,28 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">José Burgos</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">José</span></a>
   </li>  
   <li class="nav-item compact">
@@ -170,111 +141,82 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Descomposición de series de tiempo</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">ggplot2</div>
+                <div class="quarto-category">annotate</div>
+                <div class="quarto-category">databcrd</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Autor/a</div>
+      <div class="quarto-title-meta-contents">
+               <p>José Burgos </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Fecha de publicación</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">25 dic 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contenido</h2>
+   
+  <ul>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
+  <li><a href="#componentes-de-una-serie-de-tiempo" id="toc-componentes-de-una-serie-de-tiempo" class="nav-link" data-scroll-target="#componentes-de-una-serie-de-tiempo">Componentes de una serie de tiempo</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<section id="introducción" class="level2">
+<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
+<p>Hola estimado lector, en esta ocasión le traigo un ejercicio muy útil para los economistas y todo profesional que trabaje con series de tiempo.</p>
+<p>Según <em>Wooldridge,</em> las series de tiempo son esas observaciones de una variable o varias variables que se caracterizan principalmente con una periodicidad u orden temporal, dígase mensual, trimestral, anual, para mencionar algunas.</p>
+<p><span class="math display">\[
+X_t, t = 1, 2, ... T
+\]</span></p>
+<p><em>Donde</em> <span class="math inline">\(X_t\)</span> <em>es la variable de interés en el periodo</em> <span class="math inline">\(t\)</span> <em>y</em> <span class="math inline">\(T\)</span> <em>mayuscula es la cantidad de observaciones.</em></p>
+<p>Un concepto clave a la hora de entender las series de tiempos, es la periodicidad, este no es mas que la cantidad de veces que toman las observaciones de una variable.</p>
+<p>Alguno ejemplos sobre series de tiempo, tenemos las tasas de intereses que pueden ser mensuales, trimestrales o anuales, dependiendo de si nos referimos a las tasa de interés pasiva o activa. Otros ejemplo de serie de tiempo, pueden ser las variables económicas, como el <strong>IMAE</strong>, que tiene una periodicidad mensual, asimismo como el <strong>IPC.</strong></p>
+</section>
+<section id="componentes-de-una-serie-de-tiempo" class="level2">
+<h2 class="anchored" data-anchor-id="componentes-de-una-serie-de-tiempo">Componentes de una serie de tiempo</h2>
+<ol type="1">
+<li><strong>Estacionalidad:</strong> son los movimientos que una serie de tiempo presenta en determinados periodos de la misma, la cual presenta con un patrón de fluctaciones. <em>Un ejemplo sería el consumo de energía eléctrica que es mayor en verano por la temperatura</em>.</li>
+<li><strong>Tendencia:</strong> es la dirección general en la que se mueve una serie de tiempo. <em>Ejemplo: el PIB tiende a crecer a lo largo del tiempo.</em></li>
+<li><strong>Aleatoriedad:</strong></li>
+</ol>
 
 
+</section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="ggplot2,annotate,databcrd" data-listing-date-sort="1735099200000" data-listing-file-modified-sort="1735275606578" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1167">
-<div class="thumbnail">
-<p><a href="./posts/graficos/domina_ggplot2.html" class="no-external"></a></p><a href="./posts/graficos/domina_ggplot2.html" class="no-external">
-<p class="card-img-top"><img src="posts\graficos\domina_ggplot2_files\figure-html\unnamed-chunk-2-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/graficos/domina_ggplot2.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/graficos/domina_ggplot2.html" class="no-external">Domina la estética con ggplot2</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/graficos/domina_ggplot2.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/graficos/domina_ggplot2.html" class="no-external">Muchas personas no suelen dedicar tiempo a la estética de los gráficos al realizar análisis en RStudio, y es comprensible. Mejorar la apariencia de un gráfico, especialmente…<code></code><code></code><code></code></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/graficos/domina_ggplot2.html" class="no-external">
-<div class="listing-date">
-Dec 25, 2024
-</div>
-<div class="listing-author">
-José Burgos
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="media,mediana,simetría" data-listing-date-sort="1735099200000" data-listing-file-modified-sort="1745375950602" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2535">
-<div class="thumbnail">
-<p><a href="./posts/media-mediana/analisis.html" class="no-external"></a></p><a href="./posts/media-mediana/analisis.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./posts/media-mediana/analisis.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/media-mediana/analisis.html" class="no-external">La Media y la Mediana: Guía Completa para su Elección e Interpretación en Análisis Estadísticos</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/media-mediana/analisis.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/media-mediana/analisis.html" class="no-external">La elección entre la media y la mediana como medidas de tendencia central es un aspecto fundamental del análisis estadístico que impacta significativamente en la…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/media-mediana/analisis.html" class="no-external">
-<div class="listing-date">
-Dec 25, 2024
-</div>
-<div class="listing-author">
-José Burgos
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="quantmod,getSymbols,Data,FRED" data-listing-date-sort="1709352000000" data-listing-file-modified-sort="1716747261897" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1356">
-<div class="thumbnail">
-<p><a href="./posts/getSymbols/getsymbols.html" class="no-external"></a></p><a href="./posts/getSymbols/getsymbols.html" class="no-external">
-<p class="card-img-top"><img src="posts\getSymbols\getsymbols_files\figure-html\unnamed-chunk-8-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./posts/getSymbols/getsymbols.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/getSymbols/getsymbols.html" class="no-external">Obtener datos desde una fuente remota</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/getSymbols/getsymbols.html" class="no-external"></a>
-</div>
-<div class="listing-description">
-<a href="./posts/getSymbols/getsymbols.html" class="no-external">Cuando iniciamos a trabajar con R, es común que analicemos datos en formatos Excel que descargamos en nuestro ordenador. Con el paso del tiempo, esta tarea se convierte en…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/getSymbols/getsymbols.html" class="no-external">
-<div class="listing-date">
-Mar 2, 2024
-</div>
-<div class="listing-author">
-José Burgos
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -318,12 +260,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // flash "checked"
     button.classList.add('code-copy-button-checked');
     var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
+    button.setAttribute("title", "Copiado");
     let tooltip;
     if (window.bootstrap) {
       button.setAttribute("data-bs-toggle", "tooltip");
       button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
+      button.setAttribute("data-bs-title", "Copiado");
       tooltip = new bootstrap.Tooltip(button, 
         { trigger: "manual", 
           customClass: "code-copy-button-tooltip",
@@ -700,4 +642,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
