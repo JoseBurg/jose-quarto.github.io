@@ -25,23 +25,13 @@ La elección entre la media y la mediana como medidas de tendencia central es un
 
 ## Medidas de Tendencia Central
 
-Las medidas de tendencia central son herramientas estadísticas fundamentales que permiten resumir un conjunto de datos en un solo valor representativo. Estas medidas identifican el punto central alrededor del cual se distribuyen los datos, facilitando su interpretación y análisis[^1]. En el ámbito de la estadística descriptiva, constituyen el primer paso para comprender la naturaleza de los datos antes de realizar comparaciones entre diferentes grupos o aplicar técnicas estadísticas más avanzadas[^2].
+Las medidas de tendencia central son herramientas estadísticas fundamentales que permiten resumir un conjunto de datos en un solo valor representativo. Estas medidas identifican el punto central alrededor del cual se distribuyen los datos, facilitando su interpretación y análisis. En el ámbito de la estadística descriptiva, constituyen el primer paso para comprender la naturaleza de los datos antes de realizar comparaciones entre diferentes grupos o aplicar técnicas estadísticas más avanzadas.
 
-[^1]: <https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/>
-
-[^2]: <https://educacionuc.files.wordpress.com/2015/05/como_presentar_estadistica.pdf>
-
-La importancia de estas medidas radica en su capacidad para simplificar grandes conjuntos de información en valores únicos que pueden ser fácilmente interpretados y comparados. Esta simplificación resulta especialmente valiosa cuando se trabaja con grandes volúmenes de datos o cuando se necesita comunicar resultados a audiencias diversas[^3]. Sin embargo, la elección de la medida adecuada requiere un análisis cuidadoso de las características de los datos y del objetivo específico del estudio.
-
-[^3]: <https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/>
+La importancia de estas medidas radica en su capacidad para simplificar grandes conjuntos de información en valores únicos que pueden ser fácilmente interpretados y comparados. Esta simplificación resulta especialmente valiosa cuando se trabaja con grandes volúmenes de datos o cuando se necesita comunicar resultados a audiencias diversas. Sin embargo, la elección de la medida adecuada requiere un análisis cuidadoso de las características de los datos y del objetivo específico del estudio.
 
 ### Media Aritmética
 
-La media aritmética, comúnmente conocida como promedio, representa el `punto de equilibrio` o centro de masa de un conjunto de datos[^4]. Se calcula sumando todos los valores y dividiendo esta suma por el número total de observaciones, lo que resulta en un valor que considera la magnitud de todos los datos del conjunto[^5]. Este método de cálculo hace que la media utilice la totalidad de la información disponible, lo que puede ser tanto una ventaja como una desventaja dependiendo del contexto.
-
-[^4]: <https://www.datacamp.com/es/tutorial/mean-vs-median>
-
-[^5]: <https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/>
+La media aritmética, comúnmente conocida como promedio, representa el `punto de equilibrio` o centro de masa de un conjunto de datos. Se calcula sumando todos los valores y dividiendo esta suma por el número total de observaciones, lo que resulta en un valor que considera la magnitud de todos los datos del conjunto. Este método de cálculo hace que la media utilice la totalidad de la información disponible, lo que puede ser tanto una ventaja como una desventaja dependiendo del contexto.
 
 El cálculo de la media se expresa mediante la fórmula:
 
@@ -49,24 +39,16 @@ $$
 \bar{X} = \frac{\sum_{i=1}^{n} x_i}{n}
 $$
 
-Donde $x_i$ representa cada valor individual y $n$ es el número total de observaciones. El resultado siempre se expresa en la misma unidad de medida que los datos originales, lo que facilita su interpretación en términos prácticos[^6].
-
-[^6]: <https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/>
+Donde $x_i$ representa cada valor individual y $n$ es el número total de observaciones. El resultado siempre se expresa en la misma unidad de medida que los datos originales, lo que facilita su interpretación en términos prácticos.
 
 ### Mediana
 
-La mediana representa el valor que ocupa la posición central cuando los datos se ordenan de menor a mayor, dividiendo el conjunto en dos partes iguales[^7]. Esta característica hace que el 50% de las observaciones queden por debajo de la mediana y el otro 50% por encima, independientemente de la magnitud de los valores extremos[^8].
-
-[^7]: <https://www.datacamp.com/es/tutorial/mean-vs-median>
-
-[^8]: <https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/>
+La mediana representa el valor que ocupa la posición central cuando los datos se ordenan de menor a mayor, dividiendo el conjunto en dos partes iguales. Esta característica hace que el 50% de las observaciones queden por debajo de la mediana y el otro 50% por encima, independientemente de la magnitud de los valores extremos.
 
 El procedimiento para calcular la mediana varía ligeramente dependiendo de si el número de observaciones es par o impar:
 
 -   Para un número impar de observaciones: se ordenan los datos y se selecciona el valor que ocupa la posición central.
--   Para un número par de observaciones: se ordenan los datos y se calcula el promedio de los dos valores centrales[^9].
-
-[^9]: <https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/>
+-   Para un número par de observaciones: se ordenan los datos y se calcula el promedio de los dos valores centrales.
 
 Esta metodología de cálculo confiere a la mediana una característica distintiva: su resistencia a la influencia de valores extremos o atípicos, lo que la convierte en una medida más robusta en determinadas situaciones.
 
@@ -74,29 +56,19 @@ Esta metodología de cálculo confiere a la mediana una característica distinti
 
 ### Sensibilidad a Valores Extremos
 
-Una de las diferencias más significativas entre la media y la mediana radica en su comportamiento frente a valores extremos o atípicos. La media, debido a que considera la magnitud de todos los valores en su cálculo, es particularmente sensible a estos datos atípicos[^10]. Un solo valor extremadamente alto o bajo puede alterar considerablemente el resultado, alejándolo de lo que podría considerarse como el `centro real` de los datos.
+Una de las diferencias más significativas entre la media y la mediana radica en su comportamiento frente a valores extremos o atípicos. La media, debido a que considera la magnitud de todos los valores en su cálculo, es particularmente sensible a estos datos atípicos. Un solo valor extremadamente alto o bajo puede alterar considerablemente el resultado, alejándolo de lo que podría considerarse como el `centro real` de los datos.
 
-[^10]: <https://www.datacamp.com/es/tutorial/mean-vs-median>
-
-En contraste, la mediana muestra una notable estabilidad frente a estos valores extremos[^11]. Al basarse únicamente en la posición central de los datos ordenados, los valores atípicos tienen un impacto mínimo o nulo en su cálculo, lo que proporciona una medida más robusta y representativa en presencia de distribuciones asimétricas o con valores anómalos[^12].
-
-[^11]: <https://www.datacamp.com/es/tutorial/mean-vs-median>
-
-[^12]: <https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/>
+En contraste, la mediana muestra una notable estabilidad frente a estos valores extremos. Al basarse únicamente en la posición central de los datos ordenados, los valores atípicos tienen un impacto mínimo o nulo en su cálculo, lo que proporciona una medida más robusta y representativa en presencia de distribuciones asimétricas o con valores anómalos.
 
 ### Comportamiento en Diferentes Distribuciones
 
-El tipo de distribución de los datos juega un papel crucial en la elección entre la media y la mediana. En distribuciones perfectamente simétricas, donde los datos se distribuyen de manera equilibrada alrededor del valor central, la media y la mediana coinciden, proporcionando ambas una adecuada representación de la tendencia central[^13].
-
-[^13]: <https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/>
+El tipo de distribución de los datos juega un papel crucial en la elección entre la media y la mediana. En distribuciones perfectamente simétricas, donde los datos se distribuyen de manera equilibrada alrededor del valor central, la media y la mediana coinciden, proporcionando ambas una adecuada representación de la tendencia central.
 
 Sin embargo, en distribuciones asimétricas, la situación cambia significativamente:
 
 -   En distribuciones con asimetría positiva (sesgadas hacia la derecha), la media tiende a ser mayor que la mediana debido a la influencia de valores atípicamente altos.
 
--   En distribuciones con asimetría negativa (sesgadas hacia la izquierda), la media suele ser menor que la mediana, afectada por valores excepcionalmente bajos[^14].
-
-[^14]: <https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/>
+-   En distribuciones con asimetría negativa (sesgadas hacia la izquierda), la media suele ser menor que la mediana, afectada por valores excepcionalmente bajos.
 
 Esta diferencia en el comportamiento resulta fundamental para interpretar correctamente los datos y evitar conclusiones erróneas basadas en una medida inadecuada.
 
@@ -110,21 +82,15 @@ La mediana, por su parte, minimiza la suma de las desviaciones absolutas, lo que
 
 ### La Media en Contextos Educativos
 
-En el ámbito educativo, la media se utiliza frecuentemente para calcular el promedio de calificaciones de un estudiante[^15]. Por ejemplo, si un alumno obtiene las siguientes notas en matemáticas: 4.0, 3.5, 4.5, y 5.0, la media se calcularía sumando todas las notas (4.0 + 3.5 + 4.5 + 5.0 = 17) y dividiéndolas por el número de evaluaciones (17/4 = 4.25). Este valor representa el rendimiento general del estudiante en la asignatura y permite compararlo con otros estudiantes o con estándares establecidos.
-
-[^15]: <https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/>
+En el ámbito educativo, la media se utiliza frecuentemente para calcular el promedio de calificaciones de un estudiante. Por ejemplo, si un alumno obtiene las siguientes notas en matemáticas: 4.0, 3.5, 4.5, y 5.0, la media se calcularía sumando todas las notas (4.0 + 3.5 + 4.5 + 5.0 = 17) y dividiéndolas por el número de evaluaciones (17/4 = 4.25). Este valor representa el rendimiento general del estudiante en la asignatura y permite compararlo con otros estudiantes o con estándares establecidos.
 
 Este método resulta adecuado cuando las calificaciones siguen una distribución relativamente simétrica y no existen valores extremos que puedan distorsionar el resultado. Sin embargo, si un estudiante tiene una calificación excepcionalmente baja o alta, la media podría no reflejar adecuadamente su desempeño habitual.
 
 ### La Mediana en Análisis Económicos
 
-En análisis económicos, particularmente al estudiar la distribución de ingresos en una población, la mediana suele ser preferible a la media[^16]. Si consideramos los ingresos mensuales de cinco empleados: \$1,000, \$1,200, \$1,400, \$1,600, y \$3,000, la mediana sería \$1,400, indicando que la mitad de los empleados gana menos y la otra mitad gana más que esta cantidad.
+En análisis económicos, particularmente al estudiar la distribución de ingresos en una población, la mediana suele ser preferible a la media. Si consideramos los ingresos mensuales de cinco empleados: \$1,000, \$1,200, \$1,400, \$1,600, y \$3,000, la mediana sería \$1,400, indicando que la mitad de los empleados gana menos y la otra mitad gana más que esta cantidad.
 
-[^16]: <https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/>
-
-En este caso, la mediana proporciona una visión más realista del "empleado típico" que la media (\$1,640), la cual se ve inflada por el valor atípicamente alto de \$3,000. Esta es precisamente la razón por la que los indicadores económicos relacionados con ingresos, como el salario mediano, suelen preferirse sobre los promedios para evitar la distorsión causada por los ingresos extremadamente altos de un pequeño porcentaje de la población[^17].
-
-[^17]: <https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/>
+En este caso, la mediana proporciona una visión más realista del "empleado típico" que la media (\$1,640), la cual se ve inflada por el valor atípicamente alto de \$3,000. Esta es precisamente la razón por la que los indicadores económicos relacionados con ingresos, como el salario mediano, suelen preferirse sobre los promedios para evitar la distorsión causada por los ingresos extremadamente altos de un pequeño porcentaje de la población.
 
 ### Casos de Distribuciones Asimétricas
 
@@ -136,40 +102,28 @@ En este escenario, la media se vería arrastrada hacia los valores más altos de
 
 ### Principios para la Comunicación Efectiva
 
-La presentación adecuada de medidas de tendencia central en trabajos científicos o informes técnicos requiere no solo seleccionar la medida apropiada sino también comunicarla de manera efectiva[^18]. Es fundamental proporcionar información suficiente para que el lector pueda comprender completamente el contexto y las características de los datos analizados.
-
-[^18]: <https://educacionuc.files.wordpress.com/2015/05/como_presentar_estadistica.pdf>
+La presentación adecuada de medidas de tendencia central en trabajos científicos o informes técnicos requiere no solo seleccionar la medida apropiada sino también comunicarla de manera efectiva. Es fundamental proporcionar información suficiente para que el lector pueda comprender completamente el contexto y las características de los datos analizados.
 
 Al presentar estas medidas, se recomienda:
 
 1.  No limitarse a exponer simplemente porcentajes o promedios aislados.
 2.  Proporcionar el número exacto de individuos u observaciones para cada categoría o grupo.
-3.  Incluir medidas de dispersión (como la desviación estándar o el rango intercuartílico) que complementen a las medidas de tendencia central[^19].
-
-[^19]: <https://educacionuc.files.wordpress.com/2015/05/como_presentar_estadistica.pdf>
+3.  Incluir medidas de dispersión (como la desviación estándar o el rango intercuartílico) que complementen a las medidas de tendencia central.
 
 Estas prácticas permiten una interpretación más completa y precisa de los resultados, evitando simplificaciones excesivas que podrían conducir a interpretaciones erróneas.
 
 ### Formato y Estructura para Informes Científicos
 
-En informes científicos, la presentación de medidas de tendencia central debe seguir un formato estructurado que facilite su comprensión e interpretación[^20]. Los resultados descriptivos deben presentarse para cada grupo por separado, especialmente en estudios comparativos donde se analizan diferentes tratamientos o condiciones[^21].
-
-[^20]: <https://dialnet.unirioja.es/descarga/articulo/8663067.pdf>
-
-[^21]: <https://educacionuc.files.wordpress.com/2015/05/como_presentar_estadistica.pdf>
+En informes científicos, la presentación de medidas de tendencia central debe seguir un formato estructurado que facilite su comprensión e interpretación. Los resultados descriptivos deben presentarse para cada grupo por separado, especialmente en estudios comparativos donde se analizan diferentes tratamientos o condiciones.
 
 La sección de resultados debe incluir:
 
 1.  Datos correspondientes a la pregunta de investigación o problemática.
 2.  Un análisis contextual breve que explique el significado de estos datos.
 3.  Los resultados más relevantes para la pregunta de investigación.
-4.  Un informe preciso de los hallazgos estadísticos, asumiendo que los lectores tienen una comprensión sólida de los conceptos estadísticos básicos[^22].
+4.  Un informe preciso de los hallazgos estadísticos, asumiendo que los lectores tienen una comprensión sólida de los conceptos estadísticos básicos.
 
-[^22]: <https://dialnet.unirioja.es/descarga/articulo/8663067.pdf>
-
-Es importante recordar que esta sección debe ser una descripción general pero relativamente breve de los hallazgos, no una presentación exhaustiva de cada número y cálculo realizado durante el análisis[^23].
-
-[^23]: <https://dialnet.unirioja.es/descarga/articulo/8663067.pdf>
+Es importante recordar que esta sección debe ser una descripción general pero relativamente breve de los hallazgos, no una presentación exhaustiva de cada número y cálculo realizado durante el análisis.
 
 ## Criterios de Selección: ¿Cuándo Usar Cada Medida?
 
@@ -179,9 +133,7 @@ El primer criterio para seleccionar entre la media y la mediana debe ser el aná
 
 -   En distribuciones simétricas, donde los datos se distribuyen equilibradamente alrededor del valor central, tanto la media como la mediana proporcionan resultados similares y pueden utilizarse indistintamente.
 -   En distribuciones asimétricas positivas (con cola a la derecha), la mediana suele ser más representativa que la media, ya que esta última se ve inflada por los valores extremos del lado derecho.
--   En distribuciones asimétricas negativas (con cola a la izquierda), la mediana también resulta más adecuada, pues la media se ve reducida por los valores extremos del lado izquierdo[^24].
-
-[^24]: <https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/>
+-   En distribuciones asimétricas negativas (con cola a la izquierda), la mediana también resulta más adecuada, pues la media se ve reducida por los valores extremos del lado izquierdo.
 
 Identificar correctamente el tipo de distribución constituye, por tanto, el paso inicial más importante para una elección informada.
 
@@ -191,9 +143,7 @@ La presencia de valores atípicos o extremos representa otro factor determinante
 
 -   Si los datos contienen valores atípicos que son realmente parte del fenómeno estudiado y no errores de medición, la mediana proporciona una medida más robusta y representativa de la tendencia central.
 -   Si los valores extremos son producto de errores o no son relevantes para el análisis, podría ser preferible eliminarlos y utilizar la media para los datos restantes.
--   En algunos casos, puede resultar informativo calcular y reportar ambas medidas, explicando las discrepancias observadas entre ellas debido a la influencia de estos valores atípicos[^25].
-
-[^25]: <https://www.datacamp.com/es/tutorial/mean-vs-median>
+-   En algunos casos, puede resultar informativo calcular y reportar ambas medidas, explicando las discrepancias observadas entre ellas debido a la influencia de estos valores atípicos.
 
 Esta consideración resulta especialmente importante en campos como la economía, la medicina o la psicología, donde la presencia de valores extremos es común y puede afectar significativamente los resultados.
 
@@ -203,9 +153,7 @@ Finalmente, los objetivos específicos del análisis deben guiar la elección de
 
 -   Si el objetivo es estimar parámetros o realizar inferencias estadísticas posteriores (como pruebas de hipótesis o intervalos de confianza), la media suele ser preferible debido a sus propiedades matemáticas.
 -   Si el propósito es describir el "valor típico" o central de una distribución, especialmente en presencia de asimetrías o valores extremos, la mediana resulta más apropiada.
--   Si se busca comunicar resultados a audiencias no especializadas o tomar decisiones basadas en el "caso típico", la mediana puede ofrecer una representación más intuitiva y menos susceptible a malinterpretaciones[^26].
-
-[^26]: <https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/>
+-   Si se busca comunicar resultados a audiencias no especializadas o tomar decisiones basadas en el "caso típico", la mediana puede ofrecer una representación más intuitiva y menos susceptible a malinterpretaciones.
 
 En muchos casos, la estrategia óptima consiste en reportar ambas medidas junto con indicadores de dispersión, proporcionando así una visión más completa de las características de los datos.
 
@@ -236,9 +184,7 @@ La elección entre la media y la mediana como medida de tendencia central debe b
 
 En distribuciones simétricas sin valores extremos significativos, ambas medidas proporcionan resultados similares, aunque la media suele preferirse por sus propiedades matemáticas favorables. En contraste, ante distribuciones asimétricas o con valores atípicos, la mediana emerge como la opción más robusta y representativa, resistiendo la influencia de estos valores extremos que pueden distorsionar significativamente la media.
 
-Más allá de la elección entre una u otra medida, el enfoque más completo y riguroso consiste en adoptar una perspectiva integrada que combine múltiples indicadores estadísticos. La presentación conjunta de la media, la mediana, medidas de dispersión apropiadas y representaciones gráficas proporciona una visión comprehensiva de los datos, facilitando interpretaciones más precisas y matizadas[^27].
-
-[^27]: <https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/>
+Más allá de la elección entre una u otra medida, el enfoque más completo y riguroso consiste en adoptar una perspectiva integrada que combine múltiples indicadores estadísticos. La presentación conjunta de la media, la mediana, medidas de dispersión apropiadas y representaciones gráficas proporciona una visión comprehensiva de los datos, facilitando interpretaciones más precisas y matizadas.
 
 Para concluir, ofrecemos algunas recomendaciones prácticas para la selección y presentación de medidas de tendencia central:
 
@@ -246,14 +192,16 @@ Para concluir, ofrecemos algunas recomendaciones prácticas para la selección y
 2.  Considerar el propósito específico del análisis y las características de la audiencia a la que se dirigirán los resultados.
 3.  En caso de duda, calcular y reportar tanto la media como la mediana, explicando las posibles discrepancias entre ambas.
 4.  Complementar siempre las medidas de tendencia central con indicadores de dispersión apropiados.
-5.  Utilizar representaciones gráficas para facilitar la interpretación y comunicación de los resultados[^28][^29].
-
-[^28]: <https://dialnet.unirioja.es/descarga/articulo/8663067.pdf>
-
-[^29]: <https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/>
+5.  Utilizar representaciones gráficas para facilitar la interpretación y comunicación de los resultados.
 
 Siguiendo estas recomendaciones, los investigadores y analistas podrán realizar elecciones informadas que maximicen la validez y utilidad de sus análisis estadísticos, evitando interpretaciones erróneas derivadas de la selección inadecuada de medidas de tendencia central.
 
-::: {style="text-align: center"}
-⁂
-:::
+## Referencias
+
+DataCamp. (s. f.). *Media vs Mediana: ¿cuándo usar cuál?* Recuperado de <https://www.datacamp.com/es/tutorial/mean-vs-median>
+
+Pérez, C. (s. f.). *Cómo presentar la información estadística*. Recuperado de <https://educacionuc.files.wordpress.com/2015/05/como_presentar_estadistica.pdf>
+
+Rincón, Y. (2022, 19 de septiembre). *Medidas de tendencia central: qué son y cuáles son*. Universidad Internacional de La Rioja (UNIR). Recuperado de <https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/>
+
+Vallejo, J. A., Fernández, M. P. & Livacic-Rojas, P. E. (2022). Una reflexión sobre las medidas de tendencia central más comunes. *Educación matemática*, 34(2), 159–178. Recuperado de <https://dialnet.unirioja.es/descarga/articulo/8663067.pdf>
