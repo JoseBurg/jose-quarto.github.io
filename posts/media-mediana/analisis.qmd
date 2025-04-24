@@ -29,7 +29,7 @@ Las medidas de tendencia central son herramientas estadísticas fundamentales qu
 
 La importancia de estas medidas radica en su capacidad para simplificar grandes conjuntos de información en valores únicos que pueden ser fácilmente interpretados y comparados. Esta simplificación resulta especialmente valiosa cuando se trabaja con grandes volúmenes de datos o cuando se necesita comunicar resultados a audiencias diversas. Sin embargo, la elección de la medida adecuada requiere un análisis cuidadoso de las características de los datos y del objetivo específico del estudio.
 
-### Media Aritmética
+### Media
 
 La media aritmética, comúnmente conocida como promedio, representa el `punto de equilibrio` o centro de masa de un conjunto de datos. Se calcula sumando todos los valores y dividiendo esta suma por el número total de observaciones, lo que resulta en un valor que considera la magnitud de todos los datos del conjunto. Este método de cálculo hace que la media utilice la totalidad de la información disponible, lo que puede ser tanto una ventaja como una desventaja dependiendo del contexto.
 
