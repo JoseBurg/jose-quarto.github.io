@@ -2,7 +2,6 @@
   {
     "listing": "/index.html",
     "items": [
-      "/posts/media-mediana/analisis.html",
       "/posts/graficos/domina_ggplot2.html",
       "/posts/getSymbols/getsymbols.html"
     ]

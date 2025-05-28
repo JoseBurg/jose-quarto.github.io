@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="José Burgos">
+
+<title>¿Qué es mejor usar, la mediana o la media? – José Burgos</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Sin resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">José Burgos</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Buscar"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Navegación de palanca" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">José</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/jos%C3%A9-antonio-burgos-francisco-979672163/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:joseaburgos01@outlook.com"> <i class="bi bi-envelope-at" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contenido</h2>
+   
+  <ul>
+  <li><a href="#medidas-de-tendencia-central" id="toc-medidas-de-tendencia-central" class="nav-link active" data-scroll-target="#medidas-de-tendencia-central">Medidas de Tendencia Central</a>
+  <ul class="collapse">
+  <li><a href="#media" id="toc-media" class="nav-link" data-scroll-target="#media">Media</a></li>
+  <li><a href="#mediana" id="toc-mediana" class="nav-link" data-scroll-target="#mediana">Mediana</a></li>
+  </ul></li>
+  <li><a href="#análisis-comparativo-media-vs-mediana" id="toc-análisis-comparativo-media-vs-mediana" class="nav-link" data-scroll-target="#análisis-comparativo-media-vs-mediana">Análisis Comparativo: Media vs Mediana</a>
+  <ul class="collapse">
+  <li><a href="#sensibilidad-a-valores-extremos" id="toc-sensibilidad-a-valores-extremos" class="nav-link" data-scroll-target="#sensibilidad-a-valores-extremos">Sensibilidad a Valores Extremos</a></li>
+  <li><a href="#comportamiento-en-diferentes-distribuciones" id="toc-comportamiento-en-diferentes-distribuciones" class="nav-link" data-scroll-target="#comportamiento-en-diferentes-distribuciones">Comportamiento en Diferentes Distribuciones</a></li>
+  <li><a href="#propiedades-algebraicas-y-analíticas" id="toc-propiedades-algebraicas-y-analíticas" class="nav-link" data-scroll-target="#propiedades-algebraicas-y-analíticas">Propiedades Algebraicas y Analíticas</a></li>
+  </ul></li>
+  <li><a href="#aplicaciones-prácticas-y-ejemplos-ilustrativos" id="toc-aplicaciones-prácticas-y-ejemplos-ilustrativos" class="nav-link" data-scroll-target="#aplicaciones-prácticas-y-ejemplos-ilustrativos">Aplicaciones Prácticas y Ejemplos Ilustrativos</a>
+  <ul class="collapse">
+  <li><a href="#la-media-en-contextos-educativos" id="toc-la-media-en-contextos-educativos" class="nav-link" data-scroll-target="#la-media-en-contextos-educativos">La Media en Contextos Educativos</a></li>
+  <li><a href="#la-mediana-en-análisis-económicos" id="toc-la-mediana-en-análisis-económicos" class="nav-link" data-scroll-target="#la-mediana-en-análisis-económicos">La Mediana en Análisis Económicos</a></li>
+  <li><a href="#casos-de-distribuciones-asimétricas" id="toc-casos-de-distribuciones-asimétricas" class="nav-link" data-scroll-target="#casos-de-distribuciones-asimétricas">Casos de Distribuciones Asimétricas</a></li>
+  </ul></li>
+  <li><a href="#guía-para-la-presentación-de-medidas-de-tendencia-central" id="toc-guía-para-la-presentación-de-medidas-de-tendencia-central" class="nav-link" data-scroll-target="#guía-para-la-presentación-de-medidas-de-tendencia-central">Guía para la Presentación de Medidas de Tendencia Central</a>
+  <ul class="collapse">
+  <li><a href="#principios-para-la-comunicación-efectiva" id="toc-principios-para-la-comunicación-efectiva" class="nav-link" data-scroll-target="#principios-para-la-comunicación-efectiva">Principios para la Comunicación Efectiva</a></li>
+  <li><a href="#formato-y-estructura-para-informes-científicos" id="toc-formato-y-estructura-para-informes-científicos" class="nav-link" data-scroll-target="#formato-y-estructura-para-informes-científicos">Formato y Estructura para Informes Científicos</a></li>
+  </ul></li>
+  <li><a href="#criterios-de-selección-cuándo-usar-cada-medida" id="toc-criterios-de-selección-cuándo-usar-cada-medida" class="nav-link" data-scroll-target="#criterios-de-selección-cuándo-usar-cada-medida">Criterios de Selección: ¿Cuándo Usar Cada Medida?</a>
+  <ul class="collapse">
+  <li><a href="#análisis-del-tipo-de-distribución" id="toc-análisis-del-tipo-de-distribución" class="nav-link" data-scroll-target="#análisis-del-tipo-de-distribución">Análisis del Tipo de Distribución</a></li>
+  <li><a href="#consideración-de-valores-atípicos" id="toc-consideración-de-valores-atípicos" class="nav-link" data-scroll-target="#consideración-de-valores-atípicos">Consideración de Valores Atípicos</a></li>
+  <li><a href="#objetivos-específicos-del-análisis" id="toc-objetivos-específicos-del-análisis" class="nav-link" data-scroll-target="#objetivos-específicos-del-análisis">Objetivos Específicos del Análisis</a></li>
+  </ul></li>
+  <li><a href="#medidas-complementarias-para-un-análisis-integral" id="toc-medidas-complementarias-para-un-análisis-integral" class="nav-link" data-scroll-target="#medidas-complementarias-para-un-análisis-integral">Medidas Complementarias para un Análisis Integral</a>
+  <ul class="collapse">
+  <li><a href="#indicadores-de-dispersión" id="toc-indicadores-de-dispersión" class="nav-link" data-scroll-target="#indicadores-de-dispersión">Indicadores de Dispersión</a></li>
+  <li><a href="#representaciones-gráficas" id="toc-representaciones-gráficas" class="nav-link" data-scroll-target="#representaciones-gráficas">Representaciones Gráficas</a></li>
+  </ul></li>
+  <li><a href="#conclusión-hacia-una-elección-informada" id="toc-conclusión-hacia-una-elección-informada" class="nav-link" data-scroll-target="#conclusión-hacia-una-elección-informada">Conclusión: Hacia una Elección Informada</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias">Referencias</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">¿Qué es mejor usar, la mediana o la media?</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">media</div>
+    <div class="quarto-category">mediana</div>
+    <div class="quarto-category">simetría</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Autor/a</div>
+    <div class="quarto-title-meta-contents">
+             <p>José Burgos </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Fecha de publicación</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">22 abr 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="image2.jpg" class="img-fluid quarto-figure quarto-figure-center figure-img" width="231"></p>
+</figure>
+</div>
+<p>La elección entre la media y la mediana como medidas de tendencia central es un aspecto fundamental del análisis estadístico que impacta significativamente en la interpretación de los datos. Un análisis cuidadoso revela que la media funciona idealmente en distribuciones simétricas, mientras que la mediana ofrece mayor robustez frente a valores atípicos, siendo preferible en distribuciones asimétricas. Seleccionar incorrectamente entre estas medidas puede distorsionar gravemente la interpretación de los datos, por lo que resulta esencial comprender la naturaleza de la distribución y complementar el análisis con otras medidas estadísticas para obtener conclusiones válidas y representativas.</p>
+<section id="medidas-de-tendencia-central" class="level2">
+<h2 class="anchored" data-anchor-id="medidas-de-tendencia-central">Medidas de Tendencia Central</h2>
+<p>Las medidas de tendencia central son herramientas estadísticas fundamentales que permiten resumir un conjunto de datos en un solo valor representativo. Estas medidas identifican el punto central alrededor del cual se distribuyen los datos, facilitando su interpretación y análisis. En el ámbito de la estadística descriptiva, constituyen el primer paso para comprender la naturaleza de los datos antes de realizar comparaciones entre diferentes grupos o aplicar técnicas estadísticas más avanzadas.</p>
+<p>La importancia de estas medidas radica en su capacidad para simplificar grandes conjuntos de información en valores únicos que pueden ser fácilmente interpretados y comparados. Esta simplificación resulta especialmente valiosa cuando se trabaja con grandes volúmenes de datos o cuando se necesita comunicar resultados a audiencias diversas. Sin embargo, la elección de la medida adecuada requiere un análisis cuidadoso de las características de los datos y del objetivo específico del estudio.</p>
+<section id="media" class="level3">
+<h3 class="anchored" data-anchor-id="media">Media</h3>
+<p>La media aritmética, comúnmente conocida como promedio, representa el <code>punto de equilibrio</code> o centro de masa de un conjunto de datos. Se calcula sumando todos los valores y dividiendo esta suma por el número total de observaciones, lo que resulta en un valor que considera la magnitud de todos los datos del conjunto. Este método de cálculo hace que la media utilice la totalidad de la información disponible, lo que puede ser tanto una ventaja como una desventaja dependiendo del contexto.</p>
+<p>El cálculo de la media se expresa mediante la fórmula:</p>
+<p><span class="math display">\[
+\bar{X} = \frac{\sum_{i=1}^{n} x_i}{n}
+\]</span></p>
+<p>Donde <span class="math inline">\(x_i\)</span> representa cada valor individual y <span class="math inline">\(n\)</span> es el número total de observaciones. El resultado siempre se expresa en la misma unidad de medida que los datos originales, lo que facilita su interpretación en términos prácticos.</p>
+</section>
+<section id="mediana" class="level3">
+<h3 class="anchored" data-anchor-id="mediana">Mediana</h3>
+<p>La mediana representa el valor que ocupa la posición central cuando los datos se ordenan de menor a mayor, dividiendo el conjunto en dos partes iguales. Esta característica hace que el 50% de las observaciones queden por debajo de la mediana y el otro 50% por encima, independientemente de la magnitud de los valores extremos.</p>
+<p>El procedimiento para calcular la mediana varía ligeramente dependiendo de si el número de observaciones es par o impar:</p>
+<ul>
+<li>Para un número impar de observaciones: se ordenan los datos y se selecciona el valor que ocupa la posición central.</li>
+<li>Para un número par de observaciones: se ordenan los datos y se calcula el promedio de los dos valores centrales.</li>
+</ul>
+<p>Esta metodología de cálculo confiere a la mediana una característica distintiva: su resistencia a la influencia de valores extremos o atípicos, lo que la convierte en una medida más robusta en determinadas situaciones.</p>
+</section>
+</section>
+<section id="análisis-comparativo-media-vs-mediana" class="level2">
+<h2 class="anchored" data-anchor-id="análisis-comparativo-media-vs-mediana">Análisis Comparativo: Media vs Mediana</h2>
+<section id="sensibilidad-a-valores-extremos" class="level3">
+<h3 class="anchored" data-anchor-id="sensibilidad-a-valores-extremos">Sensibilidad a Valores Extremos</h3>
+<p>Una de las diferencias más significativas entre la media y la mediana radica en su comportamiento frente a valores extremos o atípicos. La media, debido a que considera la magnitud de todos los valores en su cálculo, es particularmente sensible a estos datos atípicos. Un solo valor extremadamente alto o bajo puede alterar considerablemente el resultado, alejándolo de lo que podría considerarse como el <code>centro real</code> de los datos.</p>
+<p>En contraste, la mediana muestra una notable estabilidad frente a estos valores extremos. Al basarse únicamente en la posición central de los datos ordenados, los valores atípicos tienen un impacto mínimo o nulo en su cálculo, lo que proporciona una medida más robusta y representativa en presencia de distribuciones asimétricas o con valores anómalos.</p>
+</section>
+<section id="comportamiento-en-diferentes-distribuciones" class="level3">
+<h3 class="anchored" data-anchor-id="comportamiento-en-diferentes-distribuciones">Comportamiento en Diferentes Distribuciones</h3>
+<p>El tipo de distribución de los datos juega un papel crucial en la elección entre la media y la mediana. En distribuciones perfectamente simétricas, donde los datos se distribuyen de manera equilibrada alrededor del valor central, la media y la mediana coinciden, proporcionando ambas una adecuada representación de la tendencia central.</p>
+<p>Sin embargo, en distribuciones asimétricas, la situación cambia significativamente:</p>
+<ul>
+<li><p>En distribuciones con asimetría positiva (sesgadas hacia la derecha), la media tiende a ser mayor que la mediana debido a la influencia de valores atípicamente altos.</p></li>
+<li><p>En distribuciones con asimetría negativa (sesgadas hacia la izquierda), la media suele ser menor que la mediana, afectada por valores excepcionalmente bajos.</p></li>
+</ul>
+<p>Esta diferencia en el comportamiento resulta fundamental para interpretar correctamente los datos y evitar conclusiones erróneas basadas en una medida inadecuada.</p>
+</section>
+<section id="propiedades-algebraicas-y-analíticas" class="level3">
+<h3 class="anchored" data-anchor-id="propiedades-algebraicas-y-analíticas">Propiedades Algebraicas y Analíticas</h3>
+<p>Desde una perspectiva algebraica, la media posee propiedades matemáticas que la hacen especialmente útil para análisis estadísticos avanzados. La suma de las desviaciones respecto a la media siempre es cero, lo que facilita cálculos posteriores como la varianza o la desviación estándar. Además, la media minimiza la suma de los cuadrados de las desviaciones, lo que la convierte en un estimador eficiente en muchos contextos estadísticos.</p>
+<p>La mediana, por su parte, minimiza la suma de las desviaciones absolutas, lo que explica su robustez frente a valores extremos. Esta propiedad resulta ventajosa en análisis donde se busca reducir el impacto de observaciones atípicas, como en estudios económicos sobre distribución de ingresos o en análisis de tiempos de respuesta.</p>
+</section>
+</section>
+<section id="aplicaciones-prácticas-y-ejemplos-ilustrativos" class="level2">
+<h2 class="anchored" data-anchor-id="aplicaciones-prácticas-y-ejemplos-ilustrativos">Aplicaciones Prácticas y Ejemplos Ilustrativos</h2>
+<section id="la-media-en-contextos-educativos" class="level3">
+<h3 class="anchored" data-anchor-id="la-media-en-contextos-educativos">La Media en Contextos Educativos</h3>
+<p>En el ámbito educativo, la media se utiliza frecuentemente para calcular el promedio de calificaciones de un estudiante. Por ejemplo, si un alumno obtiene las siguientes notas en matemáticas: 4.0, 3.5, 4.5, y 5.0, la media se calcularía sumando todas las notas (4.0 + 3.5 + 4.5 + 5.0 = 17) y dividiéndolas por el número de evaluaciones (17/4 = 4.25). Este valor representa el rendimiento general del estudiante en la asignatura y permite compararlo con otros estudiantes o con estándares establecidos.</p>
+<p>Este método resulta adecuado cuando las calificaciones siguen una distribución relativamente simétrica y no existen valores extremos que puedan distorsionar el resultado. Sin embargo, si un estudiante tiene una calificación excepcionalmente baja o alta, la media podría no reflejar adecuadamente su desempeño habitual.</p>
+</section>
+<section id="la-mediana-en-análisis-económicos" class="level3">
+<h3 class="anchored" data-anchor-id="la-mediana-en-análisis-económicos">La Mediana en Análisis Económicos</h3>
+<p>En análisis económicos, particularmente al estudiar la distribución de ingresos en una población, la mediana suele ser preferible a la media. Si consideramos los ingresos mensuales de cinco empleados: $1,000, $1,200, $1,400, $1,600, y $3,000, la mediana sería $1,400, indicando que la mitad de los empleados gana menos y la otra mitad gana más que esta cantidad.</p>
+<p>En este caso, la mediana proporciona una visión más realista del “empleado típico” que la media ($1,640), la cual se ve inflada por el valor atípicamente alto de $3,000. Esta es precisamente la razón por la que los indicadores económicos relacionados con ingresos, como el salario mediano, suelen preferirse sobre los promedios para evitar la distorsión causada por los ingresos extremadamente altos de un pequeño porcentaje de la población.</p>
+</section>
+<section id="casos-de-distribuciones-asimétricas" class="level3">
+<h3 class="anchored" data-anchor-id="casos-de-distribuciones-asimétricas">Casos de Distribuciones Asimétricas</h3>
+<p>Para ilustrar el impacto del tipo de distribución en la elección de la medida adecuada, consideremos el tiempo de resolución de un problema matemático por parte de un grupo de estudiantes. Si la mayoría de los estudiantes resuelven el problema en tiempos cercanos entre sí, pero unos pocos tardan significativamente más, tendríamos una distribución con asimetría positiva.</p>
+<p>En este escenario, la media se vería arrastrada hacia los valores más altos debido a esos pocos estudiantes que tardaron mucho más, mientras que la mediana mantendría su posición central, reflejando mejor el tiempo “típico” de resolución. Utilizar la media en este caso podría llevar a conclusiones erróneas sobre la dificultad del problema o el nivel del grupo.</p>
+</section>
+</section>
+<section id="guía-para-la-presentación-de-medidas-de-tendencia-central" class="level2">
+<h2 class="anchored" data-anchor-id="guía-para-la-presentación-de-medidas-de-tendencia-central">Guía para la Presentación de Medidas de Tendencia Central</h2>
+<section id="principios-para-la-comunicación-efectiva" class="level3">
+<h3 class="anchored" data-anchor-id="principios-para-la-comunicación-efectiva">Principios para la Comunicación Efectiva</h3>
+<p>La presentación adecuada de medidas de tendencia central en trabajos científicos o informes técnicos requiere no solo seleccionar la medida apropiada sino también comunicarla de manera efectiva. Es fundamental proporcionar información suficiente para que el lector pueda comprender completamente el contexto y las características de los datos analizados.</p>
+<p>Al presentar estas medidas, se recomienda:</p>
+<ol type="1">
+<li>No limitarse a exponer simplemente porcentajes o promedios aislados.</li>
+<li>Proporcionar el número exacto de individuos u observaciones para cada categoría o grupo.</li>
+<li>Incluir medidas de dispersión (como la desviación estándar o el rango intercuartílico) que complementen a las medidas de tendencia central.</li>
+</ol>
+<p>Estas prácticas permiten una interpretación más completa y precisa de los resultados, evitando simplificaciones excesivas que podrían conducir a interpretaciones erróneas.</p>
+</section>
+<section id="formato-y-estructura-para-informes-científicos" class="level3">
+<h3 class="anchored" data-anchor-id="formato-y-estructura-para-informes-científicos">Formato y Estructura para Informes Científicos</h3>
+<p>En informes científicos, la presentación de medidas de tendencia central debe seguir un formato estructurado que facilite su comprensión e interpretación. Los resultados descriptivos deben presentarse para cada grupo por separado, especialmente en estudios comparativos donde se analizan diferentes tratamientos o condiciones.</p>
+<p>La sección de resultados debe incluir:</p>
+<ol type="1">
+<li>Datos correspondientes a la pregunta de investigación o problemática.</li>
+<li>Un análisis contextual breve que explique el significado de estos datos.</li>
+<li>Los resultados más relevantes para la pregunta de investigación.</li>
+<li>Un informe preciso de los hallazgos estadísticos, asumiendo que los lectores tienen una comprensión sólida de los conceptos estadísticos básicos.</li>
+</ol>
+<p>Es importante recordar que esta sección debe ser una descripción general pero relativamente breve de los hallazgos, no una presentación exhaustiva de cada número y cálculo realizado durante el análisis.</p>
+</section>
+</section>
+<section id="criterios-de-selección-cuándo-usar-cada-medida" class="level2">
+<h2 class="anchored" data-anchor-id="criterios-de-selección-cuándo-usar-cada-medida">Criterios de Selección: ¿Cuándo Usar Cada Medida?</h2>
+<section id="análisis-del-tipo-de-distribución" class="level3">
+<h3 class="anchored" data-anchor-id="análisis-del-tipo-de-distribución">Análisis del Tipo de Distribución</h3>
+<p>El primer criterio para seleccionar entre la media y la mediana debe ser el análisis del tipo de distribución de los datos. Como regla general:</p>
+<ul>
+<li>En distribuciones simétricas, donde los datos se distribuyen equilibradamente alrededor del valor central, tanto la media como la mediana proporcionan resultados similares y pueden utilizarse indistintamente.</li>
+<li>En distribuciones asimétricas positivas (con cola a la derecha), la mediana suele ser más representativa que la media, ya que esta última se ve inflada por los valores extremos del lado derecho.</li>
+<li>En distribuciones asimétricas negativas (con cola a la izquierda), la mediana también resulta más adecuada, pues la media se ve reducida por los valores extremos del lado izquierdo.</li>
+</ul>
+<p>Identificar correctamente el tipo de distribución constituye, por tanto, el paso inicial más importante para una elección informada.</p>
+</section>
+<section id="consideración-de-valores-atípicos" class="level3">
+<h3 class="anchored" data-anchor-id="consideración-de-valores-atípicos">Consideración de Valores Atípicos</h3>
+<p>La presencia de valores atípicos o extremos representa otro factor determinante en la elección entre estas medidas:</p>
+<ul>
+<li>Si los datos contienen valores atípicos que son realmente parte del fenómeno estudiado y no errores de medición, la mediana proporciona una medida más robusta y representativa de la tendencia central.</li>
+<li>Si los valores extremos son producto de errores o no son relevantes para el análisis, podría ser preferible eliminarlos y utilizar la media para los datos restantes.</li>
+<li>En algunos casos, puede resultar informativo calcular y reportar ambas medidas, explicando las discrepancias observadas entre ellas debido a la influencia de estos valores atípicos.</li>
+</ul>
+<p>Esta consideración resulta especialmente importante en campos como la economía, la medicina o la psicología, donde la presencia de valores extremos es común y puede afectar significativamente los resultados.</p>
+</section>
+<section id="objetivos-específicos-del-análisis" class="level3">
+<h3 class="anchored" data-anchor-id="objetivos-específicos-del-análisis">Objetivos Específicos del Análisis</h3>
+<p>Finalmente, los objetivos específicos del análisis deben guiar la elección de la medida más adecuada:</p>
+<ul>
+<li>Si el objetivo es estimar parámetros o realizar inferencias estadísticas posteriores (como pruebas de hipótesis o intervalos de confianza), la media suele ser preferible debido a sus propiedades matemáticas.</li>
+<li>Si el propósito es describir el “valor típico” o central de una distribución, especialmente en presencia de asimetrías o valores extremos, la mediana resulta más apropiada.</li>
+<li>Si se busca comunicar resultados a audiencias no especializadas o tomar decisiones basadas en el “caso típico”, la mediana puede ofrecer una representación más intuitiva y menos susceptible a malinterpretaciones.</li>
+</ul>
+<p>En muchos casos, la estrategia óptima consiste en reportar ambas medidas junto con indicadores de dispersión, proporcionando así una visión más completa de las características de los datos.</p>
+</section>
+</section>
+<section id="medidas-complementarias-para-un-análisis-integral" class="level2">
+<h2 class="anchored" data-anchor-id="medidas-complementarias-para-un-análisis-integral">Medidas Complementarias para un Análisis Integral</h2>
+<section id="indicadores-de-dispersión" class="level3">
+<h3 class="anchored" data-anchor-id="indicadores-de-dispersión">Indicadores de Dispersión</h3>
+<p>Para complementar las medidas de tendencia central y obtener una comprensión más completa de la distribución de los datos, es fundamental incorporar indicadores de dispersión adecuados:</p>
+<ul>
+<li>La desviación estándar y la varianza son los indicadores de dispersión más utilizados junto con la media, proporcionando información sobre la variabilidad de los datos alrededor del promedio.</li>
+<li>El rango intercuartílico (la diferencia entre el tercer y primer cuartil) es el indicador de dispersión que mejor complementa a la mediana, ofreciendo una medida robusta de la variabilidad que, al igual que la mediana, no se ve fuertemente afectada por valores extremos.</li>
+</ul>
+<p>La presentación conjunta de medidas de tendencia central y dispersión permite una interpretación más precisa y matizada de los datos, evitando conclusiones simplistas basadas únicamente en valores centrales.</p>
+</section>
+<section id="representaciones-gráficas" class="level3">
+<h3 class="anchored" data-anchor-id="representaciones-gráficas">Representaciones Gráficas</h3>
+<p>Las representaciones gráficas constituyen herramientas poderosas para visualizar la distribución de los datos y comprender mejor la relación entre diferentes medidas de tendencia central:</p>
+<ul>
+<li>Los histogramas permiten identificar visualmente el tipo de distribución (simétrica o asimétrica) y la ubicación relativa de la media y la mediana.</li>
+<li>Los diagramas de caja (box plots) muestran la mediana, los cuartiles y los valores atípicos, proporcionando una representación visual intuitiva de la distribución.</li>
+<li>Los gráficos de densidad facilitan la comparación entre distribuciones y la identificación de patrones subyacentes en los datos.</li>
+</ul>
+<p>Estas representaciones complementan el análisis numérico y ayudan a comunicar de manera efectiva las características de los datos a audiencias diversas.</p>
+</section>
+</section>
+<section id="conclusión-hacia-una-elección-informada" class="level2">
+<h2 class="anchored" data-anchor-id="conclusión-hacia-una-elección-informada">Conclusión: Hacia una Elección Informada</h2>
+<p>La elección entre la media y la mediana como medida de tendencia central debe basarse en un análisis cuidadoso de múltiples factores. La naturaleza de la distribución de los datos, la presencia de valores atípicos y los objetivos específicos del análisis constituyen los criterios fundamentales para tomar esta decisión.</p>
+<p>En distribuciones simétricas sin valores extremos significativos, ambas medidas proporcionan resultados similares, aunque la media suele preferirse por sus propiedades matemáticas favorables. En contraste, ante distribuciones asimétricas o con valores atípicos, la mediana emerge como la opción más robusta y representativa, resistiendo la influencia de estos valores extremos que pueden distorsionar significativamente la media.</p>
+<p>Más allá de la elección entre una u otra medida, el enfoque más completo y riguroso consiste en adoptar una perspectiva integrada que combine múltiples indicadores estadísticos. La presentación conjunta de la media, la mediana, medidas de dispersión apropiadas y representaciones gráficas proporciona una visión comprehensiva de los datos, facilitando interpretaciones más precisas y matizadas.</p>
+<p>Para concluir, ofrecemos algunas recomendaciones prácticas para la selección y presentación de medidas de tendencia central:</p>
+<ol type="1">
+<li>Analizar siempre previamente la distribución de los datos mediante herramientas gráficas y estadísticas descriptivas básicas.</li>
+<li>Considerar el propósito específico del análisis y las características de la audiencia a la que se dirigirán los resultados.</li>
+<li>En caso de duda, calcular y reportar tanto la media como la mediana, explicando las posibles discrepancias entre ambas.</li>
+<li>Complementar siempre las medidas de tendencia central con indicadores de dispersión apropiados.</li>
+<li>Utilizar representaciones gráficas para facilitar la interpretación y comunicación de los resultados.</li>
+</ol>
+<p>Siguiendo estas recomendaciones, los investigadores y analistas podrán realizar elecciones informadas que maximicen la validez y utilidad de sus análisis estadísticos, evitando interpretaciones erróneas derivadas de la selección inadecuada de medidas de tendencia central.</p>
+</section>
+<section id="referencias" class="level2">
+<h2 class="anchored" data-anchor-id="referencias">Referencias</h2>
+<p>DataCamp. (s. f.). <em>Media vs Mediana: ¿cuándo usar cuál?</em> Recuperado de <a href="https://www.datacamp.com/es/tutorial/mean-vs-median" class="uri">https://www.datacamp.com/es/tutorial/mean-vs-median</a></p>
+<p>Pérez, C. (s. f.). <em>Cómo presentar la información estadística</em>. Recuperado de <a href="https://educacionuc.files.wordpress.com/2015/05/como_presentar_estadistica.pdf" class="uri">https://educacionuc.files.wordpress.com/2015/05/como_presentar_estadistica.pdf</a></p>
+<p>Rincón, Y. (2022, 19 de septiembre). <em>Medidas de tendencia central: qué son y cuáles son</em>. Universidad Internacional de La Rioja (UNIR). Recuperado de <a href="https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/" class="uri">https://colombia.unir.net/actualidad-unir/medidas-tendencia-central/</a></p>
+<p>Vallejo, J. A., Fernández, M. P. &amp; Livacic-Rojas, P. E. (2022). Una reflexión sobre las medidas de tendencia central más comunes. <em>Educación matemática</em>, 34(2), 159–178. Recuperado de <a href="https://dialnet.unirioja.es/descarga/articulo/8663067.pdf" class="uri">https://dialnet.unirioja.es/descarga/articulo/8663067.pdf</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
