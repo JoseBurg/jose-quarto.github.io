@@ -100,15 +100,16 @@ Vamos a crear una función la cual nos de una fecha desde el primer sábado de e
 
 ```{r}
 library(dplyr)
+ # Calcula el primer sabado de enero de cada año
 get_first_friday <- function(year) {
   first_week <- as.Date(paste0(year, "-01-01")) + 
-    (6 - as.POSIXlt(paste0(year, "-01-01"))$wday) # Calcula el primer sabado de enero
+    (6 - as.POSIXlt(paste0(year, "-01-01"))$wday)
   
   return(first_week)
 }
 
 fechas <- seq(
-  get_first_friday(2012), 
+  get_first_friday(2013), 
   Sys.Date(), 
   by = "week" # Generamos una secuencia de fechas semanales
 ) 
@@ -145,7 +146,7 @@ combustibles_months |>
          y = "Precio (RD$)",
          color = NULL) +
     theme_minimal() +
-    scale_x_date(date_labels = "%Y-%m", date_breaks = "1 year") +
+    scale_x_date(date_labels = "%Y-%m", date_breaks = "2 year") +
   theme(
     legend.position = c(.8, 0.5), # Posición de la leyenda
   )
