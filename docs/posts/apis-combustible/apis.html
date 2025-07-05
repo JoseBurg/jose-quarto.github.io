@@ -8,7 +8,7 @@
 
 <meta name="author" content="José Burgos">
 
-<title>Descomposición de series de tiempo – José Burgos</title>
+<title>Apis Digital Gob – José Burgos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -68,36 +102,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
+<meta name="quarto:status" content="draft">
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -105,7 +111,7 @@ window.Quarto = {
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner"><div id="quarto-draft-alert" class="alert alert-warning"><i class="bi bi-pencil-square"></i>Borrador</div>
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -122,6 +128,11 @@ window.Quarto = {
   <li class="nav-item">
     <a class="nav-link" href="../../about.html"> 
 <span class="menu-text">José</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="../../book.qmd"> <i class="bi bi-book" role="img">
+</i> 
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://www.linkedin.com/in/jos%C3%A9-antonio-burgos-francisco-979672163/"> <i class="bi bi-linkedin" role="img">
@@ -144,11 +155,11 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Descomposición de series de tiempo</h1>
+      <h1 class="title">Apis Digital Gob</h1>
                                 <div class="quarto-categories">
-                <div class="quarto-category">ggplot2</div>
-                <div class="quarto-category">annotate</div>
-                <div class="quarto-category">databcrd</div>
+                <div class="quarto-category">httr</div>
+                <div class="quarto-category">Apis</div>
+                <div class="quarto-category">combsustibles</div>
               </div>
                   </div>
   </div>
@@ -166,7 +177,7 @@ window.Quarto = {
       <div>
       <div class="quarto-title-meta-heading">Fecha de publicación</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">25 dic 2024</p>
+        <p class="date">5 jul 2025</p>
       </div>
     </div>
     
@@ -182,8 +193,10 @@ window.Quarto = {
     <h2 id="toc-title">Contenido</h2>
    
   <ul>
-  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a></li>
-  <li><a href="#componentes-de-una-serie-de-tiempo" id="toc-componentes-de-una-serie-de-tiempo" class="nav-link" data-scroll-target="#componentes-de-una-serie-de-tiempo">Componentes de una serie de tiempo</a></li>
+  <li><a href="#que-son-y-como-funcionan-las-apis" id="toc-que-son-y-como-funcionan-las-apis" class="nav-link active" data-scroll-target="#que-son-y-como-funcionan-las-apis">Que son y como funcionan las Apis?</a>
+  <ul class="collapse">
+  <li><a href="#función-y-paquetes" id="toc-función-y-paquetes" class="nav-link" data-scroll-target="#función-y-paquetes">Función y paquetes</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -194,26 +207,168 @@ window.Quarto = {
 
 
 
-<section id="introducción" class="level2">
-<h2 class="anchored" data-anchor-id="introducción">Introducción</h2>
-<p>Hola estimado lector, en esta ocasión le traigo un ejercicio muy útil para los economistas y todo profesional que trabaje con series de tiempo.</p>
-<p>Según <em>Wooldridge,</em> las series de tiempo son esas observaciones de una variable o varias variables que se caracterizan principalmente con una periodicidad u orden temporal, dígase mensual, trimestral, anual, para mencionar algunas.</p>
-<p><span class="math display">\[
-X_t, t = 1, 2, ... T
-\]</span></p>
-<p><em>Donde</em> <span class="math inline">\(X_t\)</span> <em>es la variable de interés en el periodo</em> <span class="math inline">\(t\)</span> <em>y</em> <span class="math inline">\(T\)</span> <em>mayuscula es la cantidad de observaciones.</em></p>
-<p>Un concepto clave a la hora de entender las series de tiempos, es la periodicidad, este no es mas que la cantidad de veces que toman las observaciones de una variable.</p>
-<p>Alguno ejemplos sobre series de tiempo, tenemos las tasas de intereses que pueden ser mensuales, trimestrales o anuales, dependiendo de si nos referimos a las tasa de interés pasiva o activa. Otros ejemplo de serie de tiempo, pueden ser las variables económicas, como el <strong>IMAE</strong>, que tiene una periodicidad mensual, asimismo como el <strong>IPC.</strong></p>
-</section>
-<section id="componentes-de-una-serie-de-tiempo" class="level2">
-<h2 class="anchored" data-anchor-id="componentes-de-una-serie-de-tiempo">Componentes de una serie de tiempo</h2>
+<p>En esta ocacion estaremos descargando los precios de los combustible de República Dominicana desde la apis del portal de datos abiertos del gobierno dominicano. Utilizaremos el paquete <code>httr</code> para realizar la petición a la API y la función de <code>cbind_rows</code> del paquete <code>dplyr</code> para convertir la lista de resultados en un dataframe.</p>
+<p>El precio de los combustible son actualizados cada semana, por lo que la data tiene una frercuencia semanal. El precio esta en pesos dominicanos.</p>
+<section id="que-son-y-como-funcionan-las-apis" class="level2">
+<h2 class="anchored" data-anchor-id="que-son-y-como-funcionan-las-apis">Que son y como funcionan las Apis?</h2>
+<p>Las APIs (Application Programming Interfaces) son conjuntos de reglas y protocolos que permiten la comunicación entre diferentes aplicaciones. En el caso de las APIs web, estas permiten que una aplicación pueda solicitar datos a otra aplicación a través de internet.</p>
+<p>En R, las APIs se pueden utilizar para obtener datos de diferentes fuentes, como bases de datos, servicios web, etc. Para utilizar una API en R, se necesita conocer la URL de la API y los parámetros que se deben enviar en la solicitud.</p>
+<section id="función-y-paquetes" class="level3">
+<h3 class="anchored" data-anchor-id="función-y-paquetes">Función y paquetes</h3>
+<p>La función <code>GET</code> del paquete <code>httr</code> se utiliza para realizar una solicitud HTTP GET a una URL específica. Esta función devuelve un objeto de respuesta que contiene el contenido de la respuesta, el código de estado HTTP y otros metadatos.</p>
+<p><strong>Pasos:</strong></p>
 <ol type="1">
-<li><strong>Estacionalidad:</strong> son los movimientos que una serie de tiempo presenta en determinados periodos de la misma, la cual presenta con un patrón de fluctaciones. <em>Un ejemplo sería el consumo de energía eléctrica que es mayor en verano por la temperatura</em>.</li>
-<li><strong>Tendencia:</strong> es la dirección general en la que se mueve una serie de tiempo. <em>Ejemplo: el PIB tiende a crecer a lo largo del tiempo.</em></li>
-<li><strong>Aleatoriedad:</strong></li>
+<li>Instalar y cargar los paquetes necesarios.</li>
+<li>Realizar la solicitud a la API utilizando la función <code>GET</code>.</li>
+<li>Extraer el contenido de la respuesta utilizando la función <code>content</code>.</li>
+<li>Acceder a los datos específicos de la respuesta.</li>
+<li>Convertir la respuesta de lista a dataframe.</li>
 </ol>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Necesitamos realizar la consulta con la fecha:</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>date <span class="ot">&lt;-</span> <span class="st">"2023-10-01"</span> <span class="co"># Fecha de los precios de los combustibles</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>link <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"https://api.digital.gob.do/v1/fuels?date="</span>, date)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Hacemos la solicitud a la API de la DGII</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>precios <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">GET</span>(link)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Extraemos el contenido de la solicitud</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>respuesta <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">content</span>(<span class="at">x =</span> precios) <span class="co"># Esto devuelve un objeto de tipo lista</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Accedemos a la sección de datos</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>resultados <span class="ot">&lt;-</span> respuesta[[<span class="st">"data"</span>]] <span class="co"># El resultado es una lista de precios de combustibles</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>En el código anterior, primero definimos la fecha para la cual queremos obtener los precios de los combustibles. Luego, construimos la URL de la API utilizando esa fecha. A continuación, utilizamos la función <code>GET</code> del paquete <code>httr</code> para realizar la solicitud a la API. Finalmente, extraemos el contenido de la respuesta y accedemos a los datos específicos que nos interesan.</p>
+<p>El resultado es una lista con la siguiente estructura:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>resultados[[<span class="dv">1</span>]]</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>$id
+[1] 15811
+
+$name
+[1] "Gasolina Premium"
+
+$code
+[1] "PGACU00"
+
+$currency
+[1] "DOP"
+
+$price
+[1] "293.10"
+
+$date
+[1] "2023-09-30"</code></pre>
+</div>
+</div>
+<p>La lista contiene información sobre los precios de diferentes combustibles, incluyendo el nombre del combustible, el precio por galón y la fecha de actualización.</p>
+<p>Ahora convertiremos esta lista en un dataframe para facilitar su análisis. Utilizaremos la función <code>bind_rows</code> del paquete <code>dplyr</code> para combinar los elementos de la lista en un único dataframe.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>combustibles <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(resultados) <span class="co"># Convertimos la lista en un dataframe</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>combustibles <span class="sc">|&gt;</span> </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">glimpse</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 19
+Columns: 6
+$ id       &lt;int&gt; 15811, 15812, 15813, 15814, 15815, 15816, 15817, 15818, 15819…
+$ name     &lt;chr&gt; "Gasolina Premium", "Gasolina Regular", "Gasoil Regular", "Ga…
+$ code     &lt;chr&gt; "PGACU00", "PGAIX00", "POAEE00", NA, NA, NA, NA, "AATGZ00", "…
+$ currency &lt;chr&gt; "DOP", "DOP", "DOP", "DOP", "DOP", "DOP", "DOP", "DOP", "DOP"…
+$ price    &lt;chr&gt; "293.10", "274.50", "221.60", "253.26", "247.58", "253.26", "…
+$ date     &lt;chr&gt; "2023-09-30", "2023-09-30", "2023-09-30", "2023-09-30", "2023…</code></pre>
+</div>
+</div>
+<p>Si queremos pasar a un nivel más avanzados, creamos una función que nos permita obtener los precios de los combustibles para cualquier fecha que le indiquemos. Más allá podemos descargar un histórico de precios de los combustibles.</p>
+<section id="creando-una-función-para-obtener-precios-de-combustibles" class="level4">
+<h4 class="anchored" data-anchor-id="creando-una-función-para-obtener-precios-de-combustibles">Creando una función para obtener precios de combustibles</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>get_combustibles <span class="ot">&lt;-</span> <span class="cf">function</span>(date) {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  link <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"https://api.digital.gob.do/v1/fuels?date="</span>, date)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  precios <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">GET</span>(link)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  respuesta <span class="ot">&lt;-</span> httr<span class="sc">::</span><span class="fu">content</span>(<span class="at">x =</span> precios)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  resultados <span class="ot">&lt;-</span> respuesta[[<span class="st">"data"</span>]]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  combustibles <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(resultados)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(combustibles)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Utilizaremos la función <code>get_combustibles</code> para obtener los precios de los combustibles desde el 1 de enero de 2023 hasta la fecha actual, y luego organizaremos los datos para obtener el precio de la última semana de cada mes.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fechas <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">as.Date</span>(<span class="st">"2019-01-01"</span>), <span class="fu">Sys.Date</span>(), <span class="at">by =</span> <span class="st">"week"</span>) <span class="co"># Generamos una secuencia de fechas semanales</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>combustibles <span class="ot">&lt;-</span> <span class="fu">lapply</span>(fechas, get_combustibles) <span class="co"># Aplicamos la función a cada fecha</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertimos la lista de dataframes en un único dataframe</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>historico_fuels <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(combustibles) <span class="co"># Unimos todos los dataframes en uno solo</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Vamos a obtener el precio de la última semana de cada mes:</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>combustibles_months <span class="ot">&lt;-</span> historico_fuels <span class="sc">|&gt;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">fecha =</span> <span class="fu">as.Date</span>(date), <span class="co"># Convertimos la columna fecha a tipo Date</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">as.numeric</span>(price) <span class="co"># Convertimos la columna price a tipo numérico</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">mes =</span> lubridate<span class="sc">::</span><span class="fu">floor_date</span>(fecha, <span class="st">"month"</span>),</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    name <span class="co"># Agrupamos por mes y nombre del combustible</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_tail</span>(<span class="at">n =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="co"># Obtenemos el precio de la última semana de cada mes</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>fecha)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="visualización-de-los-precios-de-los-combustibles" class="level4">
+<h4 class="anchored" data-anchor-id="visualización-de-los-precios-de-los-combustibles">Visualización de los precios de los combustibles</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>combustibles_months <span class="sc">|&gt;</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(stringr<span class="sc">::</span><span class="fu">str_detect</span>(name, <span class="st">"Gasolina Premium|Gasoil Optimo"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mes, <span class="at">y =</span> price, <span class="at">color =</span> name)) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Precios de Combustibles en República Dominicana"</span>,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">x =</span> <span class="st">"Mes"</span>,</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Precio (RD$)"</span>,</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">color =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_date</span>(<span class="at">date_labels =</span> <span class="st">"%Y-%m"</span>, <span class="at">date_breaks =</span> <span class="st">"1 year"</span>) <span class="sc">+</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="fu">c</span>(.<span class="dv">8</span>, <span class="fl">0.5</span>), <span class="co"># Posición de la leyenda</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="apis_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="tabla-de-precios-en-los-últimos-años" class="level4">
+<h4 class="anchored" data-anchor-id="tabla-de-precios-en-los-últimos-años">Tabla de precios en los últimos años</h4>
 
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->

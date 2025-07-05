@@ -12,4 +12,10 @@ about:
       href: mailto:joseaburgos01@outlook.com
 ---
 
-Hola, mi nombre es José Burgos. Soy un joven economista apasionado por la ciencia de datos y la programación en RStudio. Te invito a visitar mi blog personal, donde comparto técnicas de ciencia de datos y análisis económicos, principalmente utilizando modelos econométricos.
+### José Burgos
+
+Soy un economista con deseo de aprender todos lo días y de compartir mis conocimientos con los demás. Me apasiona la ciencia de datos y la programación en RStudio, y disfruto explorando nuevas formas de aplicar estas habilidades en el análisis económico.
+
+En este blog, encontrarás una variedad de temas relacionados con la ciencia de datos, la economía y la programación en R. Espero que mis publicaciones te sean útiles y te inspiren a seguir aprendiendo y creciendo en estos campos.
+
+Si tienes alguna pregunta o comentario sobre mis publicaciones, no dudes en contactarme a través de mi perfil de `LinkedIn` o enviándome un correo electrónico a mi dirección de `Outlook`. Estoy siempre abierto a nuevas ideas y colaboraciones.

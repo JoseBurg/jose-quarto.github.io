@@ -1,4 +1,4 @@
-library(httr) # vamos usar este paquete para usar el protocolo HTTP
+library(httr) 
 library(tidyverse)
 
 get_precios_combustible <- function(date) {
@@ -17,20 +17,39 @@ get_precios_combustible <- function(date) {
 
 get_precios_combustible(date = "2023-01-16")
 
-lista_fechas <- seq.Date(from = as.Date("2010-01-09"), to = as.Date("2022-04-02"), by = "week")
+lista_fechas <- seq.Date(from = as.Date("2010-01-09"), to = as.Date("2024-11-16"), by = "week")
 
 historico <- lapply(lista_fechas, get_precios_combustible)
 
 historico_df <- dplyr::bind_rows(historico)
 
 gasolina <- historico_df |> 
+  dplyr::mutate(
+    date = as.Date(date),
+    year = lubridate::year(date),
+    month = lubridate::month(date),
+    price = as.numeric(price)) |>
   dplyr::filter(stringr::str_detect(name, "Gasolina")) |>
   tidyr::separate_wider_delim(cols = name, 
                               delim = " ", 
                               names = c("combustible", "tipo"))
+#  Vamos a calcular la variación porcentual de los precios de la gasolina
+var_gasolina <- gasolina |> 
+  dplyr::group_by(tipo) |> 
+  dplyr::arrange(date) |> 
+  dplyr::mutate(
+    price_change = (price - dplyr::lag(price)) / dplyr::lag(price) * 100) |> 
+  dplyr::ungroup()
+
+# Gráficamos la variación porcentual de los precios de la gasolina
+var_gasolina |> 
+  ggplot(aes(x = date, y = price_change, color = tipo)) +
+  geom_line() +
+  labs(title = "Variación porcentual de los precios de la gasolina",
+       x = "Fecha", y = "Variación porcentual") +
+  theme_minimal()
 
 gasolina |> 
-  mutate(date = as.Date(date)) |>
   ggplot(aes(x = date, y = price)) +
   geom_col() +
   facet_wrap(~tipo, scales = "free_y")
