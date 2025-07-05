@@ -208,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>En esta ocacion estaremos descargando los precios de los combustible de República Dominicana desde la apis del portal de datos abiertos del gobierno dominicano. Utilizaremos el paquete <code>httr</code> para realizar la petición a la API y la función de <code>cbind_rows</code> del paquete <code>dplyr</code> para convertir la lista de resultados en un dataframe.</p>
-<p>El precio de los combustible son actualizados cada semana, por lo que la data tiene una frercuencia semanal. El precio esta en pesos dominicanos.</p>
+<p>El precio de los combustible son actualizados cada semana, por lo que la data tiene una frecuencia semanal, el precio es publicado el viernes de cada semana, pero se aplica a partir de las doces de la noche, por lo que la observación de los precios es a partir del sábado de cada semana. Por lo tanto, si queremos obtener los precios de los combustibles para una fecha específica, debemos asegurarnos de que esta fecha sea un sábado.</p>
 <section id="que-son-y-como-funcionan-las-apis" class="level2">
 <h2 class="anchored" data-anchor-id="que-son-y-como-funcionan-las-apis">Que son y como funcionan las Apis?</h2>
 <p>Las APIs (Application Programming Interfaces) son conjuntos de reglas y protocolos que permiten la comunicación entre diferentes aplicaciones. En el caso de las APIs web, estas permiten que una aplicación pueda solicitar datos a otra aplicación a través de internet.</p>
@@ -289,7 +289,7 @@ $ price    &lt;chr&gt; "293.10", "274.50", "221.60", "253.26", "247.58", "253.26
 $ date     &lt;chr&gt; "2023-09-30", "2023-09-30", "2023-09-30", "2023-09-30", "2023…</code></pre>
 </div>
 </div>
-<p>Si queremos pasar a un nivel más avanzados, creamos una función que nos permita obtener los precios de los combustibles para cualquier fecha que le indiquemos. Más allá podemos descargar un histórico de precios de los combustibles.</p>
+<p>Si queremos pasar a un nivel más avanzados, creamos una función que nos permita obtener los precios de los combustibles para cualquier fecha que le indiquemos.</p>
 <section id="creando-una-función-para-obtener-precios-de-combustibles" class="level4">
 <h4 class="anchored" data-anchor-id="creando-una-función-para-obtener-precios-de-combustibles">Creando una función para obtener precios de combustibles</h4>
 <div class="cell">
@@ -307,30 +307,43 @@ $ date     &lt;chr&gt; "2023-09-30", "2023-09-30", "2023-09-30", "2023-09-30", "
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>Utilizaremos la función <code>get_combustibles</code> para obtener los precios de los combustibles desde el 1 de enero de 2023 hasta la fecha actual, y luego organizaremos los datos para obtener el precio de la última semana de cada mes.</p>
+<p>Resulta que si utilizamos la función <code>get_combustibles</code> con una fecha y esta no corresponde a una fecha que no coincide con un sábado, la API nos devolverá los datos que estén más cercanos a esta fecha. Por lo tanto, es importante asegurarnos de que la fecha que pasamos a la función sea el sexto día de la semana.Para obtener un histórico de precios de los combustibles, podemos generar una secuencia de fechas semanales.</p>
+<p>Vamos a crear una función la cual nos de una fecha desde el primer sábado de enero de un año, y luego utilizaremos esta función para generar una secuencia de fechas semanales. Posteriormente, aplicaremos la función <code>get_combustibles</code> a cada una de estas fechas para obtener los precios correspondientes.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>fechas <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="fu">as.Date</span>(<span class="st">"2019-01-01"</span>), <span class="fu">Sys.Date</span>(), <span class="at">by =</span> <span class="st">"week"</span>) <span class="co"># Generamos una secuencia de fechas semanales</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>combustibles <span class="ot">&lt;-</span> <span class="fu">lapply</span>(fechas, get_combustibles) <span class="co"># Aplicamos la función a cada fecha</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertimos la lista de dataframes en un único dataframe</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>historico_fuels <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(combustibles) <span class="co"># Unimos todos los dataframes en uno solo</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Vamos a obtener el precio de la última semana de cada mes:</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>combustibles_months <span class="ot">&lt;-</span> historico_fuels <span class="sc">|&gt;</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">fecha =</span> <span class="fu">as.Date</span>(date), <span class="co"># Convertimos la columna fecha a tipo Date</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">as.numeric</span>(price) <span class="co"># Convertimos la columna price a tipo numérico</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">mes =</span> lubridate<span class="sc">::</span><span class="fu">floor_date</span>(fecha, <span class="st">"month"</span>),</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    name <span class="co"># Agrupamos por mes y nombre del combustible</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_tail</span>(<span class="at">n =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="co"># Obtenemos el precio de la última semana de cada mes</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>fecha)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a> <span class="co"># Calcula el primer sabado de enero de cada año</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>get_first_friday <span class="ot">&lt;-</span> <span class="cf">function</span>(year) {</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  first_week <span class="ot">&lt;-</span> <span class="fu">as.Date</span>(<span class="fu">paste0</span>(year, <span class="st">"-01-01"</span>)) <span class="sc">+</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    (<span class="dv">6</span> <span class="sc">-</span> <span class="fu">as.POSIXlt</span>(<span class="fu">paste0</span>(year, <span class="st">"-01-01"</span>))<span class="sc">$</span>wday)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(first_week)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>fechas <span class="ot">&lt;-</span> <span class="fu">seq</span>(</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">get_first_friday</span>(<span class="dv">2012</span>), </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">Sys.Date</span>(), </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">by =</span> <span class="st">"week"</span> <span class="co"># Generamos una secuencia de fechas semanales</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>) </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>combustibles <span class="ot">&lt;-</span> <span class="fu">lapply</span>(fechas, get_combustibles) <span class="co"># Aplicamos la función a cada fecha</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertimos la lista de dataframes en un único dataframe</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>historico_fuels <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(combustibles) <span class="co"># Unimos todos los dataframes en uno solo</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Vamos a obtener el precio de la última semana de cada mes:</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>combustibles_months <span class="ot">&lt;-</span> historico_fuels <span class="sc">|&gt;</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">fecha =</span> <span class="fu">as.Date</span>(date), <span class="co"># Convertimos la columna fecha a tipo Date</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">price =</span> <span class="fu">as.numeric</span>(price) <span class="co"># Convertimos la columna price a tipo numérico</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">mes =</span> lubridate<span class="sc">::</span><span class="fu">floor_date</span>(fecha, <span class="st">"month"</span>),</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    name <span class="co"># Agrupamos por mes y nombre del combustible</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span> </span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_tail</span>(<span class="at">n =</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="co"># Obtenemos el precio de la última semana de cada mes</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>fecha)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -365,6 +378,12 @@ $ date     &lt;chr&gt; "2023-09-30", "2023-09-30", "2023-09-30", "2023-09-30", "
 </section>
 <section id="tabla-de-precios-en-los-últimos-años" class="level4">
 <h4 class="anchored" data-anchor-id="tabla-de-precios-en-los-últimos-años">Tabla de precios en los últimos años</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vamos a crear una función para obtener el primer viernes de la primera semana de enero de un año</span></span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 
 
 </section>

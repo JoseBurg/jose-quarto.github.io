@@ -100,9 +100,10 @@ Vamos a crear una función la cual nos de una fecha desde el primer sábado de e
 
 ```{r}
 library(dplyr)
+ # Calcula el primer sabado de enero de cada año
 get_first_friday <- function(year) {
   first_week <- as.Date(paste0(year, "-01-01")) + 
-    (6 - as.POSIXlt(paste0(year, "-01-01"))$wday) # Calcula el primer sabado de enero
+    (6 - as.POSIXlt(paste0(year, "-01-01"))$wday)
   
   return(first_week)
 }
