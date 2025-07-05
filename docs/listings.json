@@ -2,7 +2,10 @@
   {
     "listing": "/index.html",
     "items": [
+<<<<<<< HEAD
       "/posts/apis-combustible/apis.html",
+=======
+>>>>>>> 1c8fc22bb5d27e051c32bbe4e66519eace420e36
       "/posts/graficos/domina_ggplot2.html",
       "/posts/getSymbols/getsymbols.html"
     ]
