@@ -11,6 +11,8 @@ website:
       - about.qmd
       # - icon: github
       #   href: https://github.com/joseburg
+      - icon: book
+        href: book.qmd
       - icon: linkedin
         href: https://www.linkedin.com/in/jos%C3%A9-antonio-burgos-francisco-979672163/
       - icon: envelope-at
