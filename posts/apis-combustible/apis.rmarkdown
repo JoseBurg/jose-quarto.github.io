@@ -21,6 +21,8 @@ format:
     highlight-style: github
 ---
 
+
+
 En esta ocacion estaremos descargando los precios de los combustible de República Dominicana desde la apis del portal de datos abiertos del gobierno dominicano. Utilizaremos el paquete `httr` para realizar la petición a la API y la función de `cbind_rows` del paquete `dplyr` para convertir la lista de resultados en un dataframe.
 
 El precio de los combustible son actualizados cada semana, por lo que la data tiene una frecuencia semanal, el precio es publicado el viernes de cada semana, pero se aplica a partir de las doces de la noche, por lo que la observación de los precios es a partir del sábado de cada semana. Por lo tanto, si queremos obtener los precios de los combustibles para una fecha específica, debemos asegurarnos de que esta fecha sea un sábado.
@@ -43,6 +45,8 @@ La función `GET` del paquete `httr` se utiliza para realizar una solicitud HTTP
 4.  Acceder a los datos específicos de la respuesta.
 5.  Convertir la respuesta de lista a dataframe.
 
+
+
 ```{r}
 # Necesitamos realizar la consulta con la fecha:
 date <- "2023-10-01" # Fecha de los precios de los combustibles
@@ -58,17 +62,25 @@ respuesta <- httr::content(x = precios) # Esto devuelve un objeto de tipo lista
 resultados <- respuesta[["data"]] # El resultado es una lista de precios de combustibles
 ```
 
+
+
 En el código anterior, primero definimos la fecha para la cual queremos obtener los precios de los combustibles. Luego, construimos la URL de la API utilizando esa fecha. A continuación, utilizamos la función `GET` del paquete `httr` para realizar la solicitud a la API. Finalmente, extraemos el contenido de la respuesta y accedemos a los datos específicos que nos interesan.
 
 El resultado es una lista con la siguiente estructura:
+
+
 
 ```{r}
 resultados[[1]]
 ```
 
+
+
 La lista contiene información sobre los precios de diferentes combustibles, incluyendo el nombre del combustible, el precio por galón y la fecha de actualización.
 
 Ahora convertiremos esta lista en un dataframe para facilitar su análisis. Utilizaremos la función `bind_rows` del paquete `dplyr` para combinar los elementos de la lista en un único dataframe.
+
+
 
 ```{r}
 combustibles <- dplyr::bind_rows(resultados) # Convertimos la lista en un dataframe
@@ -77,9 +89,13 @@ combustibles |>
   dplyr::glimpse()
 ```
 
+
+
 Si queremos pasar a un nivel más avanzados, creamos una función que nos permita obtener los precios de los combustibles para cualquier fecha que le indiquemos.
 
 #### Creando una función para obtener precios de combustibles
+
+
 
 ```{r}
 get_combustibles <- function(date) {
@@ -94,9 +110,13 @@ get_combustibles <- function(date) {
 }
 ```
 
+
+
 Resulta que si utilizamos la función `get_combustibles` con una fecha y esta no corresponde a una fecha que no coincide con un sábado, la API nos devolverá los datos que estén más cercanos a esta fecha. Por lo tanto, es importante asegurarnos de que la fecha que pasamos a la función sea el sexto día de la semana.Para obtener un histórico de precios de los combustibles, podemos generar una secuencia de fechas semanales.
 
 Vamos a crear una función la cual nos de una fecha desde el primer sábado de enero de un año, y luego utilizaremos esta función para generar una secuencia de fechas semanales. Posteriormente, aplicaremos la función `get_combustibles` a cada una de estas fechas para obtener los precios correspondientes.
+
+
 
 ```{r}
 library(dplyr)
@@ -133,7 +153,11 @@ combustibles_months <- historico_fuels |>
   select(-fecha)
 ```
 
+
+
 #### Visualización de los precios de los combustibles
+
+
 
 ```{r}
 library(ggplot2)
@@ -153,7 +177,11 @@ combustibles_months |>
 
 ```
 
+
+
 #### Tabla de precios en los últimos años
+
+
 
 ```{r}
 # Vamos a crear una función para obtener el primer viernes de la primera semana de enero de un año
@@ -164,3 +192,4 @@ combustibles_months |>
 
 
 ```
+
