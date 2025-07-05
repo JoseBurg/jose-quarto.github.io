@@ -23,6 +23,7 @@ library(httr)
 library(dplyr)
 library(ggplot2)
 library(tidytext)
+library(dplyr)
 
 link <- "https://apis.sb.gob.do/estadisticas/v2/carteras/creditos/genero?periodoInicial=2021-01"
 subscription_key <- "bRhDMj4xQCQw9cG"
@@ -32,19 +33,19 @@ json_content <- content(response, "text", encoding = "UTF-8")
 captaciones <- jsonlite::fromJSON(json_content)
 
 
-# captaciones |> 
-#   # group_by(region) |> 
-#   mutate(
-#     total = sum(balance),
-#     entidad = as.factor(entidad),
-#     orden = reorder_within(entidad, total, region)) |> 
-#   ggplot() + 
-#   geom_col(
-#     aes(x = total/1000000, y = orden), 
-#     show.legend = FALSE) +
-#   labs(x = "", y = "") +
-#   facet_wrap(~region, scales = "free_y") +
-#   scale_y_reordered()
+captaciones |>
+  # group_by(region) |>
+  mutate(
+    total = sum(balance),
+    entidad = as.factor(entidad),
+    orden = reorder_within(entidad, total, region)) |>
+  ggplot() +
+  geom_col(
+    aes(x = total/1000000, y = orden),
+    show.legend = FALSE) +
+  labs(x = "", y = "") +
+  facet_wrap(~region, scales = "free_y") +
+  scale_y_reordered()
 ```
 
 [Pasos para registrarse en la APis de la Super de Bancos](https://medium.com/@SB-ESTUDIOS/c%C3%B3mo-registrarte-en-el-portal-de-apis-de-la-superintendencia-de-bancos-b8a59acf3f9a)
