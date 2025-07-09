@@ -125,42 +125,62 @@ combustibles_months <- historico_fuels |>
     price = as.numeric(price) # Convertimos la columna price a tipo numérico
   ) |> 
   group_by(
-    mes = lubridate::floor_date(fecha, "month"),
+    fecha = lubridate::floor_date(fecha, "month"),
     name # Agrupamos por mes y nombre del combustible
   ) |> 
   slice_tail(n = 1) |> # Obtenemos el precio de la última semana de cada mes
-  ungroup() |> 
-  select(-fecha)
+  ungroup()
 ```
 
 #### Visualización de los precios de los combustibles
 
 ```{r}
-library(ggplot2)
-combustibles_months |> 
-  filter(stringr::str_detect(name, "Gasolina Premium|Gasoil Optimo")) |>
-  ggplot(aes(x = mes, y = price, color = name)) +
-    geom_line() +
-    labs(title = "Precios de Combustibles en República Dominicana",
-         x = "Mes",
-         y = "Precio (RD$)",
-         color = NULL) +
-    theme_minimal() +
-    scale_x_date(date_labels = "%Y-%m", date_breaks = "2 year") +
-  theme(
-    legend.position = c(.8, 0.5), # Posición de la leyenda
-  )
+# Vamos a crear gráficos con highcharter
+plot_highchart_combustibles <- function(
+    data, 
+    combustibles = c("Gasolina Premium", "Gasoil Optimo"),
+    type = "spline"
+  
+  ) {
+  data |> 
+    dplyr::filter(name %in% combustibles) |> 
+    dplyr::mutate(date = as.Date(date)) |>
+    # dplyr::arrange(date) |>             
+    highcharter::hchart(
+      type,
+      highcharter::hcaes(x = date, y = price, group = name)) |>
+    highcharter::hc_title(text = "Evolución de precios de combustibles") |>
+    highcharter::hc_subtitle(text = "República Dominicana") |>
+    highcharter::hc_xAxis(
+      type  = "datetime",
+      title = list(text = "Fecha")
+    ) |> 
+    highcharter::hc_yAxis(
+      title  = list(text = "Precio (RD$)"),
+      labels = list(format = "{value:,.2f}")
+    ) |> 
+    highcharter::hc_tooltip(
+      shared      = TRUE,
+      xDateFormat = "%b %Y",
+      pointFormat = "<span style=\"color:{series.color}\">\u25CF</span>
+                     {series.name}: <b>${point.y:.2f}</b><br/>"
+    )
+}
 
 ```
 
-#### Tabla de precios en los últimos años
+Para visualizar los precios de los combustibles, utilizaremos la función `plot_highchart_combustibles`, que nos permitirá crear gráficos interactivos utilizando el paquete `highcharter`. A continuación, mostramos un ejemplo de cómo utilizar esta función para visualizar los precios de la Gasolina Premium y el Gasoil Óptimo.
 
 ```{r}
-# Vamos a crear una función para obtener el primer viernes de la primera semana de enero de un año
-
-
-
-
-
-
+plot_highchart_combustibles(
+  combustibles_months
+)
 ```
+
+Esta función toma como entrada un dataframe con los precios de los combustibles y genera un gráfico interactivo que muestra la evolución de los precios a lo largo del tiempo. Puedes personalizar los combustibles que deseas visualizar y el tipo de gráfico (por defecto, se utiliza un gráfico de líneas).
+
+## Conclusión
+
+En este artículo, hemos explorado cómo utilizar las APIs para obtener datos de precios de combustibles en República Dominicana. Hemos aprendido a realizar solicitudes a una API, extraer y manipular los datos, y finalmente, visualizarlos utilizando gráficos interactivos.
+
+Este proceso nos permite acceder a información actualizada y relevante de manera eficiente, lo que es fundamental para el análisis de datos en tiempo real. Las APIs son herramientas poderosas que facilitan la integración de datos externos en nuestros proyectos de análisis y visualización.
