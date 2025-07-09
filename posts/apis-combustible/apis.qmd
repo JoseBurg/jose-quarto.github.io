@@ -161,11 +161,9 @@ plot_highchart_combustibles <- function(
     ) |> 
     highcharter::hc_tooltip(
       shared      = TRUE,
-      xDateFormat = "%B %Y",
-      headerFormat = "",
+      xDateFormat = "%b %Y",
       pointFormat = "<span style=\"color:{series.color}\">\u25CF</span>
-                     {series.name}: <b>RD${point.y:.2f}</b><br/>"
-    )
+                     {series.name}: <b>${point.y:.2f}</b><br/>")
 }
 
 ```
