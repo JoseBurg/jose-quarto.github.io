@@ -1,0 +1,274 @@
+/* --- ESTILOS GENERALES --- */
+:root {
+  --color-primario: #2c3e50; /* Azul oscuro */
+  --color-secundario: #3498db; /* Azul claro */
+  --color-fondo: #ecf0f1; /* Gris claro */
+  --color-texto: #333;
+  --color-blanco: #fff;
+}
+
+#profile-section {
+  padding: 20px;
+  background-color: var(--color-blanco);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.cv-container {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  background: var(--color-blanco);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* --- BARRA LATERAL (SIDEBAR) --- */
+.sidebar {
+  background-color: var(--color-primario);
+  color: var(--color-blanco);
+  padding: 30px;
+  width: 35%;
+  text-align: center;
+}
+
+.profile-pic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 5px solid var(--color-secundario);
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.sidebar h1 {
+  font-size: 2em;
+  margin-bottom: 5px;
+}
+
+.sidebar h2 {
+  font-size: 1.1em;
+  font-weight: 300;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 20px;
+}
+
+.contact-info h3 {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+
+.contact-info ul {
+  list-style-type: none;
+  text-align: left;
+}
+
+.contact-info li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.contact-info i {
+  color: var(--color-secundario);
+  margin-right: 10px;
+  width: 20px;
+}
+
+/* --- CONTENIDO PRINCIPAL --- */
+.main-content {
+  padding: 40px;
+  width: 65%;
+}
+
+.main-content section {
+  margin-bottom: 40px;
+}
+
+.main-content h3 {
+  font-size: 1.5em;
+  color: var(--color-primario);
+  border-bottom: 2px solid var(--color-secundario);
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+
+/* --- SECCIÓN DE HABILIDADES (BARRAS DE PROGRESO) --- */
+.skill {
+  margin-bottom: 15px;
+}
+
+.skill p {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.progress-bar {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 25px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.progress {
+  background-color: var(--color-secundario);
+  height: 100%;
+  border-radius: 25px;
+  position: relative;
+  animation: fill-bar 2s ease-in-out;
+}
+
+/* Animación para llenar la barra */
+@keyframes fill-bar {
+  from {
+      width: 0%;
+  }
+}
+
+/* Pseudo-elemento para mostrar el porcentaje */
+.progress::after {
+  content: attr(data-percent);
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-blanco);
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+/* --- SECCIÓN DE INTERESES (BOTONES) --- */
+.interests-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.interest-button {
+  background-color: var(--color-fondo);
+  color: var(--color-primario);
+  padding: 10px 15px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.interest-button:hover {
+  background-color: var(--color-secundario);
+  color: var(--color-blanco);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* --- ESTILOS PARA EXPERIENCIA LABORAL --- */
+.job-entry {
+    margin-bottom: 20px;
+}
+
+.job-entry:last-of-type {
+    margin-bottom: 0;
+}
+
+.job-entry h4 {
+    color: var(--color-primario);
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.job-date {
+    font-style: italic;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+.job-entry ul {
+    list-style-position: inside;
+    padding-left: 5px;
+}
+
+.job-entry li {
+    margin-bottom: 5px;
+}
+
+/* --- ESTILOS PARA REFERENCIAS --- */
+.references-info {
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 20px;
+}
+
+/* --- DISEÑO RESPONSIVO PARA MÓVILES --- */
+@media (max-width: 768px) {
+  .cv-container {
+      flex-direction: column;
+  }
+
+  .sidebar, .main-content {
+      width: 100%;
+  }
+
+  .sidebar {
+      padding: 20px;
+  }
+
+  .main-content {
+      padding: 20px;
+  }
+
+  .sidebar h1 {
+      font-size: 1.8em;
+  }
+}
+
+/* --- AJUSTES PARA HABILIDADES EN LA BARRA LATERAL --- */
+.sidebar .skills-section {
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 20px;
+}
+
+.sidebar .skills-section h3 {
+    color: var(--color-blanco); /* Cambia el color del título a blanco */
+    border-bottom: none; /* Quita el borde inferior que no se necesita aquí */
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.sidebar .skill p {
+    color: var(--color-blanco); /* Cambia el color del texto de la habilidad a blanco */
+    font-weight: normal;
+    text-align: left;
+}
+
+.sidebar .progress-bar {
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo de la barra más claro */
+}
+
+/* No es necesario cambiar .progress ya que su color azul contrasta bien */
