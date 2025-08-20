@@ -21,11 +21,11 @@ format:
     highlight-style: github
 ---
 
-En esta ocacion estaremos descargando los precios de los combustible de República Dominicana desde la apis del portal de datos abiertos del gobierno dominicano. Utilizaremos el paquete `httr` para realizar la petición a la API y la función de `cbind_rows` del paquete `dplyr` para convertir la lista de resultados en un dataframe.
+En esta ocasión descargaremos los precios de los combustibles de República Dominicana a través de la API disponible en el portal de datos abiertos del gobierno dominicano. Utilizaremos el paquete `httr` para realizar la petición a la API y la función `cbind_rows` de `dplyr` para convertir la lista de resultados en un *data frame*.
 
-El precio de los combustible son actualizados cada semana, por lo que la data tiene una frecuencia semanal, el precio es publicado el viernes de cada semana, pero se aplica a partir de las doces de la noche, por lo que la observación de los precios es a partir del sábado de cada semana. Por lo tanto, si queremos obtener los precios de los combustibles para una fecha específica, debemos asegurarnos de que esta fecha sea un sábado.
+Los precios de los combustibles se actualizan cada semana, por lo que la información tiene una frecuencia semanal. El precio se publica los viernes, pero entra en vigencia a partir de la medianoche, de manera que la observación corresponde al sábado de cada semana. Por lo tanto, si queremos obtener los precios de los combustibles para una fecha específica, debemos asegurarnos de que esa fecha sea un sábado.
 
-## Que son y como funcionan las Apis?
+## ¿Qué son y cómo funcionan las APIs?
 
 Las APIs (Application Programming Interfaces) son conjuntos de reglas y protocolos que permiten la comunicación entre diferentes aplicaciones. En el caso de las APIs web, estas permiten que una aplicación pueda solicitar datos a otra aplicación a través de internet.
 
@@ -41,7 +41,7 @@ La función `GET` del paquete `httr` se utiliza para realizar una solicitud HTTP
 2.  Realizar la solicitud a la API utilizando la función `GET`.
 3.  Extraer el contenido de la respuesta utilizando la función `content`.
 4.  Acceder a los datos específicos de la respuesta.
-5.  Convertir la respuesta de lista a dataframe.
+5.  Convertir la respuesta de lista a un *data frame*.
 
 ```{r}
 # Necesitamos realizar la consulta con la fecha:
@@ -68,16 +68,16 @@ resultados[[1]]
 
 La lista contiene información sobre los precios de diferentes combustibles, incluyendo el nombre del combustible, el precio por galón y la fecha de actualización.
 
-Ahora convertiremos esta lista en un dataframe para facilitar su análisis. Utilizaremos la función `bind_rows` del paquete `dplyr` para combinar los elementos de la lista en un único dataframe.
+Ahora convertiremos esta lista en un *data frame* para facilitar su análisis. Utilizaremos la función `bind_rows` del paquete `dplyr` para combinar los elementos de la lista en un único *data frame*.
 
 ```{r}
-combustibles <- dplyr::bind_rows(resultados) # Convertimos la lista en un dataframe
+combustibles <- dplyr::bind_rows(resultados) # Convertimos la lista en un data frame
 
 combustibles |> 
   dplyr::glimpse()
 ```
 
-Si queremos pasar a un nivel más avanzados, creamos una función que nos permita obtener los precios de los combustibles para cualquier fecha que le indiquemos.
+Si queremos ir un paso más allá, podemos crear una función que nos permita obtener los precios de los combustibles para cualquier fecha que indiquemos.
 
 #### Creando una función para obtener precios de combustibles
 
@@ -94,13 +94,13 @@ get_combustibles <- function(date) {
 }
 ```
 
-Resulta que si utilizamos la función `get_combustibles` con una fecha y esta no corresponde a una fecha que no coincide con un sábado, la API nos devolverá los datos que estén más cercanos a esta fecha. Por lo tanto, es importante asegurarnos de que la fecha que pasamos a la función sea el sexto día de la semana.Para obtener un histórico de precios de los combustibles, podemos generar una secuencia de fechas semanales.
+Si utilizamos la función `get_combustibles` con una fecha que no coincide con un sábado, la API devolverá los datos más cercanos a esa fecha. Por ello, es recomendable asegurarnos de que la fecha que pasamos a la función sea el sexto día de la semana. Para obtener un histórico de precios de los combustibles podemos generar una secuencia de fechas semanales.
 
-Vamos a crear una función la cual nos de una fecha desde el primer sábado de enero de un año, y luego utilizaremos esta función para generar una secuencia de fechas semanales. Posteriormente, aplicaremos la función `get_combustibles` a cada una de estas fechas para obtener los precios correspondientes.
+Crearemos una función que nos devuelva una fecha a partir del primer sábado de enero de un año. Después, utilizaremos esta función para generar una secuencia de fechas semanales y aplicaremos `get_combustibles` a cada una de ellas para obtener los precios correspondientes.
 
 ```{r}
 library(dplyr)
- # Calcula el primer sabado de enero de cada año
+ # Calcula el primer sábado de enero de cada año
 get_first_friday <- function(year) {
   first_week <- as.Date(paste0(year, "-01-01")) + 
     (6 - as.POSIXlt(paste0(year, "-01-01"))$wday)
@@ -115,8 +115,8 @@ fechas <- seq(
 ) 
 
 combustibles <- lapply(fechas, get_combustibles) # Aplicamos la función a cada fecha
-# Convertimos la lista de dataframes en un único dataframe
-historico_fuels <- dplyr::bind_rows(combustibles) # Unimos todos los dataframes en uno solo
+# Convertimos la lista de data frames en un único data frame
+historico_fuels <- dplyr::bind_rows(combustibles) # Unimos todos los data frames en uno solo
 
 # Vamos a obtener el precio de la última semana de cada mes:
 combustibles_months <- historico_fuels |>
@@ -138,7 +138,7 @@ combustibles_months <- historico_fuels |>
 # Vamos a crear gráficos con highcharter
 plot_highchart_combustibles <- function(
     data, 
-    combustibles = c("Gasolina Premium", "Gasoil Optimo"),
+    combustibles = c("Gasolina Premium", "Gasoil Óptimo"),
     type = "spline"
   
   ) {
@@ -176,7 +176,7 @@ plot_highchart_combustibles(
 )
 ```
 
-Esta función toma como entrada un dataframe con los precios de los combustibles y genera un gráfico interactivo que muestra la evolución de los precios a lo largo del tiempo. Puedes personalizar los combustibles que deseas visualizar y el tipo de gráfico (por defecto, se utiliza un gráfico de líneas).
+Esta función recibe como entrada un *data frame* con los precios de los combustibles y genera un gráfico interactivo que muestra su evolución a lo largo del tiempo. Puedes personalizar los combustibles que deseas visualizar y el tipo de gráfico (por defecto se utiliza un gráfico de líneas).
 
 ## Conclusión
 
