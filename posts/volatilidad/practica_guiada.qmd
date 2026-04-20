@@ -1,0 +1,339 @@
+---
+title: "Econometría de Series de Tiempo"
+subtitle: "Volatilidad de Tasas de Interés en República Dominicana <br> José Antonio Burgos (25-0140)"
+format:
+   html: 
+     lang: es
+     embed-resources: true
+     warning: false
+     message: false
+     fig-cap-location: top
+     theme: united
+     css: styles.css
+---
+
+
+```{r paquetes}
+#| echo: false
+library(dplyr)
+library(xts)
+library(ggplot2)
+library(forecast)
+library(tidyr)
+library(modelsummary)
+library(FinTS)
+library(rugarch)
+```
+
+\newline
+
+## Preparación de datos y tranformaciones
+
+Se procedió a la carga de las tasas de interés pasivas con frecuencia semanal, las cuales fueron posteriormente transformadas a objetos de series de tiempo utilizando la clase xts. El conjunto de datos incluye las tasas correspondientes a depósitos a 30 días, depósitos a más de 360 días, así como la tasa promedio ponderada del sistema. Estas series son publicadas por el Banco Central de la República Dominicana.
+
+```{r}
+#| echo: true
+tasas_pasivas <- readxl::read_excel("tasas_pasivas_semanal.xlsx") 
+
+data <- tasas_pasivas |> 
+    mutate(fecha = as.Date(week_inicio)) |> 
+    arrange(fecha)
+
+ts_data <- xts(tasas_pasivas[,-c(1,2)], order.by = data$fecha)
+```
+
+
+## Exploración de las Series
+
+### En niveles
+
+```{r}
+#| label: fig-tasa
+#| fig-cap: "Evolución de las Tasas Pasivas en Niveles"
+autoplot(ts_data) +
+    labs(x = "Periodo", y = "Tasas") + 
+    ggplot2::scale_y_continuous(labels = \(x) scales::comma(x, suffix = ".0 %"))
+```
+
+Como se observa @fig-tasa exites un nivel de volatilidad en las tres tasas presentadas, pero como es de esperar, se registra un nivel más alto de volatilidad a medida que nos movemos de una tasa de mayor plazo a menor subsesivamente.
+
+Existen episodiso de alta volatilidad, principalmente en coyunturas asociadas a eventos de crisis internacionales. 
+
+
+### En diferencias logarítmicas
+
+```{r}
+#| label: fig-tasa-log-diff
+#| fig-cap: "Evolución de las Tasas Pasivas en diferencias logarítmicas"
+ts_ld <- diff(log(ts_data))*100
+
+autoplot(ts_ld) + labs(x = "Periodo", y = "Tasas")
+```
+
+
+Las series en diferencias logarítmicas presentan un comportamiento consistente con estacionariedad en media, dado que oscilan alrededor de un valor cercano a cero y no evidencian tendencias persistentes a lo largo del tiempo. Este resultado es coherente con la transformación aplicada, la cual suele eliminar la no estacionariedad presente en los niveles de las series.
+
+No obstante, aunque la media parece estable, la varianza no es constante. Se identifican claramente períodos de baja variabilidad seguidos de episodios de alta volatilidad, especialmente en años recientes, donde las fluctuaciones son más pronunciadas. Este patrón refleja la presencia de clusters de volatilidad, es decir, agrupamientos de alta y baja variabilidad en el tiempo.
+
+### En diferencias logarítmicas al cuadrado
+```{r}
+#| label: fig-tasa-lg-dff2
+#| fig-cap: En diferencias logarítmicas al cuadrado
+autoplot(ts_ld^2) + labs(x = "Periodo", y = "Tasas")
+```
+
+En las tres series de la @fig-tasa-lg-dff2, los picos de volatilidad no aparecen de forma aislada y aleatoria, sino que se agrupan en el tiempo; cuando hay un valor elevado del cuadrado de la diferencia logarítmica, es muy probable que los períodos adyacentes también presenten valores elevados. Esto es precisamente la firma estadística de autocorrelación en la varianza (también llamada autocorrelación en los cuadrados de los residuos). Hay períodos largos de baja volatilidad interrumpidos por episodios de alta volatilidad 
+persistente, eso es `clustering`, e implica autocorrelación significativa en la varianza.
+
+
+
+## División por Régimen
+
+
+
+```{r}
+#| echo: false
+# Periodos pre y post adopción del MELI
+r_pre  <- ts_ld["/2011-12-31"]|> na.omit()
+r_post <- ts_ld["2012-01-01/"]|> na.omit()
+```
+
+::: {layout-ncol=2}
+
+```{r}
+#| label: fig-tasa-preemi
+#| fig-cap: En diferencias logarítmicas pre EMI
+autoplot(r_pre) + labs(x = "Periodo", y = "Tasas")
+```
+
+
+```{r}
+#| label: fig-tasa-postemi
+#| fig-cap: En diferencias logarítmicas post EMI
+autoplot(r_post) + labs(x = "Periodo", y = "Tasas")
+```
+
+:::
+
+
+Las @fig-tasa-preemi y @fig-tasa-postemi presentan las diferencias logarítmicas de las tasas pasivas en los subperíodos pre y post adopción del Esquema de Metas de Inflación (EMI). En el período pre-EMI (2008–2012), las tres series muestran fluctuaciones de amplitud moderada y sin episodios de volatilidad extrema sostenida. Por el contrario, en el período post-EMI (2013–2025) se observa un marcado clustering de volatilidad, especialmente durante 2019–2022, donde tp_30d y tp_m360 registran excursiones que superan los ±75 puntos, reflejando el impacto de los choques macroeconómicos asociados a la pandemia del COVID-19.
+
+
+## Modelo de la Media
+
+
+Vamos a seleccionar la tasa pasiva de corto plazo, las de un periodo de de 30 días, ya que esta es la que muestra la mayor variabilidad en los dos subperiodos de la adopción del EMI. 
+
+
+```{r}
+(fit_mean <- auto.arima(r_pre[,1])) |> modelsummary()
+```
+
+El modelo seleccionado es un ARMA(1,2), lo que indica que la serie presenta dependencia tanto en sus valores pasados como en choques anteriores. No obstante, para validar completamente la idoneidad del modelo, es imprescindible analizar los residuos; en particular, verificar que no presenten autocorrelación, condición necesaria para considerarlos como ruido blanco.
+
+
+
+```{r}
+#| label: fig-residual-ruido-blanco
+#| fig-cap: Residuos del modelo estimado
+(resid_pre <- residuals(fit_mean)) |> plot(xlab = "Periodo", ylab = "Residuos", col = "darkblue", lwd = 2)
+```
+
+
+Los residuos presentados en @fig-residual-ruido-blanco cumplen parcialmente con las condiciones de ruido blanco (media cero y sin autocorrelación evidente en media), pero muestran indicios de heterocedasticidad condicional. Por tanto, sería apropiado avanzar hacia la estimación de un modelo GARCH, que permita modelar explícitamente la dinámica de la volatilidad observada.
+
+
+## Test ARCH
+
+
+```{r}
+ArchTest(resid_pre, lags =12)
+```
+
+
+El contraste tiene como hipótesis nula la ausencia de efectos ARCH (es decir, varianza condicional constante). En este caso, el valor p obtenido (p-value = 0.3326) es considerablemente mayor que niveles de significancia habituales (1%, 5% o incluso 10%). Por tanto, no se rechaza la hipótesis nula.
+
+En consecuencia, no hay evidencia estadísticamente significativa de heterocedasticidad condicional en los residuos del modelo ARMA(1,2). Esto sugiere que la varianza de los errores puede considerarse aproximadamente constante en el tiempo, y que la especificación en media parece adecuada sin necesidad de modelar la volatilidad mediante un modelo GARCH.
+
+
+## Modelo GARCH(1,1)
+
+Estimar el siguiente modelo GARCH(1,1):
+
+$$\sigma^2_t = \alpha_0 + \alpha_1\epsilon^2_{t-1} + \beta_1\sigma^2_{t-1}$$
+
+
+
+```{r}
+spec <- ugarchspec(variance.model = list(model ="sGARCH"), mean.model = list(armaOrder =c(1 ,1)))
+
+fit <- ugarchfit(spec , data = r_pre[,1])
+```
+
+
+
+Calcular: 
+
+$$\alpha + \beta = 0.14910+0.79396=0.94306$$
+
+Sí, existe alta persistencia en la volatilidad, ver @sec-apendicea.
+
+El valor de $\alpha + \beta =0.94306$ es muy cercano a 1, lo que indica que los choques a la volatilidad tienden a disiparse lentamente en el tiempo. En modelos GARCH(1,1), cuando esta suma es elevada (especialmente mayor a 0.9), se interpreta como evidencia de que la volatilidad es altamente persistente.
+
+
+## Modelos Extendidos
+
+### EGARCH
+
+```{r}
+spec_egarch <- ugarchspec(variance.model = list(model = "eGARCH"), mean.model = list(armaOrder = c(0,0)))
+
+(fit_egarch <- fit_egarch <- ugarchfit(spec_egarch, r_pre[,1]))
+```
+
+### GJR GARCH
+
+
+```{r}
+spec_gjr <- ugarchspec(
+  variance.model = list(model = "gjrGARCH"),
+  mean.model = list(armaOrder = c(0,0))
+)
+
+fit_gjr <- ugarchfit(spec_gjr, r_pre[,1])
+```
+
+
+### IGARCH
+
+
+```{r}
+spec_igarch <- ugarchspec(
+  variance.model = list(model = "iGARCH"),
+  mean.model = list(armaOrder = c(0,0))
+)
+
+fit_igarch <- ugarchfit(spec_igarch, r_pre[,1])
+```
+
+#### Asimetría en la volatilidad
+
+No se encuentra evidencia de asimetría en la volatilidad. En el modelo GJR-GARCH (ver @sec-apendiceb), el parámetro asociado al efecto asimétrico ($\lambda_1$) no resulta estadísticamente significativo (p-value elevado), lo que indica que no existen diferencias relevantes en la respuesta de la volatilidad ante choques positivos y negativos.
+
+Adicionalmente, los resultados del Sign Bias Test refuerzan esta conclusión, ya que no se detectan efectos significativos asociados al signo de los shocks.
+
+
+#### Impacto de shocks negativos
+
+En línea con lo anterior, no hay evidencia de que los shocks negativos tengan un mayor impacto sobre la volatilidad en comparación con los positivos. La falta de significancia del término asimétrico implica que el modelo no captura efectos tipo *leverage*, es decir, no se observa que las caídas en las tasas generen incrementos desproporcionados en la volatilidad.
+
+#### Persistencia de la volatilidad
+
+Sí se observa una alta persistencia en la volatilidad, ir al @sec-apendicec. En el modelo GJR-GARCH, la suma de los parámetros $\alpha_1 + \beta_1$ es elevada (aproximadamente 0.90), lo que sugiere que los efectos de los shocks sobre la volatilidad se disipan lentamente.
+
+Por su parte, el modelo iGARCH impone explícitamente una estructura de persistencia extrema, donde los choques tienen efectos permanentes sobre la varianza condicional. Sin embargo, este resultado debe interpretarse con cautela, ya que puede reflejar una sobreparametrización más que una verdadera dinámica de largo plazo.
+
+
+## Comparación Pre vs Post 2012
+
+
+### Estimación pre y post EMI
+
+```{r}
+fit_pre  <- ugarchfit(spec, data = r_pre[,1])
+fit_post <- ugarchfit(spec, data = r_post[,1])
+```
+
+###  Persistencia
+
+$$(\alpha+\beta)$$
+
+```{r}
+# Extraer coeficientes
+coef_pre  <- coef(fit_pre)
+coef_post <- coef(fit_post)
+
+(persist_pre  <- coef_pre["alpha1"] + coef_pre["beta1"])
+(persist_post <- coef_post["alpha1"] + coef_post["beta1"])
+
+```
+
+
+
+### Nivel de volatilidad
+
+
+####  Mean: 
+
+
+```{r}
+vol_pre  <- sigma(fit_pre)^2
+vol_post <- sigma(fit_post)^2
+
+mean(vol_pre)
+mean(vol_post)
+```
+
+
+#### Gráficos
+
+::: {layout-ncol=2}
+
+```{r}
+#| label: fig-volatilidad-pre-2012
+#| fig-cap: Volatilidad Condicional Pre 2012
+plot(sigma(fit_pre))
+```
+
+
+```{r}
+#| label: fig-volatilidad-post-2012
+#| fig-cap: Volatilidad Condicional Post 2012
+plot(sigma(fit_post))
+```
+
+:::
+
+
+#### Consideraciones y comentarios
+
+Con base en los resultados estimados, la volatilidad sí aumentó tras la adopción del esquema de metas de inflación. La varianza condicional promedio pasó de 174.42 en el período pre a 274.51 en el período post, lo que indica un entorno monetario más volátil después del cambio de régimen.
+
+En términos de persistencia, también se observa un incremento claro: $(\alpha+\beta)$ pasó de 0.9431 en el período pre a 0.9937 en el período post. Esto sugiere que, luego de la adopción de metas de inflación, los choques sobre la volatilidad tardaron más en disiparse y dejaron una huella más prolongada en el tiempo. En consecuencia, sí se evidencia una persistencia del riesgo muy alta, especialmente en el período posterior.
+
+Desde la perspectiva de política monetaria, estos resultados implican que el mercado monetario se volvió más sensible a perturbaciones y que la autoridad monetaria pudo haber enfrentado un entorno en el que los shocks sobre las tasas de interés tuvieron efectos más duraderos. Esto exige una respuesta de política más cuidadosa, con mayor énfasis en la comunicación, la credibilidad del régimen y el monitoreo permanente de las condiciones financieras, ya que pequeñas perturbaciones pueden traducirse en episodios de volatilidad prolongada.
+
+En síntesis, tras la adopción de metas de inflación, la volatilidad aumentó, el riesgo se volvió más persistente y el mercado monetario mostró una dinámica más sensible a los shocks, lo que refuerza la importancia de una política monetaria bien anclada y preventiva.
+
+
+
+
+
+
+
+
+## Apéndices
+
+### Apéndice A: Estimación del modelo GARCH(1,1) {#sec-apendicea}
+
+
+```{r}
+fit
+```
+
+
+### Apéndice B: Estimación del modelo GJR GARCH {#sec-apendiceb}
+
+
+```{r}
+fit_gjr
+```
+
+### Apéndice C: Estimación del modelo IGARCH {#sec-apendicec}
+
+
+```{r}
+fit_igarch
+```
+
+
