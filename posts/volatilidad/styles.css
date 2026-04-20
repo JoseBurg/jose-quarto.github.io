@@ -1,0 +1,19 @@
+h1{
+    text-align: center;
+}
+
+p.subtitle{
+    text-align: center;
+    margin: auto;
+    text-decoration: solid;
+}
+
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p{
+    text-align: justify;
+}
